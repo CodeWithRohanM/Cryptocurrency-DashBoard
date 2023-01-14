@@ -26,8 +26,13 @@ const DashBoardUI = (props) => {
     const chartLoadingStatus = useSelector((state) => state.fetchAPI.chartLoadingStatus);
     const divisionNumber = useSelector((state) => state.fetchAPI.divisionNumber);
     const days = useSelector((state) => state.fetchAPI.days);
-    const coinName  = useSelector((state)=> state.fetchAPI.coinName);
+    const coinName = useSelector((state) => state.fetchAPI.coinName);
+
+
+
     const [backColor, setBackColor] = useState("");
+    const [exchangeRate, setExchangeRate] = useState(13.445);
+    const [exchangeName, setExchangeName] = useState("ETH");
 
 
     console.log("STATUSSSS = " + loadingStatus);
@@ -38,23 +43,52 @@ const DashBoardUI = (props) => {
     console.log("Props ->");
     console.log(props.chartData);
 
+
+
+
+    const exchangeCoins = (event) => {
+        const getValue = event.target.value;
+
+        if (getValue === "tether") {
+            setExchangeRate(20626.04);
+            setExchangeName("TETH");
+        }
+        else if (getValue == "binance") {
+            setExchangeRate(68.01)
+            setExchangeName("BNS");
+        }
+        else if (getValue === "xrp") {
+            setExchangeRate(52811.44);
+            setExchangeName("RPP");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     return <>
 
 
 
 
-        <div className="p-8 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 flex-1">
+        <div className="h-20 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 flex-1 flex items-center">
 
             <div className="flex flex-col gap-y-12 
-md:flex-row 
-justify-between items-center bg-yellow-300 container mx-auto">
+                md:flex-row 
+                justify-between items-center bg-yellow-300 container mx-auto">
                 <div>
                     <img src="" alt="Logo_Img"></img>
                 </div>
 
 
                 <div className="flex flex-col gap-y-3 text-xl font-bold
-        md:flex-row md:gap-x-6">
+                md:flex-row md:gap-x-6">
                     <h1>Home</h1>
                     <h1>About</h1>
                     <h1>Articles</h1>
@@ -109,7 +143,7 @@ justify-between items-center bg-yellow-300 container mx-auto">
                             <div className="flex flex-row justify-between w-full h-fit items-start bg-pink-400">
 
                                 <div className="flex flex-row gap-x-4 hover:cursor-pointer">
-                                    <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800 " onClick={()=> dispatch(getDaysCount(1))}>1D</button>
+                                    <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800 " onClick={() => dispatch(getDaysCount(1))}>1D</button>
                                     <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800" onClick={() => dispatch(getDaysCount(7))}>1W</button>
                                     <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800" onClick={() => dispatch(getDaysCount(30))}>1M</button>
                                     <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800" onClick={() => dispatch(getDaysCount(90))}>3M</button>
@@ -242,15 +276,16 @@ justify-between items-center bg-yellow-300 container mx-auto">
                                                 <h1 className="text-red-500">Sell</h1>
                                                 <select className="px-4 p-2 bg-gray-400 rounded-md">
                                                     <option selected>BitCoins</option>
-                                                    <option>One</option>
                                                 </select>
                                             </div>
 
                                             <div className="flex flex-row gap-x-4 items-center">
                                                 <h1 className="text-gray-500">Buy</h1>
-                                                <select className="px-4 py-2 bg-gray-400 rounded-md">
-                                                    <option selected>Eth</option>
-                                                    <option>Two</option>
+                                                <select className="px-4 py-2 bg-gray-400 rounded-md" onChange={exchangeCoins}>
+                                                    <option selected>Ethereum</option>
+                                                    <option value="tether">Tether</option>
+                                                    <option value="binance">Binance Coin</option>
+                                                    <option value="xrp">Ripple Coin</option>
                                                 </select>
 
                                             </div>
@@ -265,7 +300,7 @@ justify-between items-center bg-yellow-300 container mx-auto">
 
                                         <div className="flex flex-col gap-y-2">
                                             <h1 className="text-gray-500">Enter Value</h1>
-                                            <input type="text" placeholder="Avl: 0.00234 BTC" className="border-gray-400 py-2 rounded-md px-2 border-2 flex-1"></input>
+                                            <input type="text" value={`Avl:  ${exchangeRate} ${exchangeName}`} className="border-gray-400 py-2 rounded-md px-2 border-2 font-bold"></input>
                                         </div>
 
                                         <h1 className="text-gray-500 text-md px-4">230000eth</h1>
