@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Chart, ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend } from "chart.js";
 import { Data } from "../Utils/Data";
 
-const DisplayPieChart = () =>{
+const DisplayPieChart = ({chartData}) =>{
 
   Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend);
 
@@ -13,24 +13,24 @@ const DisplayPieChart = () =>{
   const dispatch = useDispatch();
 
 
-  const [chartData, setChartData] = useState({
-    labels: Data.map((curValue, index)=> curValue.userGain),
+  // const [chartData, setChartData] = useState({
+  //   labels: Data.map((curValue, index)=> curValue.userGain),
 
-    datasets: [{
-      label: "Chart Data",
-      data: Data.map((curValue, index)=> curValue.userLost),
-      backgroundColor: [
-        "red",
-        "blue",
-        "gray",
-        "yellow",
-        "pink"
-      ],
-      borderWidth: 2,
-      borderColor: "black",
-    }
-    ]
-  });
+  //   datasets: [{
+  //     label: "Chart Data",
+  //     data: Data.map((curValue, index)=> curValue.userLost),
+  //     backgroundColor: [
+  //       "red",
+  //       "blue",
+  //       "gray",
+  //       "yellow",
+  //       "pink"
+  //     ],
+  //     borderWidth: 2,
+  //     borderColor: "black",
+  //   }
+  //   ]
+  // });
 
 
 
@@ -38,7 +38,6 @@ const DisplayPieChart = () =>{
 
 
   return <>
-    <div className="chart-container h-5/6 w-full">
     <Pie
       data={chartData}
       options={{
@@ -50,7 +49,6 @@ const DisplayPieChart = () =>{
         }
       }}
     />
-  </div>
   
   </>
 

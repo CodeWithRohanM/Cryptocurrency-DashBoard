@@ -21,7 +21,7 @@ const MarketCapList = (props) => {
 
             <div className="flex flex-row gap-x-2 items-center">
                 {
-                    props.getPercentChange < 0 ? <i class="fa fa-sort-down" style={{fontSize : "24px", color: "red"}}></i> : <i class="fa fa-sort-up" style={{fontSize:"24px"}}></i>
+                    props.getPercentChange < 0 ? <i className="fa fa-sort-down" style={{fontSize : "24px", color: "red"}}></i> : <i className="fa fa-sort-up" style={{fontSize:"24px"}}></i>
                 }
                 <h1>{props.getPercentChange.toFixed(2)}</h1>
             </div>

@@ -30,9 +30,12 @@ const DashBoardUI = (props) => {
     const dispatch = useDispatch();
 
 
-
+    console.log("Props ->");
+    console.log(props.chartData);
 
     return <>
+
+
 
 
         <div className="p-8 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 flex-1">
@@ -143,7 +146,7 @@ justify-between items-center bg-yellow-300 container mx-auto">
                                 </div>
                             </div>
 
-                            <div className="bg-green-400 w-full px-8 py-2 h-full flex items-center">
+                            <div className="bg-green-400 w-full container mx-auto max-w-3xl h-full py-2 flex items-center justify-center">
 
                                 {
                                     (chartLoadingStatus) && <div className="flex flex-col items-center w-full">
@@ -152,16 +155,16 @@ justify-between items-center bg-yellow-300 container mx-auto">
                                 }
 
                                 {
-                                    (!chartLoadingStatus) && (chart === "bar") && <DisplayBarChart/>
+                                    (!chartLoadingStatus) && (chart === "bar") && <DisplayBarChart chartData={props.chartData}/>
                                 }
 
                                 {
-                                    (!chartLoadingStatus) &&  (chart === "line") && <DisplayLineChart/>
+                                    (!chartLoadingStatus) &&  (chart === "line") && <DisplayLineChart chartData = {props.chartData}/>
                                         
                                 }
 
                                 {
-                                    (!chartLoadingStatus) && (chart === "pie") && <DisplayPieChart/>
+                                    (!chartLoadingStatus) && (chart === "pie") && <DisplayPieChart chartData={props.chartData}/>
                                 }
                             </div>
 

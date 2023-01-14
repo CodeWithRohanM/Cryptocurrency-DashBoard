@@ -25,6 +25,24 @@ const App = () => {
 
   const [loading, setLoading] = useState(true);
 
+  const [chartData, setChartData] = useState({
+    labels: Data.map((curValue, index) => curValue.userGain),
+
+    datasets: [{
+      label: "Chart Data",
+      data: Data.map((curValue, index) => curValue.userLost),
+      backgroundColor: [
+        "red",
+        "blue",
+        "gray",
+        "yellow",
+        "pink"
+      ],
+      borderWidth: 2,
+      borderColor: "black",
+    }
+    ]
+  });;
 
 
 
@@ -50,6 +68,32 @@ const App = () => {
 
       console.log("Second Response ->");
       console.log(getData.data.prices[0][1]);
+
+
+
+
+      setChartData({
+        labels: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 12 === 0)).map((curValue, index)=>
+          (new Date(curValue[0]).getHours() > 12) ? (new Date(curValue[0]).getHours() - 12 + "PM") : (
+            (new Date(curValue[0]).getHours() === 0) ? "12 AM" : (new Date(curValue[0]).getHours() + "AM")
+            )
+        ),
+
+        datasets: [{
+          label: "Chart Data",
+          data: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 12 === 0)).map((curValue, index)=> curValue[1].toFixed(2)),
+          backgroundColor: [
+            "red",
+            "blue",
+            "gray",
+            "yellow",
+            "pink"
+          ],
+          borderWidth: 2,
+          borderColor: "black",
+        }
+        ]
+      });
 
 
       dispatch(getCoinData(getData.data.prices));
@@ -96,7 +140,7 @@ const App = () => {
     fetchCoinsListAPI();
     fetchCoinNameGraph();
 
-  }, [currency]);
+  }, [currency, coinName]);
 
 
 
@@ -108,7 +152,7 @@ const App = () => {
 
   return <>
 
-    <DashBoardUI />
+    <DashBoardUI chartData={chartData} />
 
 
 
