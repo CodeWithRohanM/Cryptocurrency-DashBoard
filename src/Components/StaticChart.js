@@ -29,7 +29,6 @@ const StaticChart = () => {
 
     return <>
 
-        <div className="chart-container h-40 w-40  ">
             <Pie
                 data={chartDataStatic}
                 options={{
@@ -44,7 +43,6 @@ const StaticChart = () => {
                     }
                 }}
             />
-        </div>
 
 
     </>
