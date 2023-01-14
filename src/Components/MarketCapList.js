@@ -4,7 +4,7 @@ const MarketCapList = (props) => {
 
     return <>
 
-        <div className="flex flex-row justify-between bg-white rounded-md p-3 items-center text-sm pb-4 border-b-2 border-black ">
+        <div className={`flex flex-row justify-between bg-${props.bgColors} rounded-md p-3 items-center text-sm pb-4 border-b-2 border-black`}>
 
             <div className="flex flex-row gap-x-4 items-center">
 

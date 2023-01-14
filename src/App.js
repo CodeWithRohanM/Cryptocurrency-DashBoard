@@ -11,7 +11,7 @@ import { Data } from "./Utils/Data";
 
 
 import { useSelector, useDispatch } from "react-redux";
-import { getCoinData, getCoinsList, getCurrency, getLoadingStatus, getChartLoadingStatus } from "./Actions/actions";
+import { getCoinData, getCoinsList, getCurrency, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount } from "./Actions/actions";
 
 const App = () => {
 
@@ -19,6 +19,9 @@ const App = () => {
   const currency = useSelector((state) => state.fetchAPI.currency);
   const coinName = useSelector((state) => state.fetchAPI.coinName);
   const coinData = useSelector((state) => state.fetchAPI.coinData);
+  const divisionNumber = useSelector((state)=> state.fetchAPI.divisionNumber);
+  const days = useSelector((state) => state.fetchAPI.days);
+
   const dispatch = useDispatch();
 
   // Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale);
@@ -56,10 +59,14 @@ const App = () => {
 
 
 
+
+
+
+
   const fetchCoinNameGraph = async () => {
 
     try {
-      const getData = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=1`);
+      const getData = await axios.get(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=${days}`);
 
       // const getResponse = await getData.json();
 
@@ -72,7 +79,9 @@ const App = () => {
 
 
 
-      setChartData({
+     if(days === 1){
+
+       setChartData({
         labels: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 12 === 0)).map((curValue, index)=>
           (new Date(curValue[0]).getHours() > 12) ? (new Date(curValue[0]).getHours() - 12 + "PM") : (
             (new Date(curValue[0]).getHours() === 0) ? "12 AM" : (new Date(curValue[0]).getHours() + "AM")
@@ -81,7 +90,7 @@ const App = () => {
 
         datasets: [{
           label: "Chart Data",
-          data: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 12 === 0)).map((curValue, index)=> curValue[1].toFixed(2)),
+          data: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 12 === 0)).map((curValue, index)=> curValue[1]),
           backgroundColor: [
             "red",
             "blue",
@@ -94,6 +103,80 @@ const App = () => {
         }
         ]
       });
+    }
+    else if(days === 7)
+    {
+      setChartData({
+        labels: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 24 === 0)).map((curValue, index)=> new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? 11 : new Date(curValue[0]).getMonth()+1) + "/" + new Date(curValue[0]).getFullYear()),
+
+        datasets: [{
+          label: "Chart Data",
+          data: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 24 === 0)).map((curValue, index)=> curValue[1].toFixed(2)),
+          backgroundColor: [
+            "red",
+            "blue",
+            "gray",
+            "yellow",
+            "pink"
+          ],
+          borderWidth: 2,
+          borderColor: "black",
+        }
+        ]
+      });
+
+    }
+
+    else if(days === 30)
+    {
+      setChartData({
+        labels: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 168 === 0)).map((curValue, index)=> new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? "11" : new Date(curValue[0]).getMonth()+1) + "/" + new Date(curValue[0]).getFullYear()),
+
+        datasets: [{
+          label: "Chart Data",
+          data: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 168 === 0)).map((curValue, index)=> curValue[1].toFixed(2)),
+          backgroundColor: [
+            "red",
+            "blue",
+            "gray",
+            "yellow",
+            "pink"
+          ],
+          borderWidth: 2,
+          borderColor: "black",
+        }
+        ]
+      });
+      
+    }
+
+    else if(days === 90)
+    {
+      setChartData({
+        labels: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 672 === 0)).map((curValue, index)=> new Date(curValue[0]).getDate() + "/" + new Date(curValue[0]).getMonth()+1 + "/" + new Date(curValue[0]).getFullYear()),
+
+        datasets: [{
+          label: "Chart Data",
+          data: getData.data.prices.filter((curValue, index)=> (index > 0 && index % 24 === 0)).map((curValue, index)=> curValue[1].toFixed(2)),
+          backgroundColor: [
+            "red",
+            "blue",
+            "gray",
+            "yellow",
+            "pink"
+          ],
+          borderWidth: 2,
+          borderColor: "black",
+        }
+        ]
+      });
+
+    }
+
+    else if(days === 801)
+    {
+
+    }
 
 
       dispatch(getCoinData(getData.data.prices));
@@ -140,7 +223,7 @@ const App = () => {
     fetchCoinsListAPI();
     fetchCoinNameGraph();
 
-  }, [currency, coinName]);
+  }, [currency, coinName, days]);
 
 
 

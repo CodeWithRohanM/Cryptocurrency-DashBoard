@@ -6,6 +6,8 @@ const initialState = {
     coinData: [],
     loadingStatus: true,
     chartLoadingStatus: true,
+    divisionNumber: 12,
+    days: 1
 };
 
 const fetchAPI = (state = initialState, action) =>{
@@ -58,6 +60,20 @@ const fetchAPI = (state = initialState, action) =>{
             return {
                 ...state,
                 chartLoadingStatus: action.payLoad,
+            }
+        };
+
+        case "DIVISION_NUMBER":{
+            return {
+                ...state,
+                divisionNumber: action.payLoad,
+            }
+        };
+
+        case "DAYS":{
+            return {
+                ...state,
+                days: action.payLoad,
             }
         }
 

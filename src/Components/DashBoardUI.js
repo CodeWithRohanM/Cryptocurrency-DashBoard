@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { PieChart, LineChart, BarChart } from "./DisplayLineChart";
 import { Data } from "../Utils/Data";
 import StaticChart from "./StaticChart";
@@ -12,7 +13,7 @@ import DisplayBarChart from "./DisplayBarChart";
 import MarketCapList from "./MarketCapList";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getCoinsList, getCurrency, getChartType, getCryptoCoinName } from "../Actions/actions";
+import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount } from "../Actions/actions";
 import { Chart } from "chart.js";
 
 const DashBoardUI = (props) => {
@@ -23,6 +24,10 @@ const DashBoardUI = (props) => {
     const coinData = useSelector((state) => state.fetchAPI.coinData);
     const loadingStatus = useSelector((state) => state.fetchAPI.loadingStatus);
     const chartLoadingStatus = useSelector((state) => state.fetchAPI.chartLoadingStatus);
+    const divisionNumber = useSelector((state) => state.fetchAPI.divisionNumber);
+    const days = useSelector((state) => state.fetchAPI.days);
+    const coinName  = useSelector((state)=> state.fetchAPI.coinName);
+    const [backColor, setBackColor] = useState("");
 
 
     console.log("STATUSSSS = " + loadingStatus);
@@ -98,17 +103,17 @@ justify-between items-center bg-yellow-300 container mx-auto">
                     <div className="bg-red-400 h-full flex flex-col gap-y-5 container mx-auto max-w-4xl">
 
 
-                        <div className="flex flex-col gap-y-6 h-3/5 items-start bg-blue-300 w-full">
+                        <div className="flex flex-col gap-y-6 h-4/5 items-start bg-blue-300 w-full">
 
 
-                            <div className="flex flex-row justify-between w-full">
+                            <div className="flex flex-row justify-between w-full h-fit items-start bg-pink-400">
 
-                                <div className="flex flex-row gap-x-4">
-                                    <button className="bg-blue-500 px-4 py-2 rounded-md">1D</button>
-                                    <button className="bg-blue-500 px-4 py-2 rounded-md">1W</button>
-                                    <button className="bg-blue-500 px-4 py-2 rounded-md">1M</button>
-                                    <button className="bg-blue-500 px-4 py-2 rounded-md">6M</button>
-                                    <button className="bg-blue-500 px-4 py-2 rounded-md">1Y</button>
+                                <div className="flex flex-row gap-x-4 hover:cursor-pointer">
+                                    <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800 " onClick={()=> dispatch(getDaysCount(1))}>1D</button>
+                                    <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800" onClick={() => dispatch(getDaysCount(7))}>1W</button>
+                                    <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800" onClick={() => dispatch(getDaysCount(30))}>1M</button>
+                                    <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800" onClick={() => dispatch(getDaysCount(90))}>3M</button>
+                                    <button className="bg-blue-500 px-4 py-2 rounded-md hover:bg-purple-800" onClick={() => dispatch(getDaysCount(180))}>6M</button>
                                 </div>
 
                                 <div className="flex flex-row gap-x-4">
@@ -146,6 +151,12 @@ justify-between items-center bg-yellow-300 container mx-auto">
                                 </div>
                             </div>
 
+
+                            <div className="flex flex-row gap-x-4 justify-between items-center bg-purple-400 container mx-auto max-w-md py-2 rounded-lg px-3 shadow-2xl">
+                                <h1>Coin Name = {coinName}</h1>
+                                <h1>Data Duration = {days} Days</h1>
+                            </div>
+
                             <div className="bg-green-400 w-full container mx-auto max-w-3xl h-full py-2 flex items-center justify-center">
 
                                 {
@@ -155,16 +166,16 @@ justify-between items-center bg-yellow-300 container mx-auto">
                                 }
 
                                 {
-                                    (!chartLoadingStatus) && (chart === "bar") && <DisplayBarChart chartData={props.chartData}/>
+                                    (!chartLoadingStatus) && (chart === "bar") && <DisplayBarChart chartData={props.chartData} />
                                 }
 
                                 {
-                                    (!chartLoadingStatus) &&  (chart === "line") && <DisplayLineChart chartData = {props.chartData}/>
-                                        
+                                    (!chartLoadingStatus) && (chart === "line") && <DisplayLineChart chartData={props.chartData} />
+
                                 }
 
                                 {
-                                    (!chartLoadingStatus) && (chart === "pie") && <DisplayPieChart chartData={props.chartData}/>
+                                    (!chartLoadingStatus) && (chart === "pie") && <DisplayPieChart chartData={props.chartData} />
                                 }
                             </div>
 
@@ -186,7 +197,7 @@ justify-between items-center bg-yellow-300 container mx-auto">
                                         <h1 className="font-bold text-lg">Portfolio</h1>
                                         <div className="h-40 w-40 items-center px-4">
                                             {/* <PieChart chartData={props.chartDataStatic} /> */}
-                                            <StaticChart/>
+                                            <StaticChart />
                                         </div>
                                     </div>
 
@@ -286,12 +297,13 @@ justify-between items-center bg-yellow-300 container mx-auto">
 
 
 
-                <div className="w-3/12 bg-blue-300 flex flex-col gap-y-8 py-4 overflow-y-scroll">
+                <div className="w-3/12 flex flex-col gap-y-8 py-4 overflow-y-scroll">
 
 
                     <div className="max-w-xs items-center bg-yellow-300 flex flex-col gap-y-4">
                         <h1 className="text-center font-bold text-lg">CryptoCurrency By Market Cap</h1>
                         <h1 className="font-normal"><span className="text-gray-500 font-bold">Currency =</span> <span className="uppercase">{currency}</span></h1>
+                        <h1>Days = {days}</h1>
                     </div>
 
 
@@ -305,10 +317,11 @@ justify-between items-center bg-yellow-300 container mx-auto">
 
                         {
                             (!loadingStatus) && list.map((curValue, index) => {
-                                return <>
-                                    <MarketCapList key={curValue.current_price} getCoinLogo={curValue.image} getCoinName={curValue.id} getMarketCap={curValue.market_cap} getPercentChange={curValue.market_cap_change_percentage_24h}></MarketCapList>
+                                return index % 2 === 0 ?
+                                    <MarketCapList key={curValue.current_price} getCoinLogo={curValue.image} getCoinName={curValue.id} getMarketCap={curValue.market_cap} getPercentChange={curValue.market_cap_change_percentage_24h} bgColors='white'></MarketCapList>
+                                    :
+                                    <MarketCapList key={curValue.current_price} getCoinLogo={curValue.image} getCoinName={curValue.id} getMarketCap={curValue.market_cap} getPercentChange={curValue.market_cap_change_percentage_24h} bgColors='sky-300'></MarketCapList>
 
-                                </>
                             })
                         }
 

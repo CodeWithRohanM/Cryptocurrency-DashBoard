@@ -10,6 +10,10 @@ const DisplayLineChart = ({chartData}) =>{
 
 
   const coinData = useSelector((state)=> state.fetchAPI.coinData);
+  const divisionNumber = useSelector((state)=> state.fetchAPI.divisionNumber);
+
+
+
   console.log("CoinData In DisplayLineChart -> ");
   console.log(coinData[0][1]);
   console.log(coinData.filter((curValue, index)=> (index % 12 === 0)).map((curValue, index)=> curValue[1]));

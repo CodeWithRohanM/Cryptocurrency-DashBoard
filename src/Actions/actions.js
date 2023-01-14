@@ -40,14 +40,31 @@ const getLoadingStatus = (status)=>{
         type: "LOADING_STATUS",
         payLoad: status,
     }
-}
+};
 
 const getChartLoadingStatus = (status) =>{
     return {
         type: "CHART_LOADING_STATUS",
         payLoad: status,
     }
-}
+};
 
 
-export {getCoinsList, getCurrency, getChartType, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus};
+const getDivisionNumber = (number) =>{
+    return {
+        type: "DIVISION_NUMBER",
+        payLoad: number,
+    }
+};
+
+const getDaysCount = (days) =>{
+    return {
+        type: "DAYS",
+        payLoad: days,
+    }
+};
+
+
+
+
+export {getCoinsList, getCurrency, getChartType, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount};
