@@ -2,9 +2,8 @@ import {React, useState} from "react";
 import { Pie, Bar, Line} from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 import { Chart, ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend } from "chart.js";
-import { Data } from "../Utils/Data";
 
-const DisplayBarChart = ({chartData}) =>{
+const DisplayPieChart = ({chartData}) =>{
 
   Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend);
 
@@ -14,11 +13,11 @@ const DisplayBarChart = ({chartData}) =>{
 
 
   // const [chartData, setChartData] = useState({
-  //   labels: coinData.filter((curValue, index) => (index > 0 && index % 12 ===0)).map((curValue, index)=> new Date(curValue[0]).getHours()),
+  //   labels: Data.map((curValue, index)=> curValue.userGain),
 
   //   datasets: [{
   //     label: "Chart Data",
-  //     data: coinData.filter((curValue, index)=> (index > 0 && index % 12 === 0)).map((curValue, index)=> curValue[1].toFixed(2)),
+  //     data: Data.map((curValue, index)=> curValue.userLost),
   //     backgroundColor: [
   //       "red",
   //       "blue",
@@ -38,7 +37,7 @@ const DisplayBarChart = ({chartData}) =>{
 
 
   return <>
-    <Bar
+    <Pie
       data={chartData}
       options={{
         plugins: {
@@ -56,4 +55,4 @@ const DisplayBarChart = ({chartData}) =>{
 };
 
 
-export default DisplayBarChart;
+export default DisplayPieChart;

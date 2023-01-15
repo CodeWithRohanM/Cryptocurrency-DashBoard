@@ -2,7 +2,7 @@ import {React, useState} from "react";
 import { Pie, Bar, Line} from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 import { Chart, ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend } from "chart.js";
-import { Data } from "../Utils/Data";
+import { Data } from "../../Utils/Data";
 
 const DisplayLineChart = ({chartData}) =>{
 

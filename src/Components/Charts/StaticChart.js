@@ -1,7 +1,7 @@
 import {React, useState} from "react";
 import { Chart, ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale } from "chart.js";
 import { Pie} from "react-chartjs-2";
-import { Data } from "../Utils/Data";
+import { Data } from "../../Utils/Data";
 
 
 const StaticChart = () => {
@@ -16,11 +16,12 @@ const StaticChart = () => {
             data: Data.map((curValue, index) => curValue.userLost),
             backgroundColor: [
                 "red",
-                "blue",
-                "gray",
                 "yellow",
-                "pink"
+                "green",
             ],
+            datalabels:{
+                text:"$252",
+            },
             borderWidth: 2,
             borderColor: "black",
         }
@@ -33,6 +34,9 @@ const StaticChart = () => {
                 data={chartDataStatic}
                 options={{
                     plugins: {
+                        datalabels:{
+                            display:true
+                        },
                         title: {
                             display: true,
                             text: "Users Gained between 2016-2020"

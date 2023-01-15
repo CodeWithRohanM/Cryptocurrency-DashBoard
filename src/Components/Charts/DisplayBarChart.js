@@ -1,24 +1,24 @@
-import {React, useState} from "react";
-import { Pie, Bar, Line} from "react-chartjs-2";
+import { React, useState } from "react";
+import { Pie, Bar, Line } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 import { Chart, ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend } from "chart.js";
-import { Data } from "../Utils/Data";
+import { Data } from "../../Utils/Data";
 
-const DisplayPieChart = ({chartData}) =>{
+const DisplayBarChart = ({ chartData }) => {
 
   Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend);
 
 
-  const coinData = useSelector((state)=> state.fetchAPI.coinData);
+  const coinData = useSelector((state) => state.fetchAPI.coinData);
   const dispatch = useDispatch();
 
 
   // const [chartData, setChartData] = useState({
-  //   labels: Data.map((curValue, index)=> curValue.userGain),
+  //   labels: coinData.filter((curValue, index) => (index > 0 && index % 12 ===0)).map((curValue, index)=> new Date(curValue[0]).getHours()),
 
   //   datasets: [{
   //     label: "Chart Data",
-  //     data: Data.map((curValue, index)=> curValue.userLost),
+  //     data: coinData.filter((curValue, index)=> (index > 0 && index % 12 === 0)).map((curValue, index)=> curValue[1].toFixed(2)),
   //     backgroundColor: [
   //       "red",
   //       "blue",
@@ -38,7 +38,7 @@ const DisplayPieChart = ({chartData}) =>{
 
 
   return <>
-    <Pie
+    <Bar
       data={chartData}
       options={{
         plugins: {
@@ -49,11 +49,11 @@ const DisplayPieChart = ({chartData}) =>{
         }
       }}
     />
-  
+
   </>
 
 
 };
 
 
-export default DisplayPieChart;
+export default DisplayBarChart;

@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 
-import { PieChart, LineChart, BarChart } from "./DisplayLineChart";
 import { Data } from "../Utils/Data";
-import StaticChart from "./StaticChart";
+import StaticChart from "./Charts/StaticChart";
 
 
-import DisplayLineChart from "./DisplayLineChart";
-import DisplayPieChart from "./DisplayPieChart";
-import DisplayBarChart from "./DisplayBarChart";
+import DisplayLineChart from "./Charts/DisplayLineChart";
+import DisplayPieChart from "./Charts/DisplayPieChart";
+import DisplayBarChart from "./Charts/DisplayBarChart";
 
 
 import MarketCapList from "./MarketCapList";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount } from "../Actions/actions";
+import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount, getChartLoadingStatus } from "../Actions/actions";
 import { Chart } from "chart.js";
 
 const DashBoardUI = (props) => {
@@ -95,35 +94,7 @@ const DashBoardUI = (props) => {
     return <>
 
 
-        <div className="bg-cyan-100 h-screen">
-
-
-            <div className="h-20 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 flex-1 flex items-center mb-6 shadow-md">
-
-                <div className="flex flex-col gap-y-12 
-                md:flex-row 
-                justify-between items-center container mx-auto">
-                    <div>
-                        <img src="/images/alma.png" alt="Logo_Img" className="h-12"></img>
-                    </div>
-
-
-                    <div className="flex flex-col gap-y-3 text-xl font-bold tracking-wider
-                md:flex-row md:gap-x-6">
-                        <h1>Home</h1>
-                        <h1>About</h1>
-                        <h1>Articles</h1>
-                        <h1>Conatct Us</h1>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
+        <div className="bg-cyan-100 h-screen pt-6">
 
             <div className="flex flex-row h-full container mx-auto">
 
@@ -163,12 +134,12 @@ const DashBoardUI = (props) => {
 
                         <div className="flex flex-row justify-between pl-16">
 
-                            <div className="flex flex-row gap-x-4 hover:cursor-pointer">
-                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl" onClick={() => dispatch(getDaysCount(1))}>1D</button>
-                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl" onClick={() => dispatch(getDaysCount(7))}>1W</button>
-                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl" onClick={() => dispatch(getDaysCount(30))}>1M</button>
-                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl" onClick={() => dispatch(getDaysCount(90))}>3M</button>
-                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl" onClick={() => dispatch(getDaysCount(180))}>6M</button>
+                            <div className="flex flex-row gap-x-4 hover:cursor-pointer font-bold">
+                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl transition ease-in-out hover:-translate-y-1 duration-300 hover:scale-110 active:scale-90 focus:scale-70" onClick={() =>dispatch(getDaysCount(1))}>1D</button>
+                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(7))}>1W</button>
+                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(30))}>1M</button>
+                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(90))}>3M</button>
+                                <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(180))}>6M</button>
                             </div>
 
                             <div className="flex flex-row gap-x-4">
@@ -181,13 +152,15 @@ const DashBoardUI = (props) => {
                                     <option selected>CryptoCurrency</option>
                                     {
                                         list.map((curValue, index) => {
-                                            return <>
 
-                                                <option value={curValue.id}>{curValue.name}</option>
+                                            return <>
+                                                <option value={curValue.id} className="bg-white py-3 text-black">{curValue.name}</option>
 
                                             </>
+
                                         })
                                     }
+
 
 
                                 </select>
@@ -207,7 +180,7 @@ const DashBoardUI = (props) => {
                         </div>
 
 
-                        <div className="flex flex-row gap-x-4 justify-between items-center bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 container mx-auto max-w-md py-2 rounded-lg px-3 shadow-2xl">
+                        <div className="flex flex-row gap-x-4 justify-between items-center bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 container mx-auto max-w-lg py-2 rounded-lg px-3 shadow-2xl">
                             <h1><span className="font-bold tracking-wider">Coin Name =</span> <span className="text-gray-600 font-bold uppercase tracking-wider">{coinName}</span></h1>
                             <h1><span className="font-bold tracking-wider">Data Duration =</span> <span className="text-gray-600 font-bold uppercase tracking-wider">{days} Days</span></h1>
                         </div>
@@ -343,7 +316,7 @@ const DashBoardUI = (props) => {
 
 
                             <div className="flex justify-center">
-                                <button type="button" className="bg-blue-500 text-white font-bold rounded-md px-4 py-2" onClick={exchangeCoins}>Exchange</button>
+                                <button type="button" className="bg-blue-500 text-white font-bold rounded-md px-4 py-2 hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={exchangeCoins}>Exchange</button>
                             </div>
 
                         </div>

@@ -1,6 +1,6 @@
 const initialState = {
     coinsList: [],
-    currency: "inr",
+    currency: "usd",
     chart: "line",
     coinName: "bitcoin",
     coinData: [],
