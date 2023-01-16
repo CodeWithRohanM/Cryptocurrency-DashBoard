@@ -1,5 +1,4 @@
 const initialState = {
-    coinsList: [],
     currency: "usd",
     chart: "line",
     coinName: "bitcoin",
@@ -7,19 +6,18 @@ const initialState = {
     loadingStatus: true,
     chartLoadingStatus: true,
     divisionNumber: 12,
-    days: 1
+    days: 1,
+    trendingCoinsList: [],
 };
+
+
+
+
 
 const fetchAPI = (state = initialState, action) =>{
 
     switch(action.type)
     {
-        case "COINS_LIST":{
-            return {
-                ...state,
-                coinsList: action.payLoad,
-            }
-        };
 
         case "GET_CURRENCY":{
             return {
@@ -75,7 +73,15 @@ const fetchAPI = (state = initialState, action) =>{
                 ...state,
                 days: action.payLoad,
             }
-        }
+        };
+
+        case "TRENDING_COINS":{
+            return {
+                ...state,
+                trendingCoinsList: action.payLoad,
+            }
+        };
+
 
         default: return initialState;
 
