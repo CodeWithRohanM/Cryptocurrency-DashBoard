@@ -49,15 +49,15 @@ const CoinInfo = () => {
 
         <Header />
 
-        <div class="min-w-screen min-h-screen bg-blue-100 flex items-center p-5 lg:px-20 overflow-hidden relative">
-            <div class="flex-1 min-h-full min-w-full rounded-3xl bg-white shadow-xl p-10 lg:p-20 text-gray-800 relative md:flex-col md:space-y-12 items-center text-center md:text-left">
+        <div class="min-w-screen min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600 flex  items-center p-5 lg:px-20 overflow-hidden relative">
+            <div class="flex-1 min-h-full min-w-full rounded-3xl bg-cyan-50 shadow-xl p-10 lg:p-20 text-gray-800 relative md:flex-col md:space-y-12  text-center md:text-left">
 
                 <div className="flex flex-row gap-x-6 w-full container mx-auto max-w-xl border-b border-black py-2">
                     <input type="text" id="coinInput" placeholder="Enter Coin Name.." className="focus:outline-none text-gray-400 font-bold px-3 appearance-none border-none bg-transparent flex-1 uppercase" onKeyDown={showCoinName} value={inputCoinName} onChange={(event) => {
                         setInputCoinName(event.target.value);
 
                     }}></input>
-                    <button type="button" className="bg-blue-500 text-white font-bold text-center px-4 py-2 rounded-md" onClick={fetchSearchAPI}>Search</button>
+                    <button type="button" className="bg-blue-500 text-white font-bold text-center px-4 py-2 rounded-md hover:-translate-y-1 transition ease-in-out duration-300" onClick={fetchSearchAPI}>Search</button>
                 </div>
 
 
@@ -73,7 +73,7 @@ const CoinInfo = () => {
                 <div id="desc" className="hidden">
 
                     {
-                        !getLoader && <div className=" flex-col space-y-8 rounded-xl bg-cyan-100 px-20 tracking-wider leading-12 text-xl py-4 items-center tracking-wider">
+                        !getLoader && <div className=" flex-col space-y-8 rounded-xl bg-blue-100 px-20 tracking-wider leading-12 text-xl py-4 items-center">
 
 
 
@@ -81,13 +81,13 @@ const CoinInfo = () => {
 
                             <div className="flex flex-row gap-x-4 justify-center items-center border-b border-black w-full py-2">
                                 <img src={getImage} className="h-12 w-12"></img>
-                                <h1 className="text-3xl font-bold tracking-wider">{getName}</h1>
+                                <h1 className="text-3xl font-bold tracking-wider uppercase">{getName}</h1>
 
                             </div>
 
 
 
-                            <div className=" p-6 px-8 rounded-xl shadow-2xl w-full text-center flex flex-col gap-y-6 items-center">
+                            <div className=" p-6 px-8 rounded-xl shadow-2xl w-full text-center flex flex-col gap-y-6 items-center leading-relaxed">
 
 
                                 <h1>{getDetails.slice(0, 450) + "..."}</h1>

@@ -218,22 +218,22 @@ const App = () => {
 
 
 
-  // useEffect((curValue) => {
-  //   dispatch(setLoaderState(true));
+  useEffect((curValue) => {
+    dispatch(setLoaderState(true));
 
 
-  //   dispatch(fetchList(currency));
-  //   // dispatch(fetchGraph(coinName, currency, days));
-  //   // fetchCoinNameGraph();
+    dispatch(fetchList(currency));
+    // dispatch(fetchGraph(coinName, currency, days));
+    // fetchCoinNameGraph();
 
 
-  //   //   fetchCoinGraph();
-  //   // fetchCoinsListAPI();
+    //   fetchCoinGraph();
+    // fetchCoinsListAPI();
 
-  //   // dispatch(setChartLoaderState(false));
+    // dispatch(setChartLoaderState(false));
 
 
-  // }, [currency, coinName, days]);
+  }, [currency, coinName, days]);
 
 
 
