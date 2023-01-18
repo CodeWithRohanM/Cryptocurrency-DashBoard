@@ -3,7 +3,7 @@ import React from "react";
 const ListCard = (props) => {
 
     return <>
-        <div className="rounded-xl flex flex-col gap-y-6 shadow-xl bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 p-4 tracking-wider relative z-10">
+        <div className="rounded-xl flex flex-col gap-y-6 shadow-xl bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 p-4 tracking-wider relative z-10 hover:scale-110 transition ease-in-out duration-300">
 
             <div className="p-3 text-center rounded-t-xl border-b border-black">
                 <h1 className="font-bold text-red-600">RANK : <span className="font-bold text-2xl text-black">#{props.rank}</span></h1>

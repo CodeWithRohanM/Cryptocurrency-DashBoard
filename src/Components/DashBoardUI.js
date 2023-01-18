@@ -13,17 +13,8 @@ import DisplayBarChart from "./Charts/DisplayBarChart";
 import MarketCapList from "./MarketCapList";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount, getChartLoadingStatus, getClearArray } from "../Actions/actions";
+import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount, getChartLoadingStatus, getClearArray, fetchGraph } from "../Actions/actions";
 import { Chart } from "chart.js";
-
-
-
-
-
-
-
-
-
 
 
 
@@ -37,25 +28,17 @@ const DashBoardUI = (props) => {
     //USE SELECTOR HOOKS
     const list = useSelector((state) => state.callListAPIReducer.coinsList);
 
-    const currency = useSelector((state) => state.fetchAPI.currency);
-    const chart = useSelector((state) => state.fetchAPI.chart);
-    const coinData = useSelector((state) => state.fetchAPI.coinData);
-    const loadingStatus = useSelector((state) => state.fetchAPI.loadingStatus);
-    const chartLoadingStatus = useSelector((state) => state.fetchAPI.chartLoadingStatus);
-    const divisionNumber = useSelector((state) => state.fetchAPI.divisionNumber);
-    const days = useSelector((state) => state.fetchAPI.days);
-    const coinName = useSelector((state) => state.fetchAPI.coinName);
+    const currency = useSelector((state) => state.callListAPIReducer.currency);
+    const chart = useSelector((state) => state.callListAPIReducer.chart);
+    const coinData = useSelector((state) => state.callListAPIReducer.coinData);
+    const loadingStatus = useSelector((state) => state.callListAPIReducer.loader);
+    const chartLoadingStatus = useSelector((state) => state.callListAPIReducer.chartLoader);
+    const divisionNumber = useSelector((state) => state.callListAPIReducer.divisionNumber);
+    const days = useSelector((state) => state.callListAPIReducer.days);
+    const coinName = useSelector((state) => state.callListAPIReducer.coinName);
 
     const dispatch = useDispatch();
 
-
-
-    console.log("Coin List Received DashBoard = ");
-    console.log(list);
-  
-  
-    console.log("DATAAAAAAA DashBoard");
-    console.log(coinData);
 
 
 
@@ -66,52 +49,6 @@ const DashBoardUI = (props) => {
     const [selectedExchangeValue, setSelectedExchangeValue] = useState("");
     const [storeCoinName, setStoreCoinName] = useState("");
 
-
-
-    const [chartData, setChartData] = useState({
-        labels: Data.map((curValue, index) => curValue.userGain),
-
-        datasets: [{
-          label: "Chart Data",
-          data: Data.map((curValue, index) => curValue.userLost),
-          backgroundColor: [
-            "red",
-            "blue",
-            "gray",
-            "yellow",
-            "pink"
-          ],
-          borderWidth: 2,
-          borderColor: "black",
-        }
-        ]
-      });;
-
-
-
-
-
-
-    // if (days === 7) {
-    //     setChartData({
-    //         labels: coinData.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? 11 : new Date(curValue[0]).getMonth() + 1) + "/" + new Date(curValue[0]).getFullYear()),
-
-    //         datasets: [{
-    //             label: "Chart Data",
-    //             data: coinData.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
-    //             backgroundColor: [
-    //                 "red",
-    //                 "blue",
-    //                 "gray",
-    //                 "yellow",
-    //                 "pink"
-    //             ],
-    //             borderWidth: 2,
-    //             borderColor: "black",
-    //         }
-    //         ]
-    //     });
-    // }
 
 
 
@@ -164,9 +101,7 @@ const DashBoardUI = (props) => {
 
                         <div id="serachBarLine" className="flex flex-row gap-x-4 container mx-auto max-w-4xl">
 
-    <button onClick={()=>{
-        dispatch(getClearArray());
-    }}>Clear</button>
+
                             <select className="py-3 rounded-md text-center font-bold px-3 tracking-wider" onChange={(event) => {
                                 const getValue = event.target.value;
                                 dispatch(getCurrency(getValue));
@@ -201,7 +136,8 @@ const DashBoardUI = (props) => {
 
                                 <div className="flex flex-row gap-x-4 hover:cursor-pointer font-bold">
                                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl transition ease-in-out hover:-translate-y-1 duration-300 hover:scale-110 active:scale-90 focus:scale-70" onClick={() => dispatch(getDaysCount(1))}>1D</button>
-                                    <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(7))}>1W</button>
+                                    <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(7))
+                                    }>1W</button>
                                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(30))}>1M</button>
                                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(90))}>3M</button>
                                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(180))}>6M</button>
@@ -257,16 +193,16 @@ const DashBoardUI = (props) => {
                                 }
 
                                 {
-                                    (!chartLoadingStatus) && (chart === "bar") && <DisplayBarChart chartData={chartData} />
+                                    (!chartLoadingStatus) && (chart === "bar") && <DisplayBarChart chartData={props.chartData} />
                                 }
 
                                 {
-                                    (!chartLoadingStatus) && (chart === "line") && <DisplayLineChart chartData={chartData} />
+                                    (!chartLoadingStatus) && (chart === "line") && <DisplayLineChart chartData={props.chartData} />
 
                                 }
 
                                 {
-                                    (!chartLoadingStatus) && (chart === "pie") && <DisplayPieChart chartData={chartData} />
+                                    (!chartLoadingStatus) && (chart === "pie") && <DisplayPieChart chartData={props.chartData} />
                                 }
                             </div>
 

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getTrendingCoinsList, getTrendingLoader } from "../../Actions/actions";
+import { trendingListAPI, getTrendingLoader } from "../../Actions/actions";
 import ListCard from "./ListCard";
 import Header from "../Header";
 import { NavLink } from "react-router-dom";
 
 const TrendingCoins = () => {
 
-    const trendingList = useSelector((state) => state.fetchAPI.trendingCoinsList);
+    const trendingList = useSelector((state) => state.callListAPIReducer.trendingCoinsList);
+    const loader = useSelector((state) => state.callListAPIReducer.trendingLoader);
     const dispatch = useDispatch();
 
 
@@ -16,13 +17,14 @@ const TrendingCoins = () => {
 
     const fetchTrendingCoinsList = async () => {
         try {
-
+            dispatch(getTrendingLoader(true));
             document.getElementById("trendingList").style.display = "block";
+            dispatch(trendingListAPI());
 
-            const getData = await fetch("https://api.coingecko.com/api/v3/search/trending");
-            const getResponse = await getData.json();
+            // const getData = await fetch("https://api.coingecko.com/api/v3/search/trending");
+            // const getResponse = await getData.json();
 
-            dispatch(getTrendingCoinsList(getResponse.coins));
+            // dispatch(getTrendingCoinsList(getResponse.coins));
 
 
 
@@ -55,22 +57,30 @@ const TrendingCoins = () => {
             </div>
 
 
-            <div id="trendingList" className="hidden max-h-2xl">
-                <div className="grid grid-cols-3 gap-x-16 gap-y-20">
-                    {
-                        trendingList.filter((curValue, index) => index < 6).map((curValue, index) => {
+            <div id="trendingList" className="hidden max-h-2xl container mx-auto">
 
-                            return <>
+                {
+                    loader && <div className="flex flex-col items-center ">
+                        <img src="/images/LoadingGif.gif" className="h-20 w-32 rounded-xl"></img>
+                    </div>
+                }
+                {
+                    !loader && <div className="grid grid-cols-3 gap-x-16 gap-y-20">
+                        {
+                            trendingList.filter((curValue, index) => index < 6).map((curValue, index) => {
 
-                                <ListCard key={curValue.item.price_btc} rank={index + 1} coinLogo={curValue.item.large} coinName={curValue.item.name} symbol={curValue.item.symbol}>
-                                </ListCard>
+                                return <>
 
-                            </>
+                                    <ListCard key={curValue.item.price_btc} rank={index + 1} coinLogo={curValue.item.large} coinName={curValue.item.name} symbol={curValue.item.symbol}>
+                                    </ListCard>
+
+                                </>
 
 
-                        })
-                    }
-                </div>
+                            })
+                        }
+                    </div>
+                }
 
 
             </div>
