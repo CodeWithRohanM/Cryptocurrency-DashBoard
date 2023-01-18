@@ -13,7 +13,7 @@ import DisplayBarChart from "./Charts/DisplayBarChart";
 import MarketCapList from "./MarketCapList";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount, getChartLoadingStatus, getClearArray, fetchGraph, setLoaderState, fetchList } from "../Actions/actions";
+import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount, getChartLoadingStatus, getClearArray, fetchGraph, setLoaderState, fetchList, setChartLoaderState } from "../Actions/actions";
 import { Chart } from "chart.js";
 
 
@@ -154,7 +154,7 @@ const DashBoardUI = (props) => {
                                         const getValue = event.target.value;
                                         dispatch(getCryptoCoinName(getValue));
                                     }}>
-                                        <option selected>Bitcoin</option>
+                                        <option selected>{coinName}</option>
                                         {
                                             list.map((curValue, index) => {
 
@@ -171,8 +171,11 @@ const DashBoardUI = (props) => {
                                     </select>
 
                                     <select className="py-2 rounded-md bg-white px-4 text-center font-bold tracking-wider" onChange={(event) => {
+                                        dispatch(setChartLoaderState(true));
                                         const getValue = event.target.value;
-                                        dispatch(getChartType(getValue));
+                                        setTimeout(()=>{
+                                            dispatch(getChartType(getValue));
+                                        }, 500);
                                     }}>
                                         <option selected>Line Chart</option>
                                         <option value="bar">Bar Chart</option>
@@ -346,10 +349,10 @@ const DashBoardUI = (props) => {
 
 
 
-                    <div className="w-96 flex flex-col gap-y-8  overflow-y-scroll">
+                    <div className="w-96 flex flex-col gap-y-8  overflow-y-scroll scroll-smooth">
 
 
-                        <div className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 flex flex-col gap-y-4 py-4 container mx-auto items-center max-w-xs rounded-md shadow-xl">
+                        <div className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 flex flex-col gap-y-4 py-4 container mx-auto items-center max-w-xs rounded-md shadow-xl ">
                             <h1 className="text-center font-bold text-xl tracking-wider">CryptoCurrency By Market Cap</h1>
                             <h1 className="font-normal"><span className="text-gray-500 font-bold tracking-wider">Currency =</span> <span className="uppercase font-bold text-xl">{currency}</span></h1>
                         </div>

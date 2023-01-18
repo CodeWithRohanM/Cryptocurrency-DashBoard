@@ -9,11 +9,14 @@ const CoinInfo = () => {
     const getName = useSelector((state) => state.CoinInfoReducer.coinInfo.name);
     const getDetails = useSelector((state) => state.CoinInfoReducer.details);
     const getLoader = useSelector((state) => state.CoinInfoReducer.coinInfoLoader);
-    const getURL = useSelector((state)=> state.CoinInfoReducer.url);
-    const getImage = useSelector((state)=> state.CoinInfoReducer.image);
+    const getURL = useSelector((state) => state.CoinInfoReducer.url);
+    const getImage = useSelector((state) => state.CoinInfoReducer.image);
+    const getRank = useSelector((state) => state.CoinInfoReducer.rank);
+    const getPrice = useSelector((state) => state.CoinInfoReducer.price);
     // const getImage = useState((state) => state.CoinInfoReducer.coinInfoImage);
     // const getDetails = useState((state) => state.CoinInfoReducer.coinInfoDetails);
 
+    console.log("Rank = "+getRank);
 
     const [inputCoinName, setInputCoinName] = useState("");
 
@@ -25,7 +28,7 @@ const CoinInfo = () => {
         if (event.key === "Enter") {
             document.getElementById("desc").style.display = "block";
             dispatch(getCoinInfoLoader(true));
-    
+
             dispatch(fetchCoinInfoAPI(inputCoinName.toLowerCase()));
             setInputCoinName("");
         }
@@ -64,10 +67,12 @@ const CoinInfo = () => {
 
 
 
+
+
                 {
                     getLoader && <div className="flex flex-col items-center">
-                        <img src="/images/LoadingGif.gif" className="h-20 w-32 rounded-xl"/>
-                        </div>
+                        <img src="/images/LoadingGif.gif" className="h-20 w-32 rounded-xl" />
+                    </div>
                 }
 
                 <div id="desc" className="hidden">
@@ -79,10 +84,17 @@ const CoinInfo = () => {
 
 
 
+
+
                             <div className="flex flex-row gap-x-4 justify-center items-center border-b border-black w-full py-2">
-                                <img src={getImage} className="h-12 w-12"></img>
+                                <img src={getImage} className="h-14 w-14 animate-pulse"></img>
                                 <h1 className="text-3xl font-bold tracking-wider uppercase">{getName}</h1>
 
+                            </div>
+
+                            <div className="flex flex-row conatiner mx-auto max-w-lg rounded-md shadow-2xl justify-between px-6 py-3 items-center hover:scale-110 transition ease-in-out duration-300">
+                                <h1 className="text-red-500 font-bold text-xl">Rank: <span className="text-black font-bold text-3xl animate-pulse">#{getRank}</span></h1>
+                                <h1 className="text-red-500 font-bold text-xl">Market Price: <span className="text-3xl text-black font-bold">${getPrice.toFixed(2)}</span></h1>
                             </div>
 
 
@@ -91,7 +103,7 @@ const CoinInfo = () => {
 
 
                                 <h1>{getDetails.slice(0, 450) + "..."}</h1>
-                                <a href={getURL} target="_blank" type="button" className="bg-blue-500 text-white font-bold text-center rounded-md px-5 py-2 hover:-translate-y-1 transition ease-in-out duration-300 active:scale-90">More Info..</a>
+                                <a href={getURL} target="_blank" type="button" className="bg-blue-500 text-white font-bold text-center rounded-md px-5 py-2 hover:-translate-y-1 transition ease-in-out duration-300 active:scale-90 animate-pulse animation-delay-7000">More Info..</a>
 
                             </div>
                         </div>

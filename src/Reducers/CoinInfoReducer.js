@@ -4,6 +4,8 @@ const initialState = {
     name: "",
     url: "",
     image: "",
+    rank: 1,
+    price: 1,
     coinInfoLoader: false,
 };
 
@@ -18,6 +20,8 @@ const CoinInfoReducer = (state = initialState, action) =>{
                 details: action.payLoad.description.en,
                 url: action.payLoad.links.homepage[0],
                 image: action.payLoad.image.small,
+                rank: action.payLoad.market_cap_rank,
+                price: action.payLoad.tickers[0].last,
                 coinInfoLoader: false,
             }
         };

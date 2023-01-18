@@ -82,6 +82,7 @@ const callListAPIReducer = (state = initialStates, action) => {
             return {
                 ...state,
                 chart: action.payLoad,
+                chartLoader: false,
             }
         };
 

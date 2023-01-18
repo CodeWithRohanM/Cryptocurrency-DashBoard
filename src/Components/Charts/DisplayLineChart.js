@@ -15,8 +15,12 @@ const DisplayLineChart = ({chartData}) =>{
   const days = useSelector((state)=> state.callListAPIReducer.days);
   const dispatch = useDispatch();
 
+  let duration = "";
 
-  let duration = "HOURLY";
+  if(days === 1)
+  {
+    duration = "HOURLY";
+  }
 
   if(days === 7)
   {
