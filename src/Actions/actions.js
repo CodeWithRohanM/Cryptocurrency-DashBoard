@@ -17,6 +17,27 @@ const fetchList = (currency) => {
 
 };
 
+const fetchGraph = (coinName, currency, days) =>{
+    return async(dispatch)=>{
+        const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=${days}`);
+        
+        const getResponse = await getData.json();
+
+        setTimeout(()=>{
+            dispatch(getCoinData(getResponse.prices));
+
+        }, 3000);
+
+
+    }
+}
+
+
+
+
+
+
+
 
 const trendingListAPI = () =>{
     return async(dispatch) =>{
@@ -45,6 +66,13 @@ const fetchCoinInfoAPI = (name) =>{
 
 
 
+
+
+
+
+// ACTUAL ACTION TAKERS
+
+
 const setCoinInfo = (details)=>{
     return {
         type: "COIN_INFO",
@@ -64,22 +92,12 @@ const getTrendingLoader = (status) =>{
 
 
 
-
-
-
-
 const getCoinInfoLoader = (status) =>{
     return {
         type: "COIN_LOADER",
         payLoad: status,
     }
 }
-
-
-
-
-
-
 
 
 
@@ -175,4 +193,4 @@ const getTrendingCoinsList = (trending) => {
 
 
 
-export { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader };
+export { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader, fetchGraph };

@@ -4,7 +4,7 @@ const initialStates = {
     coinName: "bitcoin",
     days: 1,
     coinData: [],
-    chartLoader: false,
+    chartLoader: true,
     loader: true,
     chart: "line",
     divisionNumber: 12,
@@ -60,6 +60,7 @@ const callListAPIReducer = (state = initialStates, action) => {
             return {
                 ...state,
                 coinData: action.payLoad,
+                chartLoader: false,
             }
         };
 

@@ -1,6 +1,6 @@
 const initialState = {
-    loadingState: true,
-    chartLoadingState: true,
+    loadingState: false,
+    chartLoadingState: false,
 };
 
 const whatsLoadingReducer = (state = initialState, action) => {

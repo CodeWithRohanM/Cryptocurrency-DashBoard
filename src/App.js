@@ -25,11 +25,11 @@ const App = () => {
   const coinName = useSelector((state) => state.callListAPIReducer.coinName);
   const chartLoader = useSelector((state) => state.callListAPIReducer.chartLoader);
   const coinData = useSelector((state) => state.callListAPIReducer.coinData);
+
   const divisionNumber = useSelector((state) => state.callListAPIReducer.divisionNumber);
   const days = useSelector((state) => state.callListAPIReducer.days);
 
-  console.log("Days = "+days);
-  console.log(coinData);
+  console.log("Days = " + days);
 
 
   const dispatch = useDispatch();
@@ -37,12 +37,73 @@ const App = () => {
   // Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale);
 
 
-        const [chartData, setChartData] = useState({
-          labels: Data.map((curValue, index) => curValue.userGain),
+
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [],
+
+  });
+
+
+
+
+
+
+
+
+
+  const fetchCoinNameGraph = async () => {
+
+    try {
+
+
+
+      const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=${days}`);
+
+      const getResponse = await getData.json();
+
+      console.log("First Response ->");
+      console.log(coinData[0]);
+
+      console.log("Second Response ->");
+      console.log(coinData[1]);
+
+      // dispatch(getCoinData(getResponse.prices));
+
+
+
+
+      if (days === 1) {
+        setChartData({
+          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) =>
+            (new Date(curValue[0]).getHours() > 12) ? (new Date(curValue[0]).getHours() - 12 + "PM") : (
+              (new Date(curValue[0]).getHours() === 0) ? "12 AM" : (new Date(curValue[0]).getHours() + "AM")
+            )
+          ),
 
           datasets: [{
             label: "Chart Data",
-            data: Data.map((curValue, index) => curValue.userLost),
+            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) => curValue[1]),
+            backgroundColor: [
+              "red",
+              "blue",
+              "gray",
+              "yellow",
+              "pink"
+            ],
+            borderWidth: 2,
+            borderColor: "black",
+          }
+          ]
+        });
+      }
+      else if (days === 7) {
+        setChartData({
+          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? 11 : new Date(curValue[0]).getMonth() + 1) + "/" + new Date(curValue[0]).getFullYear()),
+
+          datasets: [{
+            label: "Chart Data",
+            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
               "red",
               "blue",
@@ -56,118 +117,54 @@ const App = () => {
           ]
         });
 
+      }
+      else if (days === 30) {
+        setChartData({
+          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 168 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? "11" : new Date(curValue[0]).getMonth() + 1) + "/" + new Date(curValue[0]).getFullYear()),
+
+          datasets: [{
+            label: "Chart Data",
+            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 168 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
+            backgroundColor: [
+              "red",
+              "blue",
+              "gray",
+              "yellow",
+              "pink"
+            ],
+            borderWidth: 2,
+            borderColor: "black",
+          }
+          ]
+        });
+
+      }
+      else if (days === 90) {
 
 
+        setChartData({
+          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + new Date(curValue[0]).getMonth() + 1 + "/" + new Date(curValue[0]).getFullYear()),
 
+          datasets: [{
+            label: "Chart Data",
+            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
+            backgroundColor: [
+              "red",
+              "blue",
+              "gray",
+              "yellow",
+              "pink"
+            ],
+            borderWidth: 2,
+            borderColor: "black",
+          }
+          ]
+        });
 
-  const fetchCoinNameGraph = async () => {
+      }
 
-    try {
+        dispatch(setChartLoaderState(false));
 
-      const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=${days}`);
-
-      const getResponse = await getData.json();
-
-      console.log("First Response ->");
-      console.log(getResponse.prices[0][0]);
-
-      console.log("Second Response ->");
-      console.log(getResponse.prices[0][1]);
-
-      console.log(getResponse.prices);
-
-      dispatch(getCoinData(getResponse.prices));
-
-
-
-
-        // setChartData({
-        //   labels: coinData.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) =>
-        //     (new Date(curValue[0]).getHours() > 12) ? (new Date(curValue[0]).getHours() - 12 + "PM") : (
-        //       (new Date(curValue[0]).getHours() === 0) ? "12 AM" : (new Date(curValue[0]).getHours() + "AM")
-        //     )
-        //   ),
-
-        //   datasets: [{
-        //     label: "Chart Data",
-        //     data: coinData.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) => curValue[1]),
-        //     backgroundColor: [
-        //       "red",
-        //       "blue",
-        //       "gray",
-        //       "yellow",
-        //       "pink"
-        //     ],
-        //     borderWidth: 2,
-        //     borderColor: "black",
-        //   }
-        //   ]
-        // });
-      // else if (days === 7) {
-      //   setChartData({
-      //     labels: coinData.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? 11 : new Date(curValue[0]).getMonth() + 1) + "/" + new Date(curValue[0]).getFullYear()),
-
-      //     datasets: [{
-      //       label: "Chart Data",
-      //       data: coinData.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
-      //       backgroundColor: [
-      //         "red",
-      //         "blue",
-      //         "gray",
-      //         "yellow",
-      //         "pink"
-      //       ],
-      //       borderWidth: 2,
-      //       borderColor: "black",
-      //     }
-      //     ]
-      //   });
-
-      // }
-      // else if (days === 30) {
-      //   setChartData({
-      //     labels: coinData.filter((curValue, index) => (index > 0 && index % 168 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? "11" : new Date(curValue[0]).getMonth() + 1) + "/" + new Date(curValue[0]).getFullYear()),
-
-      //     datasets: [{
-      //       label: "Chart Data",
-      //       data: coinData.filter((curValue, index) => (index > 0 && index % 168 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
-      //       backgroundColor: [
-      //         "red",
-      //         "blue",
-      //         "gray",
-      //         "yellow",
-      //         "pink"
-      //       ],
-      //       borderWidth: 2,
-      //       borderColor: "black",
-      //     }
-      //     ]
-      //   });
-
-      // }
-      // else if (days === 90) {
-
-
-      //   setChartData({
-      //     labels: coinData.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + new Date(curValue[0]).getMonth() + 1 + "/" + new Date(curValue[0]).getFullYear()),
-
-      //     datasets: [{
-      //       label: "Chart Data",
-      //       data: coinData.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
-      //       backgroundColor: [
-      //         "red",
-      //         "blue",
-      //         "gray",
-      //         "yellow",
-      //         "pink"
-      //       ],
-      //       borderWidth: 2,
-      //       borderColor: "black",
-      //     }
-      //     ]
-      //   });
-
-      // }
 
 
 
@@ -219,21 +216,21 @@ const App = () => {
 
 
   useEffect((curValue) => {
+    //setting Loading States
     dispatch(setLoaderState(true));
+    dispatch(setChartLoaderState(true));
 
 
+    //Calling API's
     dispatch(fetchList(currency));
     // dispatch(fetchGraph(coinName, currency, days));
-    // fetchCoinNameGraph();
+
+    fetchCoinNameGraph();
 
 
-    //   fetchCoinGraph();
-    // fetchCoinsListAPI();
-
-    // dispatch(setChartLoaderState(false));
 
 
-  }, [currency, coinName, days]);
+  }, [coinName, currency, days]);
 
 
 
@@ -250,9 +247,9 @@ const App = () => {
   return <>
 
     <Routes>
-      <Route exact path="/" element={<DashBoardUI chartData={chartData} />}></Route>
+      <Route exact path="/" element={<DashBoardUI chartData = {chartData}/>}></Route>
       <Route exact path="/trending" element={<TrendingCoins />}></Route>
-      <Route exact path="/info" element={<CoinInfo/>}></Route>
+      <Route exact path="/info" element={<CoinInfo />}></Route>
       <Route path="*" element={<ErrorPage />}></Route>
     </Routes>
 
