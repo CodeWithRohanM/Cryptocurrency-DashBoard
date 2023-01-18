@@ -163,7 +163,7 @@ const App = () => {
 
       }
 
-        dispatch(setChartLoaderState(false));
+        // dispatch(setChartLoaderState(false));
 
 
 
@@ -218,7 +218,7 @@ const App = () => {
   useEffect((curValue) => {
     //setting Loading States
     dispatch(setLoaderState(true));
-    dispatch(setChartLoaderState(true));
+    // dispatch(setChartLoaderState(true));
 
 
     //Calling API's

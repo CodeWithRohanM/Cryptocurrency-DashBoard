@@ -11,9 +11,9 @@ const Header = () => {
                     md:flex-row 
                     justify-between items-center container mx-auto">
                 <div className="hover:scale-90 transition ease-in-out duration-300">
-                    <NavLink to="/">
+                    <a href="/">
                         <img src="/images/alma.png" alt="Logo_Img" className="h-12"></img>
-                    </NavLink>
+                    </a>
                 </div>
 
 

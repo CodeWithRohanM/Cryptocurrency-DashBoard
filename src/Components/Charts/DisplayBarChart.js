@@ -9,28 +9,12 @@ const DisplayBarChart = ({ chartData }) => {
   Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend);
 
 
-  const coinData = useSelector((state) => state.fetchAPI.coinData);
+  const coinData = useSelector((state) => state.callListAPIReducer.coinData);
+  const currency = useSelector((state) => state.callListAPIReducer.currency);
   const dispatch = useDispatch();
 
 
-  // const [chartData, setChartData] = useState({
-  //   labels: coinData.filter((curValue, index) => (index > 0 && index % 12 ===0)).map((curValue, index)=> new Date(curValue[0]).getHours()),
 
-  //   datasets: [{
-  //     label: "Chart Data",
-  //     data: coinData.filter((curValue, index)=> (index > 0 && index % 12 === 0)).map((curValue, index)=> curValue[1].toFixed(2)),
-  //     backgroundColor: [
-  //       "red",
-  //       "blue",
-  //       "gray",
-  //       "yellow",
-  //       "pink"
-  //     ],
-  //     borderWidth: 2,
-  //     borderColor: "black",
-  //   }
-  //   ]
-  // });
 
 
 
@@ -41,6 +25,30 @@ const DisplayBarChart = ({ chartData }) => {
     <Bar
       data={chartData}
       options={{
+        scales:{
+          x:{
+            title:{
+              display: true,
+              text:"DURATION",
+              font:{
+                size: 12,
+                weight:"bold",
+                color: "black",
+              }
+            }
+          },
+          y:{
+            title:{
+              display: true,
+              text:currency.toUpperCase(),
+              font:{
+                size: 12,
+                color: "black",
+                weight: "bold"
+              }
+            }
+          }
+        },
         plugins: {
           title: {
             display: true,

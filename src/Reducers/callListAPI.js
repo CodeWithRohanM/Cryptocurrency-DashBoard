@@ -4,7 +4,7 @@ const initialStates = {
     coinName: "bitcoin",
     days: 1,
     coinData: [],
-    chartLoader: true,
+    chartLoader: false,
     loader: true,
     chart: "line",
     divisionNumber: 12,
