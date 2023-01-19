@@ -167,7 +167,10 @@ const fetchCoinNameGraph = async () => {
     }
 
     
+    setTimeout(()=>{
       dispatch(setChartLoaderState(false));
+
+    }, 1500);
 
 
 

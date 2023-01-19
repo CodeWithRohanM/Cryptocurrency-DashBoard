@@ -207,8 +207,9 @@ const DashBoardUI = (props) => {
 
 
                                 {
-                                    (chartLoadingStatus) && <div className="flex flex-col items-center w-full">
-                                        <img src="/images/LoadingGif.gif" className=" h-12 w-20 rounded-full" />
+                                    (chartLoadingStatus) && <div className="flex flex-col gap-y-4 items-center w-full">
+                                        <h1 className="text-xl font-bold text-center tracking-wider">Fetching Chart Data..</h1>
+                                        <img src="/images/LoadingGif.gif" className=" h-12 w-22 rounded-full" />
                                     </div>
                                 }
 
