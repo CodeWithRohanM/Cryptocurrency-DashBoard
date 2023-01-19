@@ -10,6 +10,7 @@ const initialStates = {
     divisionNumber: 12,
     trendingCoinsList: [],
     trendingLoader: true,
+    exchangeList: [],
 };
 
 
@@ -106,6 +107,13 @@ const callListAPIReducer = (state = initialStates, action) => {
             return {
                 ...state,
                 trendingLoader: action.payLoad,
+            }
+        };
+
+        case "EXCHANGE_LIST":{
+            return {
+                ...state,   
+                exchangeList: action.payLoad,
             }
         }
 

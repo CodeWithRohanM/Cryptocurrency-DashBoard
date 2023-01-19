@@ -44,15 +44,15 @@ const TrendingCoins = () => {
             <div className="flex flex-row container mx-auto">
 
 
-                <button type="button" className="bg-gradient-to-r from-red-200 to-red-600 rounded-md text-white uppercase tracking-wider font-bold text-2xl container mx-auto max-w-md flex flex-row gap-x-4 items-center justify-center
-             py-4 hover:cursor-pointer hover:-translate-y-1 transition ease-in-out duration-300 shadow-2xl active:scale-90" onClick={fetchTrendingCoinsList}>
-                    <h1>Today's Trending Coins </h1>
+                <button type="button" className="bg-gradient-to-r from-red-200 to-red-600 rounded-md text-white uppercase tracking-wider font-bold text-2xl container mx-auto max-w-lg flex flex-row gap-x-4 items-center justify-center
+             py-4 hover:cursor-pointer hover:-translate-y-1 transition ease-in-out duration-300 shadow-2xl active:scale-90 focus:animate-none animate-pulse" onClick={fetchTrendingCoinsList}>
+                    <h1>Get Today's Trending Coins</h1>
                     <img src="/images/coinGiff.gif" className="w-8 h-8"></img>
                 </button>
 
                 <NavLink to="/" className="bg-gradient-to-r from-red-200 to-red-600 rounded-md text-white uppercase tracking-wider font-bold text-2xl px-4 flex flex-row gap-x-4 items-center justify-center
              py-4 hover:cursor-pointer hover:-translate-y-1 transition ease-in-out duration-300 shadow-2xl active:scale-90" >
-                    <h1>Go Home 🏠</h1>
+                    <h1>🏠</h1>
                 </NavLink>
             </div>
 

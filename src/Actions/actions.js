@@ -1,8 +1,10 @@
 import axios from "axios";
-
+import { useSelector, useDispatch } from "react-redux";
 
 
 const fetchList = (currency) => {
+
+    
 
     return async (dispatch) => {
         const getData = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
@@ -17,16 +19,15 @@ const fetchList = (currency) => {
 
 };
 
-const fetchGraph = (coinName, currency, days) =>{
-    return async(dispatch)=>{
+const fetchGraph = (coinName, currency, days) => {
+
+    return async (dispatch) => {
         const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=${days}`);
-        
+
         const getResponse = await getData.json();
 
-        setTimeout(()=>{
             dispatch(getCoinData(getResponse.prices));
 
-        }, 3000);
 
 
     }
@@ -39,12 +40,12 @@ const fetchGraph = (coinName, currency, days) =>{
 
 
 
-const trendingListAPI = () =>{
-    return async(dispatch) =>{
+const trendingListAPI = () => {
+    return async (dispatch) => {
         const getData = await fetch("https://api.coingecko.com/api/v3/search/trending");
         const getResponse = await getData.json();
 
-        setTimeout(()=>{
+        setTimeout(() => {
             dispatch(getTrendingCoinsList(getResponse.coins));
         }, 1500);
 
@@ -52,17 +53,30 @@ const trendingListAPI = () =>{
 };
 
 
-const fetchCoinInfoAPI = (name) =>{
-    return async (dispatch) =>{
+const fetchCoinInfoAPI = (name) => {
+    return async (dispatch) => {
         const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${name}`);
         const getResponse = await getData.json();
-        console.log("ID = "+getResponse.id);
-        setTimeout(()=>{
+        console.log("ID = " + getResponse.id);
+        setTimeout(() => {
             dispatch(setCoinInfo(getResponse));
 
-        }, 1500);
+        }, 2000);
     }
-}
+};
+
+
+
+const fetchExchangeCurrencyList = () => {
+    return async (dispatch) => {
+        const getData = await fetch("https://api.coingecko.com/api/v3/simple/supported_vs_currencies");
+        const getResponse = await getData.json();
+
+        dispatch(setExchangeList(getResponse));
+
+
+    }
+};
 
 
 
@@ -73,7 +87,14 @@ const fetchCoinInfoAPI = (name) =>{
 // ACTUAL ACTION TAKERS
 
 
-const setCoinInfo = (details)=>{
+const setExchangeList = (list) =>{
+    return {
+        type: "EXCHANGE_LIST",
+        payLoad: list,
+    }
+};
+
+const setCoinInfo = (details) => {
     return {
         type: "COIN_INFO",
         payLoad: details,
@@ -83,7 +104,7 @@ const setCoinInfo = (details)=>{
 
 
 
-const getTrendingLoader = (status) =>{
+const getTrendingLoader = (status) => {
     return {
         type: "TRENDING_LOADER",
         payLoad: status,
@@ -92,7 +113,7 @@ const getTrendingLoader = (status) =>{
 
 
 
-const getCoinInfoLoader = (status) =>{
+const getCoinInfoLoader = (status) => {
     return {
         type: "COIN_LOADER",
         payLoad: status,
@@ -193,4 +214,4 @@ const getTrendingCoinsList = (trending) => {
 
 
 
-export { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader, fetchGraph };
+export { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader, fetchGraph, fetchExchangeCurrencyList};

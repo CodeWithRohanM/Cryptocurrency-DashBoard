@@ -16,7 +16,7 @@ const CoinInfo = () => {
     // const getImage = useState((state) => state.CoinInfoReducer.coinInfoImage);
     // const getDetails = useState((state) => state.CoinInfoReducer.coinInfoDetails);
 
-    console.log("Rank = "+getRank);
+    console.log("Rank = " + getRank);
 
     const [inputCoinName, setInputCoinName] = useState("");
 
@@ -30,6 +30,7 @@ const CoinInfo = () => {
             dispatch(getCoinInfoLoader(true));
 
             dispatch(fetchCoinInfoAPI(inputCoinName.toLowerCase()));
+            setDisplayCoinName(inputCoinName);
             setInputCoinName("");
         }
     }
@@ -40,6 +41,7 @@ const CoinInfo = () => {
         dispatch(getCoinInfoLoader(true));
 
         dispatch(fetchCoinInfoAPI(inputCoinName.toLowerCase()));
+        setDisplayCoinName(inputCoinName);
         setInputCoinName("");
 
 
@@ -70,7 +72,8 @@ const CoinInfo = () => {
 
 
                 {
-                    getLoader && <div className="flex flex-col items-center">
+                    getLoader && <div className="flex flex-col items-center gap-y-6">
+                        <h1 className="text-xl font-normal">Searching for {displayCoinName}....</h1>
                         <img src="/images/LoadingGif.gif" className="h-20 w-32 rounded-xl" />
                     </div>
                 }

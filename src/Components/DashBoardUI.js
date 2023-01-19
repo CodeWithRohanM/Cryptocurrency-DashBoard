@@ -13,7 +13,7 @@ import DisplayBarChart from "./Charts/DisplayBarChart";
 import MarketCapList from "./MarketCapList";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount, getChartLoadingStatus, getClearArray, fetchGraph, setLoaderState, fetchList, setChartLoaderState } from "../Actions/actions";
+import { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getDivisionNumber, getDaysCount, getChartLoadingStatus, getClearArray, fetchGraph, setLoaderState, fetchList, setChartLoaderState, fetchExchangeList } from "../Actions/actions";
 import { Chart } from "chart.js";
 
 
@@ -37,6 +37,10 @@ const DashBoardUI = (props) => {
     const days = useSelector((state) => state.callListAPIReducer.days);
     const coinName = useSelector((state) => state.callListAPIReducer.coinName);
 
+    const exchangeList = useSelector((state) =>state.callListAPIReducer.exchangeList);
+
+
+
     const dispatch = useDispatch();
 
     console.log("Coin Data is");
@@ -46,9 +50,6 @@ const DashBoardUI = (props) => {
 
     //USESTATE HOOKS
     const [backColor, setBackColor] = useState("");
-    const [exchangeRate, setExchangeRate] = useState(13.445);
-    const [exchangeName, setExchangeName] = useState("ETH");
-    const [selectedExchangeValue, setSelectedExchangeValue] = useState("");
     const [storeCoinName, setStoreCoinName] = useState("");
 
 
@@ -67,25 +68,29 @@ const DashBoardUI = (props) => {
 
     }
 
-    const exchangeCoins = () => {
 
-        if (selectedExchangeValue === "tether") {
-            setExchangeRate(20626.04);
-            setExchangeName("TETH");
+
+    const [buyName, setBuyName] = useState("eth");
+    const [exchangeRate, setExchangeRate] = useState(13.61);
+    const [exchangeNumber, setExchangeNumber] = useState();
+
+
+    const fetchExchangeAPI = async () => {
+        try {
+            console.log("Buy = " + buyName);
+
+            const getData = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${buyName}`);
+
+            const getResponse = await getData.json();
+
+
+            setExchangeRate(`${getResponse.bitcoin[buyName].toFixed(2) * exchangeNumber} ${buyName}`);
+            console.log("Exchange = " + exchangeRate);
+        } catch (err) {
+            console.log(err);
         }
-        else if (selectedExchangeValue == "binance") {
-            setExchangeRate(68.01)
-            setExchangeName("BNS");
-        }
-        else if (selectedExchangeValue === "xrp") {
-            setExchangeRate(52811.44);
-            setExchangeName("RPP");
-        }
+
     }
-
-
-
-
 
 
 
@@ -173,7 +178,7 @@ const DashBoardUI = (props) => {
                                     <select className="py-2 rounded-md bg-white px-4 text-center font-bold tracking-wider" onChange={(event) => {
                                         dispatch(setChartLoaderState(true));
                                         const getValue = event.target.value;
-                                        setTimeout(()=>{
+                                        setTimeout(() => {
                                             dispatch(getChartType(getValue));
                                         }, 500);
                                     }}>
@@ -212,7 +217,7 @@ const DashBoardUI = (props) => {
                                 }
 
                                 {
-                                    (!chartLoadingStatus) && (chart === "line") && <DisplayLineChart chartData={props.chartData} />
+                                    (!chartLoadingStatus) && (chart === "line") && <DisplayLineChart chartData={props.chartData ? props.chartData : window.alert("Could Not Fetch")} />
 
                                 }
 
@@ -289,20 +294,31 @@ const DashBoardUI = (props) => {
                                             <div className="flex flex-row justify-between items-center">
                                                 <h1 className="text-red-500 font-bold">Sell</h1>
                                                 <select className="w-28 text-center p-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md">
-                                                    <option selected>BitCoins</option>
+                                                    <option selected>BitCoin</option>
+                                                    {/* {
+                                                        list.map((curValue, index) => {
+                                                            return <>
+                                                                <option value={curValue.id}>{curValue.name}</option>
+
+                                                            </>
+                                                        })
+                                                    } */}
                                                 </select>
                                             </div>
 
                                             <div className="flex flex-row justify-between items-center">
                                                 <h1 className="text-gray-500 font-bold">Buy</h1>
-                                                <select className="w-28 text-center py-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md" onChange={(event) => {
-                                                    setSelectedExchangeValue(event.target.value);
-
-                                                }}>
+                                                <select className="w-28 text-center py-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md" onChange={(event) => { setBuyName(event.target.value) }}>
                                                     <option selected>Ethereum</option>
-                                                    <option value="tether">Tether</option>
-                                                    <option value="binance">Binance Coin</option>
-                                                    <option value="xrp">Ripple Coin</option>
+                                                    {
+                                                        exchangeList.map((curValue, index) => {
+                                                            return <>
+                                                                <option value={curValue}>{curValue.toUpperCase()}</option>
+
+                                                            </>
+                                                        })
+                                                    }
+
                                                 </select>
 
                                             </div>
@@ -313,14 +329,14 @@ const DashBoardUI = (props) => {
                                     </div>
 
 
-                                    <div className="flex flex-col gap-y-9 px-4 w-1/2">
+                                    <div className="flex flex-col gap-y-4 w-1/2 ">
 
-                                        <div className="flex flex-col gap-y-4">
-                                            <h1 className="text-gray-500">Your Avl. Balances</h1>
-                                            <input type="text" value={`Avl:  ${exchangeRate} ${exchangeName}`} className="border-gray-400 py-2 rounded-md px-2 border-2 font-bold text-sm"></input>
+                                        <div className="flex flex-col gap-y-4 w-full">
+                                            <h1 className="text-gray-500 text-center">Your Avl. Balances</h1>
+                                            <input type="text" value={exchangeNumber} placeholder="Enter Amount.." className="border-gray-400 py-2 rounded-md px-2 border-2 font-bold text-md w-full" onChange={(event) => setExchangeNumber(event.target.value)}></input>
                                         </div>
 
-                                        <h1 className="text-gray-500 text-md px-4">230000eth</h1>
+                                        <input type="text" value={`Avl. ${exchangeRate}`} className="border-gray-400 py-2 rounded-md px-2 border-2 font-bold text-sm"></input>
 
 
                                     </div>
@@ -330,7 +346,7 @@ const DashBoardUI = (props) => {
 
 
                                 <div className="flex justify-center">
-                                    <button type="button" className="bg-blue-500 text-white font-bold rounded-md px-4 py-2 hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={exchangeCoins}>Exchange</button>
+                                    <button type="button" className="bg-blue-500 text-white font-bold rounded-md px-4 py-2 hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={fetchExchangeAPI}>Exchange</button>
                                 </div>
 
                             </div>
