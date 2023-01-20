@@ -5,11 +5,8 @@ import CoinInfo from "./Components/CoinInfo";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-
-import { Data } from "./Utils/Data";
-
 import DashBoardUI from "./Components/DashBoardUI";
-
+import { Data } from "./Utils/Data";
 
 import { useSelector, useDispatch } from "react-redux";
 import { fetchList, setLoaderState, setChartLoaderState, fetchExchangeCurrencyList, fetchGraph } from "./Actions/actions";

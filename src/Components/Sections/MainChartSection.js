@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getDaysCount, getCryptoCoinName, setChartLoaderState } from "../../Actions/actions";
+import { getDaysCount, getCryptoCoinName, setChartLoaderState, setImageURL } from "../../Actions/actions";
 
 import DisplayBarChart from "../Charts/DisplayBarChart";
 import DisplayLineChart from "../Charts/DisplayLineChart";
@@ -14,10 +14,22 @@ const MainChartSection = (props) => {
     const chartLoadingStatus = useSelector((state) => state.callListAPIReducer.chartLoader);
     const days = useSelector((state) => state.callListAPIReducer.days);
     const coinName = useSelector((state) => state.callListAPIReducer.coinName);
-
+    const imageURL = useSelector((state) => state.callListAPIReducer.imageURL);
 
     // USING USE STATE HOOK
     const [chartType, setChartType] = useState("line");
+    let chartImage = "";
+    let padding = ""
+
+    if (chartType === "line") {
+        chartImage = "📈";
+        padding = "8";
+    }
+    if (chartType === "bar") {
+        chartImage = "📊";
+        padding = "1";
+    }
+
 
 
     return <>
@@ -27,7 +39,7 @@ const MainChartSection = (props) => {
             <div className="flex flex-row justify-between md:pl-16 container mx-auto">
                 <div className="flex flex-row gap-x-2 md:gap-x-4 hover:cursor-pointer font-bold">
                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl transition ease-in-out hover:-translate-y-1 duration-300 hover:scale-110 active:scale-90 focus:scale-70" onClick={() => dispatch(getDaysCount(1))
-                    // dispatch(setChartLoaderState(true));
+                        // dispatch(setChartLoaderState(true));
                     }>1D</button>
                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(7))
                     }>1W</button>
@@ -36,13 +48,16 @@ const MainChartSection = (props) => {
                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(180))}>6M</button>
                 </div>
 
-                <div className="flex flex-row gap-x-2 md:gap-x-4">
-
+                <div className="flex flex-row gap-x-2 md:gap-x-4 relative">
+                    <div className="absolute z-10 px-3 py-1.5">
+                        <img src={imageURL} className="w-7 h-7 rounded-full"></img>
+                    </div>
                     <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider" onChange={(event) => {
                         const getValue = event.target.value;
                         dispatch(getCryptoCoinName(getValue));
+                        dispatch(setImageURL(getValue));
                     }}>
-
+                        {/* <img src={image} className="w-8 h-8 absolute"></img> */}
                         <option selected>{coinName}</option>
                         {
                             list.map((curValue, index) => {
@@ -59,19 +74,25 @@ const MainChartSection = (props) => {
 
                     </select>
 
-                    <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider" onChange={(event) => {
-                        dispatch(setChartLoaderState(true));
-                        const getValue = event.target.value;
-                        setChartType(getValue);
-                        setTimeout(()=>{
-                            dispatch(setChartLoaderState(false));
-                        }, 1000);
-                    }}>
-                        <option selected>Line Chart</option>
-                        <option value="bar">Bar Chart Vertical</option>
-                        <option value="line">Line Chart</option>
-                        <option value="bar_horizontal">Bar Chart Horizontal</option>
-                    </select>
+
+                    <div className="flex relative">
+                        <div className={`absolute z-10 px-${padding} py-2`}>
+                            <h1 className="w-7 h-7">{chartImage}</h1>
+                        </div>
+                        <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider" onChange={(event) => {
+                            dispatch(setChartLoaderState(true));
+                            const getValue = event.target.value;
+                            setChartType(getValue);
+                            setTimeout(() => {
+                                dispatch(setChartLoaderState(false));
+                            }, 1000);
+                        }}>
+
+                            <option value="bar">Bar Chart Vertical</option>
+                            <option value="line" selected>Line Chart</option>
+                            <option value="bar_horizontal">Bar Chart Horizontal</option>
+                        </select>
+                    </div>
 
                 </div>
             </div>

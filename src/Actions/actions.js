@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const fetchList = (currency) => {
 
-    
+
 
     return async (dispatch) => {
         const getData = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
@@ -26,18 +26,12 @@ const fetchGraph = (coinName, currency, days) => {
 
         const getResponse = await getData.json();
 
-            dispatch(getCoinData(getResponse.prices));
+        dispatch(getCoinData(getResponse.prices));
 
 
 
     }
-}
-
-
-
-
-
-
+};
 
 
 const trendingListAPI = () => {
@@ -80,14 +74,33 @@ const fetchExchangeCurrencyList = () => {
 
 
 
+const setImageURL = (coinName) => {
+    return async (dispatch) => {
+        const getData = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinName}&order=market_cap_desc&per_page=10&page=1&sparkline=false`);
+
+        const getResponse = await getData.json();
+
+        dispatch(getImageURL(getResponse[0].image));
+
+
+    }
+}
+
 
 
 
 
 // ACTUAL ACTION TAKERS
 
+const getImageURL = (url) =>{
+    return {
+        type: "IMAGE_URL",
+        payLoad: url,
+    }
+};
 
-const setExchangeList = (list) =>{
+
+const setExchangeList = (list) => {
     return {
         type: "EXCHANGE_LIST",
         payLoad: list,
@@ -207,4 +220,4 @@ const getTrendingCoinsList = (trending) => {
 
 
 
-export { getCoinsList, getCurrency, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader, fetchGraph, fetchExchangeCurrencyList};
+export { getCoinsList, getCurrency, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader, fetchGraph, fetchExchangeCurrencyList, setImageURL };
