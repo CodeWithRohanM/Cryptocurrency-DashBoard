@@ -31,7 +31,7 @@ const MarketCapListSection = () => {
 
 
             <div className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 flex flex-col gap-y-4 py-4 container mx-auto items-center max-w-xs rounded-md shadow-xl ">
-                <h1 className="text-center font-bold text-xl tracking-wider">CryptoCurrency By Market Cap</h1>
+                <h1 className="text-center font-bold text-xl tracking-widest">Cryptocurrency By Market Cap</h1>
                 <h1 className="font-normal"><span className="text-gray-500 font-bold tracking-wider">Currency =</span> <span className="uppercase font-bold text-xl">{currencyIcon} {currency}</span></h1>
             </div>
 

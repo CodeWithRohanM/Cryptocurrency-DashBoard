@@ -15,6 +15,8 @@ const MainChartSection = (props) => {
     const days = useSelector((state) => state.callListAPIReducer.days);
     const coinName = useSelector((state) => state.callListAPIReducer.coinName);
     const imageURL = useSelector((state) => state.callListAPIReducer.imageURL);
+    const statusMessage = useSelector((state) => state.callListAPIReducer.statusMessage);
+
 
     // USING USE STATE HOOK
     const [chartType, setChartType] = useState("line");
@@ -34,7 +36,7 @@ const MainChartSection = (props) => {
 
     return <>
 
-        <div className="md:h-3/6 flex flex-col gap-y-10 md:gap-y-6 container mx-auto w-full md:max-w-4xl ">
+        <div className="md:h-3/6 flex flex-col gap-y-10 md:gap-y-6 container mx-auto w-full md:max-w-4xl antialiased">
 
             <div className="flex flex-row justify-between md:pl-16 container mx-auto">
                 <div className="flex flex-row gap-x-2 md:gap-x-4 hover:cursor-pointer font-bold">
@@ -113,23 +115,32 @@ const MainChartSection = (props) => {
 
 
                 {
-                    (chartLoadingStatus) && <div className="flex flex-col gap-y-4 items-center w-full">
+                    statusMessage && (chartLoadingStatus) && <div className="flex flex-col gap-y-4 items-center w-full">
                         <h1 className="text-xl font-bold text-center tracking-wider">Fetching Chart Data..</h1>
                         <img src="/images/LoadingGif.gif" className=" h-12 w-22 rounded-full" />
                     </div>
                 }
 
                 {
-                    (!chartLoadingStatus) && (chartType === "bar") && <DisplayBarChart chartData={props.chartData} />
+                    !statusMessage && <div className="flex flex-col gap-y-4 items-center">
+                        <img src="/images/emoji.png" className="h-28 w-28"></img>
+                        <h1 className="text-xl font-semibold text-center">Could Not Find Your Coin..</h1>
+                        </div>
+                }
+
+
+
+                {
+                    (!chartLoadingStatus) && (chartType === "bar") && statusMessage && <DisplayBarChart chartData={props.chartData} />
                 }
 
                 {
-                    (!chartLoadingStatus) && (chartType === "line") && <DisplayLineChart chartData={props.chartData ? props.chartData : window.alert("Could Not Fetch")} />
+                    (!chartLoadingStatus) && (chartType === "line") && statusMessage && <DisplayLineChart chartData={props.chartData ? props.chartData : window.alert("Could Not Fetch")} />
 
                 }
 
                 {
-                    (!chartLoadingStatus) && (chartType === "bar_horizontal") && <DisplayBarHorizontalChart chartData={props.chartData} />
+                    (!chartLoadingStatus) && (chartType === "bar_horizontal") && statusMessage &&<DisplayBarHorizontalChart chartData={props.chartData} />
                 }
             </div>
 

@@ -11,6 +11,7 @@ const initialStates = {
     trendingLoader: true,
     exchangeList: [],
     imageURL: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+    statusMessage: true,
 };
 
 
@@ -112,6 +113,13 @@ const callListAPIReducer = (state = initialStates, action) => {
             return {
                 ...state,
                 imageURL: action.payLoad,
+            }
+        };
+
+        case "STATUS_MESSAGE":{
+            return {
+                ...state,
+                statusMessage: action.payLoad,
             }
         }
 

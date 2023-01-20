@@ -9,7 +9,7 @@ import DashBoardUI from "./Components/DashBoardUI";
 import { Data } from "./Utils/Data";
 
 import { useSelector, useDispatch } from "react-redux";
-import { fetchList, setLoaderState, setChartLoaderState, fetchExchangeCurrencyList, fetchGraph } from "./Actions/actions";
+import { fetchList, setLoaderState, setChartLoaderState, fetchExchangeCurrencyList, fetchGraph, setStatusMessage } from "./Actions/actions";
 
 const App = () => {
 
@@ -17,7 +17,11 @@ const App = () => {
   const coinName = useSelector((state) => state.callListAPIReducer.coinName);
   const coinData = useSelector((state) => state.callListAPIReducer.coinData);
   const days = useSelector((state) => state.callListAPIReducer.days);
+  const statusMessage = useSelector((state)=> state.callListAPIReducer.statusMessage);
+
   const dispatch = useDispatch();
+
+  const [status, setStatus] = useState(true);
 
 
 
@@ -161,14 +165,18 @@ const App = () => {
 
       setTimeout(() => {
         dispatch(setChartLoaderState(false));
-
+        dispatch(setStatusMessage(true));
       }, 1500);
 
 
 
 
     } catch (err) {
-      console.log(err);
+      setTimeout(()=>{
+        dispatch(setStatusMessage(false));
+        
+      }, 1500);
+      console.log("ERR ="+err);
     }
 
   }
@@ -247,6 +255,11 @@ const App = () => {
 
 
 
+
+  // if(!status)
+  // {
+  //   window.alert("Something Wrong..");
+  // }
 
 
 
