@@ -97,14 +97,10 @@ const App = () => {
           ),
 
           datasets: [{
-            label: "Price",
+            label: "Each Hour",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) => curValue[1]),
             backgroundColor: [
-              "red",
-              "blue",
-              "gray",
-              "yellow",
-              "pink"
+              "yellow"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -117,14 +113,10 @@ const App = () => {
           labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? 11 : new Date(curValue[0]).getMonth() + 1) + "/" + new Date(curValue[0]).getFullYear()),
 
           datasets: [{
-            label: "Chart Data",
+            label: "Each Day",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "red",
-              "blue",
-              "gray",
-              "yellow",
-              "pink"
+              "yellow"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -138,14 +130,10 @@ const App = () => {
           labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 168 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() === 111 ? "11" : new Date(curValue[0]).getMonth() + 1) + "/" + new Date(curValue[0]).getFullYear()),
 
           datasets: [{
-            label: "Chart Data",
+            label: "Each Week",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 168 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "red",
-              "blue",
-              "gray",
-              "yellow",
-              "pink"
+              "yellow"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -161,14 +149,10 @@ const App = () => {
           labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + new Date(curValue[0]).getMonth() + 1 + "/" + new Date(curValue[0]).getFullYear()),
 
           datasets: [{
-            label: "Chart Data",
+            label: "Each Month",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "red",
-              "blue",
-              "gray",
-              "yellow",
-              "pink"
+              "yellow"
             ],
             borderWidth: 2,
             borderColor: "black",
