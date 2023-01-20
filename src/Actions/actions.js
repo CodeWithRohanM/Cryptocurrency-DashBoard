@@ -161,13 +161,6 @@ const getCurrency = (currency) => {
     }
 };
 
-const getChartType = (chart) => {
-    return {
-        type: "CHART_TYPE",
-        payLoad: chart,
-    }
-};
-
 const getCoinData = (coinData) => {
     return {
         type: "COIN_DATA",
@@ -214,4 +207,4 @@ const getTrendingCoinsList = (trending) => {
 
 
 
-export { getCoinsList, getCurrency, getChartType, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader, fetchGraph, fetchExchangeCurrencyList};
+export { getCoinsList, getCurrency, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader, fetchGraph, fetchExchangeCurrencyList};

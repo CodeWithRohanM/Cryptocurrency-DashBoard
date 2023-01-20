@@ -2,6 +2,7 @@ import {React, useState} from "react";
 import { Chart, ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale } from "chart.js";
 import { Pie} from "react-chartjs-2";
 import { Data } from "../../Utils/Data";
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 
 const StaticChart = () => {
@@ -9,19 +10,16 @@ const StaticChart = () => {
     Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale);
 
     const [chartDataStatic, setChartDataStatic] = useState({
-        labels: Data.map((curValue, index) => curValue.userGain),
+        labels: "",
 
         datasets: [{
-            label: "Chart Data",
+            label: "Amount",
             data: Data.map((curValue, index) => curValue.userLost),
             backgroundColor: [
                 "red",
                 "yellow",
                 "green",
             ],
-            datalabels:{
-                text:"$252",
-            },
             borderWidth: 2,
             borderColor: "black",
         }
@@ -31,19 +29,30 @@ const StaticChart = () => {
     return <>
 
             <Pie
+                plugins={[ChartDataLabels]}
                 data={chartDataStatic}
                 options={{
                     plugins: {
-                        datalabels:{
-                            display:true
-                        },
                         title: {
                             display: true,
                             text: "Portfolio"
                         },
                         legend: {
                             display: false,
-                          }
+                          },
+
+                          datalabels: { // This code is used to display data values
+                            display:true,
+                            color: "black",
+                            // anchor: 'end',
+                            // align: 'top',
+                            // formatter: Math.round,
+                            font: {
+                                weight: 'bold',
+                                size: 16
+                            }
+                        }
+
                     }
                 }}
             />

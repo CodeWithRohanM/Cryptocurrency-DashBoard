@@ -43,7 +43,7 @@ const DashBoardUI = (props) => {
         <div className="bg-cyan-300">
         <Header />
 
-            <div className="bg-cyan-100 h-screen pt-6 container mx-auto rounded-xl">
+            <div className="bg-cyan-100 h-screen pt-6 container mx-auto rounded-xl antialiased">
 
                 <div className="flex flex-col gap-y-8 container mx-auto md:flex-row h-full md:gap-x-4">
 

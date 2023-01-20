@@ -121,7 +121,7 @@ const FooterSection = () => {
                                     {
                                         exchangeList.map((curValue, index) => {
                                             return <>
-                                                <option value={curValue} >{curValue.toUpperCase()}</option>
+                                                <option key={index} value={curValue} >{curValue.toUpperCase()}</option>
 
                                             </>
                                         })

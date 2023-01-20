@@ -1,9 +1,12 @@
 import {React, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCryptoCoinName, getCurrency } from "../../Actions/actions";
+import { getCryptoCoinName, getCurrency, setLoaderState, fetchList } from "../../Actions/actions";
 
 const SearchBarSection = () => {
     const dispatch = useDispatch();
+
+    const currency = useSelector((state)=> state.callListAPIReducer.currency);
+
 
     const [storeCoinName, setStoreCoinName] = useState("");
 
@@ -25,10 +28,10 @@ const SearchBarSection = () => {
             <select className="py-3 rounded-md text-center font-bold px-3 tracking-wider" onChange={(event) => {
                 const getValue = event.target.value;
                 dispatch(getCurrency(getValue));
-
+                // dispatch(setLoaderState(true));
+                // dispatch(fetchList(currency));
             }}>
-                <option selected>Currency</option>
-                <option value="usd">USD</option>
+                <option value="usd" selected>USD</option>
                 <option value="inr">INR</option>
                 <option value="eur">EUR</option>
                 <option value="jpy">JPY</option>

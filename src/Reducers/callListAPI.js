@@ -6,7 +6,7 @@ const initialStates = {
     coinData: [],
     chartLoader: false,
     loader: true,
-    chart: "line",
+    // chart: "line",
     divisionNumber: 12,
     trendingCoinsList: [],
     trendingLoader: true,
@@ -79,14 +79,6 @@ const callListAPIReducer = (state = initialStates, action) => {
             }
         };
 
-        case "CHART_TYPE": {
-            return {
-                ...state,
-                chart: action.payLoad,
-                chartLoader: false,
-            }
-        };
-
         case "DIVISION_NUMBER": {
             return {
                 ...state,
@@ -103,16 +95,16 @@ const callListAPIReducer = (state = initialStates, action) => {
             }
         };
 
-        case "TRENDING_LOADER":{
+        case "TRENDING_LOADER": {
             return {
                 ...state,
                 trendingLoader: action.payLoad,
             }
         };
 
-        case "EXCHANGE_LIST":{
+        case "EXCHANGE_LIST": {
             return {
-                ...state,   
+                ...state,
                 exchangeList: action.payLoad,
             }
         }

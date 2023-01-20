@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getDaysCount, getCryptoCoinName, setChartLoaderState, getChartType } from "../../Actions/actions";
+import { getDaysCount, getCryptoCoinName, setChartLoaderState } from "../../Actions/actions";
 
 import DisplayBarChart from "../Charts/DisplayBarChart";
 import DisplayLineChart from "../Charts/DisplayLineChart";
@@ -8,14 +8,16 @@ import DisplayBarHorizontalChart from "../Charts/DisplayBarHorizontalChart";
 
 const MainChartSection = (props) => {
     const dispatch = useDispatch();
-    const list = useSelector((state) => state.callListAPIReducer.coinsList);
 
-    const chart = useSelector((state) => state.callListAPIReducer.chart);
+    // FETCHING STORE DATA
+    const list = useSelector((state) => state.callListAPIReducer.coinsList);
     const chartLoadingStatus = useSelector((state) => state.callListAPIReducer.chartLoader);
     const days = useSelector((state) => state.callListAPIReducer.days);
     const coinName = useSelector((state) => state.callListAPIReducer.coinName);
 
 
+    // USING USE STATE HOOK
+    const [chartType, setChartType] = useState("line");
 
 
     return <>
@@ -25,6 +27,7 @@ const MainChartSection = (props) => {
             <div className="flex flex-row justify-between md:pl-16 container mx-auto">
                 <div className="flex flex-row gap-x-2 md:gap-x-4 hover:cursor-pointer font-bold">
                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl transition ease-in-out hover:-translate-y-1 duration-300 hover:scale-110 active:scale-90 focus:scale-70" onClick={() => dispatch(getDaysCount(1))
+                    // dispatch(setChartLoaderState(true));
                     }>1D</button>
                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-4 py-2 rounded-md hover:bg-blue-600 shadow-xl hover:-translate-y-1 hover:scale-110 active:scale-90 duration-300" onClick={() => dispatch(getDaysCount(7))
                     }>1W</button>
@@ -40,12 +43,12 @@ const MainChartSection = (props) => {
                         dispatch(getCryptoCoinName(getValue));
                     }}>
 
-                        <option selected getOptionLabel>{coinName}</option>
+                        <option selected>{coinName}</option>
                         {
                             list.map((curValue, index) => {
 
                                 return <>
-                                    <option value={curValue.id} className="bg-white py-3 text-black">{curValue.name}</option>
+                                    <option key={curValue.market_cap} value={curValue.id} className="bg-white py-3 text-black">{curValue.name}</option>
 
                                 </>
 
@@ -59,9 +62,10 @@ const MainChartSection = (props) => {
                     <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider" onChange={(event) => {
                         dispatch(setChartLoaderState(true));
                         const getValue = event.target.value;
-                        setTimeout(() => {
-                            dispatch(getChartType(getValue));
-                        }, 500);
+                        setChartType(getValue);
+                        setTimeout(()=>{
+                            dispatch(setChartLoaderState(false));
+                        }, 1000);
                     }}>
                         <option selected>Line Chart</option>
                         <option value="bar">Bar Chart Vertical</option>
@@ -95,16 +99,16 @@ const MainChartSection = (props) => {
                 }
 
                 {
-                    (!chartLoadingStatus) && (chart === "bar") && <DisplayBarChart chartData={props.chartData} />
+                    (!chartLoadingStatus) && (chartType === "bar") && <DisplayBarChart chartData={props.chartData} />
                 }
 
                 {
-                    (!chartLoadingStatus) && (chart === "line") && <DisplayLineChart chartData={props.chartData ? props.chartData : window.alert("Could Not Fetch")} />
+                    (!chartLoadingStatus) && (chartType === "line") && <DisplayLineChart chartData={props.chartData ? props.chartData : window.alert("Could Not Fetch")} />
 
                 }
 
                 {
-                    (!chartLoadingStatus) && (chart === "bar_horizontal") && <DisplayBarHorizontalChart chartData={props.chartData} />
+                    (!chartLoadingStatus) && (chartType === "bar_horizontal") && <DisplayBarHorizontalChart chartData={props.chartData} />
                 }
             </div>
 

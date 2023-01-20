@@ -242,18 +242,11 @@ const App = () => {
     //setting Loading States
     dispatch(setChartLoaderState(true));
 
-
     //Calling API's
     // dispatch(fetchGraph(coinName, currency, days));
     fetchCoinNameGraph();
 
   }, [days, coinName]);
-
-
-
-
-
-
 
 
 
