@@ -12,7 +12,7 @@ import DashBoardUI from "./Components/DashBoardUI";
 
 
 import { useSelector, useDispatch } from "react-redux";
-import { fetchList, setLoaderState, setChartLoaderState, fetchExchangeCurrencyList } from "./Actions/actions";
+import { fetchList, setLoaderState, setChartLoaderState, fetchExchangeCurrencyList, fetchGraph } from "./Actions/actions";
 
 const App = () => {
 
@@ -20,7 +20,6 @@ const App = () => {
   const coinName = useSelector((state) => state.callListAPIReducer.coinName);
   const coinData = useSelector((state) => state.callListAPIReducer.coinData);
   const days = useSelector((state) => state.callListAPIReducer.days);
-
   const dispatch = useDispatch();
 
 
@@ -229,12 +228,26 @@ const App = () => {
     // dispatch(fetchGraph(coinName, currency, days));
     dispatch(fetchExchangeCurrencyList());
 
+
+
     fetchCoinNameGraph();
 
 
 
 
-  }, [currency, coinName, days]);
+  }, [currency]);
+
+
+  useEffect((curValue) => {
+    //setting Loading States
+    dispatch(setChartLoaderState(true));
+
+
+    //Calling API's
+    // dispatch(fetchGraph(coinName, currency, days));
+    fetchCoinNameGraph();
+
+  }, [days, coinName]);
 
 
 
@@ -251,7 +264,7 @@ const App = () => {
   return <>
 
     <Routes>
-      <Route exact path="/" element={<DashBoardUI chartData= {chartData} />}></Route>
+      <Route exact path="/" element={<DashBoardUI chartData={chartData} />}></Route>
       <Route exact path="/trending" element={<TrendingCoins />}></Route>
       <Route exact path="/info" element={<CoinInfo />}></Route>
       <Route path="*" element={<ErrorPage />}></Route>
