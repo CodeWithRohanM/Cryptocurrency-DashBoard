@@ -63,9 +63,9 @@ const FooterSection = () => {
 
 
 
-                <div className="flex flex-col gap-y-4 items-center flex-1 md:h-full">
+                <div className="flex flex-col gap-y-4 items-center flex-1 md:h-full md:py-3">
 
-                    <h1 className="font-bold tracking-wider w-full text-center md:text-left bg-blue-300"><span className="text-gray-400 font-bold tracking-wider">Total Value:</span> $1000</h1>
+                    <h1 className="font-bold tracking-wider w-full text-center md:text-left "><span className="text-gray-400 font-bold tracking-wider">Total Value:</span> $1000</h1>
 
                     <div className="flex flex-col gap-y-4 w-full">
                         <div className="flex flex-row gap-x-2 items-center">

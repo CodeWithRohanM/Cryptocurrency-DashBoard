@@ -8,13 +8,34 @@ const DisplayBarChart = ({ chartData }) => {
 
   Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend);
 
-
-  const coinData = useSelector((state) => state.callListAPIReducer.coinData);
+  const days = useSelector((state)=> state.callListAPIReducer.days);
   const currency = useSelector((state) => state.callListAPIReducer.currency);
   const dispatch = useDispatch();
 
 
+  let duration = "";
 
+  if(days === 1)
+  {
+    duration = "HOURLY";
+  }
+
+  if(days === 7)
+  {
+    duration = "DAILY";
+  }
+  else if(days === 30)
+  {
+    duration = "WEEKLY";
+  }
+  else if(days === 90)
+  {
+    duration = "MONTHLY";
+  }
+  else if(days === 180)
+  {
+    duration = "EVERY 3 MONTHS";
+  }
 
 
 
@@ -29,7 +50,7 @@ const DisplayBarChart = ({ chartData }) => {
           x:{
             title:{
               display: true,
-              text:"DURATION",
+              text:duration,
               font:{
                 size: 12,
                 weight:"bold",
