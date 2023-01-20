@@ -9,15 +9,30 @@ const MarketCapListSection = () => {
     const loadingStatus = useSelector((state)=> state.callListAPIReducer.loader);
     const list = useSelector((state)=> state.callListAPIReducer.coinsList);
 
+    let currencyIcon = "$";
+
+    if(currency === "inr")
+    {
+        currencyIcon = "₹";
+    }
+    else if(currency === "eur")
+    {
+        currencyIcon = "€";
+    }
+    else if(currency === "jpy")
+    {
+        currencyIcon = "¥"
+    }
+
     const dispatch = useDispatch();
 
     return <>
-        <div className="w-96 flex flex-col gap-y-8  overflow-y-scroll scroll-smooth">
+        <div className="h-96 md:h-full container mx-auto md:w-96 flex flex-col gap-y-8  overflow-y-scroll scroll-smooth">
 
 
             <div className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 flex flex-col gap-y-4 py-4 container mx-auto items-center max-w-xs rounded-md shadow-xl ">
                 <h1 className="text-center font-bold text-xl tracking-wider">CryptoCurrency By Market Cap</h1>
-                <h1 className="font-normal"><span className="text-gray-500 font-bold tracking-wider">Currency =</span> <span className="uppercase font-bold text-xl">{currency}</span></h1>
+                <h1 className="font-normal"><span className="text-gray-500 font-bold tracking-wider">Currency =</span> <span className="uppercase font-bold text-xl">{currencyIcon} {currency}</span></h1>
             </div>
 
 

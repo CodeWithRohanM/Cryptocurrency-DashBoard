@@ -32,31 +32,31 @@ const App = () => {
 
 
 
-  // const [chartData, setChartData] = useState({
-  //   labels: [],
-  //   datasets: [],
-
-  // });
-
-
   const [chartData, setChartData] = useState({
-    labels: Data.map((curValue, index)=> curValue.userGain),
+    labels: [],
+    datasets: [],
 
-    datasets: [{
-      label: "Chart Data",
-      data: Data.map((curValue, index)=> curValue.userLost),
-      backgroundColor: [
-        "red",
-        "blue",
-        "gray",
-        "yellow",
-        "pink"
-      ],
-      borderWidth: 2,
-      borderColor: "black",
-    }
-    ]
   });
+
+
+  // const [chartData, setChartData] = useState({
+  //   labels: Data.map((curValue, index)=> curValue.userGain),
+
+  //   datasets: [{
+  //     label: "Chart Data",
+  //     data: Data.map((curValue, index)=> curValue.userLost),
+  //     backgroundColor: [
+  //       "red",
+  //       "blue",
+  //       "gray",
+  //       "yellow",
+  //       "pink"
+  //     ],
+  //     borderWidth: 2,
+  //     borderColor: "black",
+  //   }
+  //   ]
+  // });
 
 
 
@@ -97,7 +97,7 @@ const App = () => {
           ),
 
           datasets: [{
-            label: "Chart Data",
+            label: "Price",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) => curValue[1]),
             backgroundColor: [
               "red",
@@ -234,23 +234,23 @@ const App = () => {
 
 
 
-  // useEffect((curValue) => {
-  //   //setting Loading States
-  //   dispatch(setLoaderState(true));
-  //   dispatch(setChartLoaderState(true));
+  useEffect((curValue) => {
+    //setting Loading States
+    dispatch(setLoaderState(true));
+    dispatch(setChartLoaderState(true));
 
 
-  //   //Calling API's
-  //   dispatch(fetchList(currency));
-  //   // dispatch(fetchGraph(coinName, currency, days));
-  //   dispatch(fetchExchangeCurrencyList());
+    //Calling API's
+    dispatch(fetchList(currency));
+    // dispatch(fetchGraph(coinName, currency, days));
+    dispatch(fetchExchangeCurrencyList());
 
-  //   fetchCoinNameGraph();
-
-
+    fetchCoinNameGraph();
 
 
-  // }, [currency, coinName, days]);
+
+
+  }, [currency, coinName, days]);
 
 
 

@@ -13,8 +13,6 @@ const CoinInfo = () => {
     const getImage = useSelector((state) => state.CoinInfoReducer.image);
     const getRank = useSelector((state) => state.CoinInfoReducer.rank);
     const getPrice = useSelector((state) => state.CoinInfoReducer.price);
-    // const getImage = useState((state) => state.CoinInfoReducer.coinInfoImage);
-    // const getDetails = useState((state) => state.CoinInfoReducer.coinInfoDetails);
 
     console.log("Rank = " + getRank);
 
@@ -57,7 +55,7 @@ const CoinInfo = () => {
         <div class="min-w-screen min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600 flex  items-center p-5 lg:px-20 overflow-hidden relative">
             <div class="flex-1 min-h-full min-w-full rounded-3xl bg-cyan-50 shadow-xl p-10 lg:p-20 text-gray-800 relative md:flex-col md:space-y-12  text-center md:text-left">
 
-                <div className="flex flex-row gap-x-6 w-full container mx-auto max-w-xl border-b border-black py-2">
+                <div className="flex flex-1 flex-row gap-x-6 w-full container mx-auto md:max-w-xl border-b border-black py-2">
                     <input type="text" id="coinInput" placeholder="Enter Coin Name.." className="focus:outline-none text-gray-400 font-bold px-3 appearance-none border-none bg-transparent flex-1 uppercase" onKeyDown={showCoinName} value={inputCoinName} onChange={(event) => {
                         setInputCoinName(event.target.value);
 

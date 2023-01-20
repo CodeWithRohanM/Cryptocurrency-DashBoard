@@ -39,7 +39,7 @@ const StaticChart = () => {
                         },
                         title: {
                             display: true,
-                            text: "Users Gained between 2016-2020"
+                            text: "Portfolio"
                         },
                         legend: {
                             display: false,

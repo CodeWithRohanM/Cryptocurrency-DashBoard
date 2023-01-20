@@ -48,11 +48,11 @@ const FooterSection = () => {
         <div className="h-fit md:h-56 flex flex-row gap-x-4 container mx-auto md:max-w-4xl ">
 
 
-            <div className="flex bg-white rounded-md px-3 items-center md:px-6 md:gap-x-6 md:py-4 flex-1 flex-row justify-between">
+            <div className="flex bg-white rounded-md px-3 items-center md:px-6 gap-x-3 md:gap-x-6 md:py-3 flex-1 flex-row justify-between">
 
 
 
-                <div className="flex flex-col items-center gap-y-4 bg-red-300">
+                <div className="flex flex-col items-center gap-y-4flex-1">
                     <h1 className="font-bold text-lg tracking-wider">Portfolio</h1>
 
                     <div className="h-40 w-40 items-center px-4">
@@ -63,11 +63,11 @@ const FooterSection = () => {
 
 
 
-                <div className="flex flex-col gap-y-4 bg-blue-300 items-center">
+                <div className="flex flex-col gap-y-4 items-center flex-1 md:h-full">
 
-                    <h1 className="font-bold tracking-wider"><span className="text-gray-400 font-bold tracking-wider">Total Value:</span> $1000</h1>
+                    <h1 className="font-bold tracking-wider w-full text-center md:text-left bg-blue-300"><span className="text-gray-400 font-bold tracking-wider">Total Value:</span> $1000</h1>
 
-                    <div className="flex flex-col gap-y-4">
+                    <div className="flex flex-col gap-y-4 w-full">
                         <div className="flex flex-row gap-x-2 items-center">
                             <img src="/images/red_dot.png" className="h-3 w-3 tracking-wider"></img>
                             <h1>Tether</h1>
@@ -95,9 +95,9 @@ const FooterSection = () => {
 
             <div className="flex w-1/2 bg-white rounded-md px-3 flex-col gap-y-5 md:gap-y-5 md:px-5 md:py-4 flex-1 tracking-wider">
 
-                <div className="flex flex-row gap-x-5 justify-between bg-red-300">
+                <div className="flex flex-row gap-x-5 justify-between">
 
-                    <div className="flex flex-col gap-y-6 w-1/2 bg-yellow-300 text-center md:text-left">
+                    <div className="flex flex-col gap-y-6 w-1/2 text-center md:text-left">
 
 
                         <h1 className="font-bold text-lg ">Exchange Coins</h1>
@@ -108,7 +108,7 @@ const FooterSection = () => {
 
                             <div className="flex flex-row justify-between items-center">
                                 <h1 className="text-red-500 font-bold">Sell</h1>
-                                <select className="md:w-28 text-center p-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md">
+                                <select className="md:w-28 text-center p-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md font-semibold text-black">
                                     <option selected>BitCoin</option>
 
                                 </select>
@@ -116,12 +116,12 @@ const FooterSection = () => {
 
                             <div className="flex flex-row justify-between items-center">
                                 <h1 className="text-gray-500 font-bold">Buy</h1>
-                                <select className="md:w-28 text-center py-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md" onChange={(event) => { setBuyName(event.target.value) }}>
+                                <select className="md:w-28 text-center py-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md font-semibold text-black" onChange={(event) => { setBuyName(event.target.value) }}>
                                     <option selected>Ethereum</option>
                                     {
                                         exchangeList.map((curValue, index) => {
                                             return <>
-                                                <option value={curValue}>{curValue.toUpperCase()}</option>
+                                                <option value={curValue} >{curValue.toUpperCase()}</option>
 
                                             </>
                                         })
