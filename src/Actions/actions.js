@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 const fetchList = (currency) => {
 
-
-
     return async (dispatch) => {
         const getData = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
 
@@ -19,6 +17,7 @@ const fetchList = (currency) => {
 
 };
 
+
 const fetchGraph = (coinName, currency, days) => {
 
     return async (dispatch) => {
@@ -27,8 +26,6 @@ const fetchGraph = (coinName, currency, days) => {
         const getResponse = await getData.json();
 
         dispatch(getCoinData(getResponse.prices));
-
-
 
     }
 };
@@ -60,7 +57,6 @@ const fetchCoinInfoAPI = (name) => {
 };
 
 
-
 const fetchExchangeCurrencyList = () => {
     return async (dispatch) => {
         const getData = await fetch("https://api.coingecko.com/api/v3/simple/supported_vs_currencies");
@@ -71,7 +67,6 @@ const fetchExchangeCurrencyList = () => {
 
     }
 };
-
 
 
 const setImageURL = (coinName) => {
@@ -99,7 +94,6 @@ const getImageURL = (url) =>{
     }
 };
 
-
 const setExchangeList = (list) => {
     return {
         type: "EXCHANGE_LIST",
@@ -114,9 +108,6 @@ const setCoinInfo = (details) => {
     }
 };
 
-
-
-
 const getTrendingLoader = (status) => {
     return {
         type: "TRENDING_LOADER",
@@ -124,17 +115,12 @@ const getTrendingLoader = (status) => {
     }
 };
 
-
-
 const getCoinInfoLoader = (status) => {
     return {
         type: "COIN_LOADER",
         payLoad: status,
     }
 }
-
-
-
 
 const setLoaderState = (loaderState) => {
     return {
@@ -165,7 +151,6 @@ const getCoinsList = (list) => {
     }
 
 };
-
 
 const getCurrency = (currency) => {
     return {
@@ -215,8 +200,6 @@ const getTrendingCoinsList = (trending) => {
         payLoad: trending,
     }
 };
-
-
 
 
 

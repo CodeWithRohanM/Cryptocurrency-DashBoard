@@ -52,7 +52,7 @@ const FooterSection = () => {
 
 
 
-                <div className="flex flex-col items-center gap-y-4flex-1">
+                <div className="flex flex-col items-center gap-y-4 flex-1">
                     <h1 className="font-bold text-lg tracking-wider">Portfolio</h1>
 
                     <div className="h-40 w-40 items-center px-4">

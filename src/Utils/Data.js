@@ -4,7 +4,7 @@ export const Data = [
     id: 1,
     year: 2016,
     userGain: 80000,
-    userLost: 250
+    userLost: 375
   },
   {
     id: 2,
@@ -16,7 +16,7 @@ export const Data = [
     id: 3,
     year: 2018,
     userGain: 78888,
-    userLost: 375
+    userLost: 250
   },
 
 ];

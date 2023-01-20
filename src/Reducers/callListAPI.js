@@ -6,7 +6,6 @@ const initialStates = {
     coinData: [],
     chartLoader: false,
     loader: true,
-    // chart: "line",
     divisionNumber: 12,
     trendingCoinsList: [],
     trendingLoader: true,
@@ -86,7 +85,6 @@ const callListAPIReducer = (state = initialStates, action) => {
                 divisionNumber: action.payLoad,
             }
         };
-
 
         case "TRENDING_COINS": {
             return {

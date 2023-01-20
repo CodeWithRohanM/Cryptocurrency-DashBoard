@@ -35,11 +35,6 @@ const Header = () => {
                     className="hover:scale-95 transition ease-in-out duration-300">Coin Info</NavLink>
 
 
-                    <NavLink to="/aboutUs" 
-                    style={({isActive})=>({
-                        color: isActive ? "blue" : "black",
-                    })}
-                    className="hover:scale-95 transition ease-in-out duration-300">Conatct Us</NavLink>
                 </div>
             </div>
         </div>
