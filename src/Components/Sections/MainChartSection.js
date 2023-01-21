@@ -6,6 +6,7 @@ import DisplayBarChart from "../Charts/DisplayBarChart";
 import DisplayLineChart from "../Charts/DisplayLineChart";
 import DisplayBarHorizontalChart from "../Charts/DisplayBarHorizontalChart";
 
+
 const MainChartSection = (props) => {
     const dispatch = useDispatch();
 
@@ -16,7 +17,6 @@ const MainChartSection = (props) => {
     const coinName = useSelector((state) => state.callListAPIReducer.coinName);
     const imageURL = useSelector((state) => state.callListAPIReducer.imageURL);
     const statusMessage = useSelector((state) => state.callListAPIReducer.statusMessage);
-
 
     // USING USE STATE HOOK
     const [chartType, setChartType] = useState("line");
@@ -52,7 +52,10 @@ const MainChartSection = (props) => {
 
                 <div className="flex flex-row gap-x-2 md:gap-x-4 relative">
                     <div className="absolute z-10 px-3 py-1.5">
-                        <img src={imageURL} className="w-7 h-7 rounded-full"></img>
+                        {
+                            statusMessage ? <img src={imageURL} className="w-7 h-7 rounded-full"></img> : <img src="images/warning.png" className="w-7 h-7 rounded-full"></img>
+                        }
+                        
                     </div>
                     <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider" onChange={(event) => {
                         const getValue = event.target.value;
@@ -123,8 +126,8 @@ const MainChartSection = (props) => {
 
                 {
                     !statusMessage && <div className="flex flex-col gap-y-4 items-center">
-                        <img src="/images/emoji.png" className="h-28 w-28"></img>
-                        <h1 className="text-xl font-semibold text-center">Could Not Find Your Coin..</h1>
+                        <img src="/images/sorry.png" className="h-28 w-28"></img>
+                        <h1 className="text-xl font-semibold text-center">Could Not Find Your Coin..<br></br>Please Try Again..</h1>
                         </div>
                 }
 

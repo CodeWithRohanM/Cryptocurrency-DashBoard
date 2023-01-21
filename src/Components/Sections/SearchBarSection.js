@@ -1,6 +1,6 @@
 import {React, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getCryptoCoinName, getCurrency, setLoaderState, fetchList, setStatusMessage } from "../../Actions/actions";
+import { getCryptoCoinName, getCurrency, setLoaderState, fetchList, setStatusMessage, setImageURL } from "../../Actions/actions";
 
 const SearchBarSection = () => {
     const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const SearchBarSection = () => {
             dispatch(setStatusMessage(true));
 
             dispatch(getCryptoCoinName(storeCoinName.toLowerCase()));
-            // console.log(storeCoinName.toLowerCase());
+            dispatch(setImageURL(storeCoinName.toLowerCase()));
             setStoreCoinName("");
         }
 
