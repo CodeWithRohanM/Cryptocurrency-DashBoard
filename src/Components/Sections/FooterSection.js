@@ -1,19 +1,31 @@
 import { React, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import StaticChart from "../Charts/StaticChart";
 
 const FooterSection = () => {
-    const exchangeList = useSelector((state) => state.callListAPIReducer.exchangeList);
-    const dispatch = useDispatch();
-
-
-
-
-
 
     const [buyName, setBuyName] = useState("eth");
     const [exchangeRate, setExchangeRate] = useState(13.61);
     const [exchangeNumber, setExchangeNumber] = useState();
+
+    const [exchangeList, setExchangeList] = useState([]);
+
+
+
+    const fetchExchangeCurrencyList = async () => {
+        try {
+            const getData = await fetch("https://api.coingecko.com/api/v3/simple/supported_vs_currencies");
+            const getResponse = await getData.json();
+
+            setExchangeList(getResponse);
+
+
+        }
+        catch (err) {
+            console.log(err);
+        }
+    };
+
+
 
 
     const fetchExchangeAPI = async () => {
@@ -66,7 +78,7 @@ const FooterSection = () => {
                 <div className="flex flex-col gap-y-4 items-center flex-1 md:h-full md:py-3">
 
                     <h1 className="font-bold tracking-wider w-full text-center md:text-left "><span className="text-gray-400 font-bold tracking-wider">Total Value:</span> $1000</h1>
- 
+
                     <div className="flex flex-col gap-y-4 w-full">
                         <div className="flex flex-row gap-x-2 items-center">
                             <img src="/images/red_dot.png" className="h-3 w-3 tracking-wider"></img>
@@ -116,7 +128,11 @@ const FooterSection = () => {
 
                             <div className="flex flex-row justify-between items-center">
                                 <h1 className="text-gray-500 font-bold">Buy</h1>
-                                <select className="md:w-28 text-center py-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md font-semibold text-black" onChange={(event) => { setBuyName(event.target.value) }}>
+                                <select className="md:w-28 text-center py-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md font-semibold text-black"
+                                    onChange={(event) => {
+                                        setBuyName(event.target.value);
+                                    }}
+                                    onClick={() => fetchExchangeCurrencyList()}>
                                     <option selected>Ethereum</option>
                                     {
                                         exchangeList.map((curValue, index) => {

@@ -127,7 +127,7 @@ const MainChartSection = (props) => {
                 {
                     !statusMessage && <div className="flex flex-col gap-y-4 items-center">
                         <img src="/images/sorry.png" className="h-28 w-28"></img>
-                        <h1 className="text-xl font-semibold text-center">Could Not Find Your Coin..<br></br>Please Try Again..</h1>
+                        <h1 className="text-lg font-semibold text-center">Could Not Find Your Coin..<br></br>Please Try Again..</h1>
                         </div>
                 }
 

@@ -32,31 +32,31 @@ const App = () => {
 
 
 
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [],
-
-  });
-
-
   // const [chartData, setChartData] = useState({
-  //   labels: Data.map((curValue, index)=> curValue.userGain),
+  //   labels: [],
+  //   datasets: [],
 
-  //   datasets: [{
-  //     label: "Chart Data",
-  //     data: Data.map((curValue, index)=> curValue.userLost),
-  //     backgroundColor: [
-  //       "red",
-  //       "blue",
-  //       "gray",
-  //       "yellow",
-  //       "pink"
-  //     ],
-  //     borderWidth: 2,
-  //     borderColor: "black",
-  //   }
-  //   ]
   // });
+
+
+  const [chartData, setChartData] = useState({
+    labels: Data.map((curValue, index)=> curValue.userGain),
+
+    datasets: [{
+      label: "Chart Data",
+      data: Data.map((curValue, index)=> curValue.userLost),
+      backgroundColor: [
+        "red",
+        "blue",
+        "gray",
+        "yellow",
+        "pink"
+      ],
+      borderWidth: 2,
+      borderColor: "black",
+    }
+    ]
+  });
 
 
 
@@ -231,14 +231,8 @@ const App = () => {
     //Calling API's
     dispatch(fetchList(currency));
     // dispatch(fetchGraph(coinName, currency, days));
-    dispatch(fetchExchangeCurrencyList());
-
-
 
     fetchCoinNameGraph();
-
-
-
 
   }, [currency]);
 
@@ -249,6 +243,7 @@ const App = () => {
 
     //Calling API's
     // dispatch(fetchGraph(coinName, currency, days));
+
     fetchCoinNameGraph();
 
   }, [days, coinName]);

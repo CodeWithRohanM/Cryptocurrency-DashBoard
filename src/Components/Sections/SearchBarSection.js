@@ -1,12 +1,9 @@
-import {React, useState} from "react";
+import { React, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getCryptoCoinName, getCurrency, setLoaderState, fetchList, setStatusMessage, setImageURL } from "../../Actions/actions";
 
 const SearchBarSection = () => {
     const dispatch = useDispatch();
-
-    const currency = useSelector((state)=> state.callListAPIReducer.currency);
-
 
     const [storeCoinName, setStoreCoinName] = useState("");
 

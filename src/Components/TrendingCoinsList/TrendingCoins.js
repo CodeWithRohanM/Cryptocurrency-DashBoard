@@ -1,35 +1,37 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { trendingListAPI, getTrendingLoader } from "../../Actions/actions";
 import ListCard from "./ListCard";
 import Header from "../Header";
 import { NavLink } from "react-router-dom";
 
 const TrendingCoins = () => {
 
-    const trendingList = useSelector((state) => state.callListAPIReducer.trendingCoinsList);
-    const loader = useSelector((state) => state.callListAPIReducer.trendingLoader);
-    const dispatch = useDispatch();
 
+    const [trendingList, setTrendingList] = useState([]);
+    const [loader, setLoader] = useState(true);
+    const [statusMessage, setStatusMessage] = useState(true);
 
 
 
 
     const fetchTrendingCoinsList = async () => {
         try {
-            dispatch(getTrendingLoader(true));
+            setLoader(true);
+            setStatusMessage(true);
             document.getElementById("trendingList").style.display = "block";
-            dispatch(trendingListAPI());
 
-            // const getData = await fetch("https://api.coingecko.com/api/v3/search/trending");
-            // const getResponse = await getData.json();
+            const getData = await fetch("https://api.coingecko.com/api/v3/search/trending");
+            const getResponse = await getData.json();
+            setTrendingList(getResponse.coins);
 
-            // dispatch(getTrendingCoinsList(getResponse.coins));
+            setTimeout(() => {
+                setLoader(false);
+            }, 1500);
 
-
-
-        } catch (err) {
-            console.log(err);
+        }
+        catch (err) {
+            setTimeout(() => {
+                setStatusMessage(false);
+            }, 2000);
         }
 
     }
@@ -60,10 +62,18 @@ const TrendingCoins = () => {
             <div id="trendingList" className="hidden max-h-2xl container mx-auto">
 
                 {
-                    loader && <div className="flex flex-col items-center ">
+                    statusMessage && loader && <div className="flex flex-col items-center ">
                         <img src="/images/LoadingGif.gif" className="h-20 w-32 rounded-xl"></img>
                     </div>
                 }
+
+                {
+                    !statusMessage && <div className="flex flex-col gap-y-4 items-center">
+                        <img src="/images/sorry.png" className="h-28 w-28"></img>
+                        <h1 className="text-lg font-semibold text-center text-white tracking-wider antialiased">We are facing some error..<br></br>Please Try After Some Time..</h1>
+                    </div>
+                }
+
                 {
                     !loader && <div className="grid grid-cols-3 gap-x-16 gap-y-20">
                         {

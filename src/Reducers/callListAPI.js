@@ -7,8 +7,6 @@ const initialStates = {
     chartLoader: false,
     loader: true,
     divisionNumber: 12,
-    trendingCoinsList: [],
-    trendingLoader: true,
     exchangeList: [],
     imageURL: "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
     statusMessage: true,
@@ -84,21 +82,6 @@ const callListAPIReducer = (state = initialStates, action) => {
             return {
                 ...state,
                 divisionNumber: action.payLoad,
-            }
-        };
-
-        case "TRENDING_COINS": {
-            return {
-                ...state,
-                trendingCoinsList: action.payLoad,
-                trendingLoader: false,
-            }
-        };
-
-        case "TRENDING_LOADER": {
-            return {
-                ...state,
-                trendingLoader: action.payLoad,
             }
         };
 

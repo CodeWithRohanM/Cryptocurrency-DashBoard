@@ -1,7 +1,3 @@
-import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-
-
 const fetchList = (currency) => {
 
     return async (dispatch) => {
@@ -32,43 +28,6 @@ const fetchGraph = (coinName, currency, days) => {
 };
 
 
-const trendingListAPI = () => {
-    return async (dispatch) => {
-        const getData = await fetch("https://api.coingecko.com/api/v3/search/trending");
-        const getResponse = await getData.json();
-
-        setTimeout(() => {
-            dispatch(getTrendingCoinsList(getResponse.coins));
-        }, 1500);
-
-    }
-};
-
-
-const fetchCoinInfoAPI = (name) => {
-    return async (dispatch) => {
-        const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${name}`);
-        const getResponse = await getData.json();
-        console.log("ID = " + getResponse.id);
-        setTimeout(() => {
-            dispatch(setCoinInfo(getResponse));
-
-        }, 2000);
-    }
-};
-
-
-const fetchExchangeCurrencyList = () => {
-    return async (dispatch) => {
-        const getData = await fetch("https://api.coingecko.com/api/v3/simple/supported_vs_currencies");
-        const getResponse = await getData.json();
-
-        dispatch(setExchangeList(getResponse));
-
-
-    }
-};
-
 
 const setImageURL = (coinName) => {
     return async (dispatch) => {
@@ -85,9 +44,6 @@ const setImageURL = (coinName) => {
 
 
 
-
-
-
 // ACTUAL ACTION TAKERS
 
 const setStatusMessage = (message) =>{
@@ -96,8 +52,6 @@ const setStatusMessage = (message) =>{
         payLoad: message,
     }
 };
-
-
 
 const getImageURL = (url) =>{
     return {
@@ -206,13 +160,7 @@ const getDaysCount = (days) => {
     }
 };
 
-const getTrendingCoinsList = (trending) => {
-    return {
-        type: "TRENDING_COINS",
-        payLoad: trending,
-    }
-};
 
 
 
-export { getCoinsList, getCurrency, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, getTrendingCoinsList, fetchList, setLoaderState, setChartLoaderState, trendingListAPI, getTrendingLoader, fetchCoinInfoAPI, getCoinInfoLoader, fetchGraph, fetchExchangeCurrencyList, setImageURL, setStatusMessage };
+export { getCoinsList, getCurrency, getCryptoCoinName, getCoinData, getLoadingStatus, getChartLoadingStatus, getDivisionNumber, getDaysCount, fetchList, setLoaderState, setChartLoaderState, getTrendingLoader, getCoinInfoLoader, fetchGraph, setImageURL, setStatusMessage };

@@ -1,49 +1,100 @@
 import React, { useState } from "react";
 import Header from "./Header";
-import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchCoinInfoAPI, getCoinInfoLoader } from "../Actions/actions";
 
 const CoinInfo = () => {
-    const dispatch = useDispatch();
-    const getName = useSelector((state) => state.CoinInfoReducer.coinInfo.name);
-    const getDetails = useSelector((state) => state.CoinInfoReducer.details);
-    const getLoader = useSelector((state) => state.CoinInfoReducer.coinInfoLoader);
-    const getURL = useSelector((state) => state.CoinInfoReducer.url);
-    const getImage = useSelector((state) => state.CoinInfoReducer.image);
-    const getRank = useSelector((state) => state.CoinInfoReducer.rank);
-    const getPrice = useSelector((state) => state.CoinInfoReducer.price);
 
-    console.log("Rank = " + getRank);
 
     const [inputCoinName, setInputCoinName] = useState("");
-
     const [displayCoinName, setDisplayCoinName] = useState("");
 
+    const [getLoader, setGetLoader] = useState(false);
+    const [statusMessage, setStatusMessage] = useState(true);
+
+    const [getURL, setGetURL] = useState("");
+    const [getImage, setGetImage] = useState("");
+    const [getRank, setGetRank] = useState(1);
+    const [getPrice, setGetPrice] = useState(1);
+    const [getName, setGetName] = useState("");
+    const [getDetails, setGetDetails] = useState("");
 
 
-    const showCoinName = (event) => {
+    const showCoinName = async (event) => {
         if (event.key === "Enter") {
-            document.getElementById("desc").style.display = "block";
-            dispatch(getCoinInfoLoader(true));
 
-            dispatch(fetchCoinInfoAPI(inputCoinName.toLowerCase()));
+            try {
+                setGetLoader(true);
+                setStatusMessage(true);
+
+                setDisplayCoinName(inputCoinName);
+
+                document.getElementById("desc").style.display = "block";
+                setInputCoinName("");
+
+
+                const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${inputCoinName}`);
+                const getResponse = await getData.json();
+
+                setGetImage(getResponse.image.small);
+                setGetName(getResponse.name);
+                setGetRank(getResponse.market_cap_rank);
+                setGetPrice(getResponse.market_data.current_price.usd);
+                setGetDetails(getResponse.description.en);
+                setGetURL(getResponse.links.homepage[0]);
+
+
+                setTimeout(() => {
+                    setGetLoader(false);
+                }, 2000);
+
+            } catch (err) {
+                setGetLoader(true);
+                setTimeout(()=>{
+                    setStatusMessage(false);
+                }, 2000);
+            }
+
+        };
+
+    }
+
+
+
+    const fetchSearchAPI = async () => {
+
+        try {
+            setGetLoader(true);
+            setStatusMessage(true);
+
             setDisplayCoinName(inputCoinName);
+            document.getElementById("desc").style.display = "block";
             setInputCoinName("");
+
+
+            const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${inputCoinName}`);
+            const getResponse = await getData.json();
+
+            setGetImage(getResponse.image.small);
+            setGetName(getResponse.name);
+            setGetRank(getResponse.market_cap_rank);
+            setGetPrice(getResponse.market_data.current_price.usd);
+            setGetDetails(getResponse.description.en);
+            setGetURL(getResponse.links.homepage[0]);
+
+
+            setTimeout(() => {
+                setGetLoader(false);
+            }, 2000);
+
+        } catch (err) {
+            setGetLoader(true);
+            setTimeout(()=>{
+                setStatusMessage(false);
+            },2000);
         }
-    }
 
 
-    const fetchSearchAPI = () => {
-        document.getElementById("desc").style.display = "block";
-        dispatch(getCoinInfoLoader(true));
+    };
 
-        dispatch(fetchCoinInfoAPI(inputCoinName.toLowerCase()));
-        setDisplayCoinName(inputCoinName);
-        setInputCoinName("");
-
-
-    }
 
 
 
@@ -58,7 +109,6 @@ const CoinInfo = () => {
                 <div className="flex flex-1 flex-row gap-x-6 w-full container mx-auto md:max-w-xl border-b border-black py-2">
                     <input type="text" id="coinInput" placeholder="Enter Coin Name.." className="focus:outline-none text-gray-400 font-bold px-3 appearance-none border-none bg-transparent flex-1 uppercase" onKeyDown={showCoinName} value={inputCoinName} onChange={(event) => {
                         setInputCoinName(event.target.value);
-
                     }}></input>
                     <button type="button" className="bg-blue-500 text-white font-bold text-center px-4 py-2 rounded-md hover:-translate-y-1 transition ease-in-out duration-300" onClick={fetchSearchAPI}>Search</button>
                 </div>
@@ -70,21 +120,24 @@ const CoinInfo = () => {
 
 
                 {
-                    getLoader && <div className="flex flex-col items-center gap-y-6">
+                    statusMessage && getLoader && <div className="flex flex-col items-center gap-y-6">
                         <h1 className="text-xl font-normal">Searching for {displayCoinName}....</h1>
                         <img src="/images/LoadingGif.gif" className="h-20 w-32 rounded-xl" />
                     </div>
                 }
 
+                {
+                    !statusMessage && <div className="flex flex-col gap-y-4 items-center">
+                        <img src="/images/sorry.png" className="h-28 w-28"></img>
+                        <h1 className="text-lg font-semibold text-center">Could Not Find Your Coin..<br></br>Please Try Again..</h1>
+                    </div>
+                }
+
+
                 <div id="desc" className="hidden">
 
                     {
                         !getLoader && <div className=" flex-col space-y-8 rounded-xl bg-blue-100 px-20 tracking-wider leading-12 text-xl py-4 items-center">
-
-
-
-
-
 
 
                             <div className="flex flex-row gap-x-4 justify-center items-center border-b border-black w-full py-2">
