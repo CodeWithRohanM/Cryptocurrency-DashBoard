@@ -9,7 +9,7 @@ import DashBoardUI from "./Components/DashBoardUI";
 import { Data } from "./Utils/Data";
 
 import { useSelector, useDispatch } from "react-redux";
-import { fetchList, setLoaderState, setChartLoaderState, fetchExchangeCurrencyList, fetchGraph, setStatusMessage } from "./Actions/actions";
+import {setChartLoaderState, setStatusMessage } from "./Actions/actions";
 
 const App = () => {
 
@@ -17,11 +17,8 @@ const App = () => {
   const coinName = useSelector((state) => state.callListAPIReducer.coinName);
   const coinData = useSelector((state) => state.callListAPIReducer.coinData);
   const days = useSelector((state) => state.callListAPIReducer.days);
-  const statusMessage = useSelector((state)=> state.callListAPIReducer.statusMessage);
 
   const dispatch = useDispatch();
-
-  const [status, setStatus] = useState(true);
 
 
 
@@ -222,31 +219,31 @@ const App = () => {
 
 
 
-  useEffect((curValue) => {
-    //setting Loading States
-    dispatch(setLoaderState(true));
-    dispatch(setChartLoaderState(true));
+  // useEffect((curValue) => {
+  //   //setting Loading States
+  //   dispatch(setLoaderState(true));
+  //   dispatch(setChartLoaderState(true));
 
 
-    //Calling API's
-    dispatch(fetchList(currency));
-    // dispatch(fetchGraph(coinName, currency, days));
+  //   //Calling API's
+  //   dispatch(fetchList(currency));
+  //   // dispatch(fetchGraph(coinName, currency, days));
 
-    fetchCoinNameGraph();
+  //   fetchCoinNameGraph();
 
-  }, [currency]);
+  // }, [currency]);
 
 
-  useEffect((curValue) => {
-    //setting Loading States
-    dispatch(setChartLoaderState(true));
+  // useEffect((curValue) => {
+  //   //setting Loading States
+  //   dispatch(setChartLoaderState(true));
 
-    //Calling API's
-    // dispatch(fetchGraph(coinName, currency, days));
+  //   //Calling API's
+  //   // dispatch(fetchGraph(coinName, currency, days));
 
-    fetchCoinNameGraph();
+  //   fetchCoinNameGraph();
 
-  }, [days, coinName]);
+  // }, [days, coinName]);
 
 
 
