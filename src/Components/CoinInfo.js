@@ -110,7 +110,7 @@ const CoinInfo = () => {
                     <input type="text" id="coinInput" placeholder="Enter Coin Name.." className="focus:outline-none text-gray-400 font-bold px-3 appearance-none border-none bg-transparent flex-1 uppercase" onKeyDown={showCoinName} value={inputCoinName} onChange={(event) => {
                         setInputCoinName(event.target.value);
                     }}></input>
-                    <button type="button" className="bg-blue-500 text-white font-bold text-center px-4 py-2 rounded-md hover:-translate-y-1 transition ease-in-out duration-300" onClick={fetchSearchAPI}>Search</button>
+                    <button type="button" className="bg-blue-500 text-white font-bold text-center px-4 py-2 rounded-md hover:-translate-y-1 transition ease-in-out duration-300 active:scale-90" onClick={fetchSearchAPI}>Search</button>
                 </div>
 
 
