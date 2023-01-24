@@ -9,7 +9,7 @@ import DashBoardUI from "./Components/DashBoardUI";
 import { Data } from "./Utils/Data";
 
 import { useSelector, useDispatch } from "react-redux";
-import {setChartLoaderState, setStatusMessage } from "./Actions/actions";
+import {setChartLoaderState, setStatusMessage, setLoaderState, fetchList } from "./Actions/actions";
 
 const App = () => {
 
@@ -29,31 +29,27 @@ const App = () => {
 
 
 
-  // const [chartData, setChartData] = useState({
-  //   labels: [],
-  //   datasets: [],
-
-  // });
-
-
   const [chartData, setChartData] = useState({
-    labels: Data.map((curValue, index)=> curValue.userGain),
+    labels: [],
+    datasets: [],
 
-    datasets: [{
-      label: "Chart Data",
-      data: Data.map((curValue, index)=> curValue.userLost),
-      backgroundColor: [
-        "red",
-        "blue",
-        "gray",
-        "yellow",
-        "pink"
-      ],
-      borderWidth: 2,
-      borderColor: "black",
-    }
-    ]
   });
+
+
+  // const [chartData, setChartData] = useState({
+  //   labels: Data.map((curValue, index)=> curValue.userGain),
+
+  //   datasets: [{
+  //     label: "Chart Data",
+  //     data: Data.map((curValue, index)=> curValue.userLost),
+  //     backgroundColor: [
+  //       "#0000FF",
+  //             ],
+  //     borderWidth: 2,
+  //     borderColor: "black",
+  //   }
+  //   ]
+  // });
 
 
 
@@ -97,7 +93,7 @@ const App = () => {
             label: "Each Hour",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) => curValue[1]),
             backgroundColor: [
-              "yellow"
+              "#0000FF"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -113,7 +109,7 @@ const App = () => {
             label: "Each Day",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "yellow"
+              "#0000FF"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -130,7 +126,7 @@ const App = () => {
             label: "Each Week",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 168 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "yellow"
+              "#0000FF"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -149,7 +145,7 @@ const App = () => {
             label: "Each Month",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "yellow"
+              "#0000FF"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -219,31 +215,31 @@ const App = () => {
 
 
 
-  // useEffect((curValue) => {
-  //   //setting Loading States
-  //   dispatch(setLoaderState(true));
-  //   dispatch(setChartLoaderState(true));
+  useEffect((curValue) => {
+    //setting Loading States
+    dispatch(setLoaderState(true));
+    dispatch(setChartLoaderState(true));
 
 
-  //   //Calling API's
-  //   dispatch(fetchList(currency));
-  //   // dispatch(fetchGraph(coinName, currency, days));
+    //Calling API's
+    dispatch(fetchList(currency));
+    // dispatch(fetchGraph(coinName, currency, days));
 
-  //   fetchCoinNameGraph();
+    fetchCoinNameGraph();
 
-  // }, [currency]);
+  }, [currency]);
 
 
-  // useEffect((curValue) => {
-  //   //setting Loading States
-  //   dispatch(setChartLoaderState(true));
+  useEffect((curValue) => {
+    //setting Loading States
+    dispatch(setChartLoaderState(true));
 
-  //   //Calling API's
-  //   // dispatch(fetchGraph(coinName, currency, days));
+    //Calling API's
+    // dispatch(fetchGraph(coinName, currency, days));
 
-  //   fetchCoinNameGraph();
+    fetchCoinNameGraph();
 
-  // }, [days, coinName]);
+  }, [days, coinName]);
 
 
 

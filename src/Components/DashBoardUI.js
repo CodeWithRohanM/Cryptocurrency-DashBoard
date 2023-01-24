@@ -33,7 +33,7 @@ const DashBoardUI = (props) => {
 
     //USESTATE HOOKS
     const [backColor, setBackColor] = useState("");
-
+    const [counter, setCounter] = useState(0);
 
 
 

@@ -32,6 +32,13 @@ const MainChartSection = (props) => {
         padding = "1";
     }
 
+    const customStyles = {
+        control: base => ({
+          ...base,
+          height: 35,
+          minHeight: 35
+        })
+      };
 
 
     return <>
@@ -55,29 +62,32 @@ const MainChartSection = (props) => {
                         {
                             statusMessage ? <img src={imageURL} className="w-7 h-7 rounded-full"></img> : <img src="images/warning.png" className="w-7 h-7 rounded-full"></img>
                         }
-                        
+
                     </div>
-                    <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider" onChange={(event) => {
-                        const getValue = event.target.value;
-                        dispatch(getCryptoCoinName(getValue));
-                        dispatch(setImageURL(getValue));
-                    }}>
-                        {/* <img src={image} className="w-8 h-8 absolute"></img> */}
-                        <option selected>{coinName}</option>
-                        {
-                            list.map((curValue, index) => {
+                        <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider basic-single" 
+                        classNamePrefix="select"
+                        styles = {customStyles}
+                        onChange={(event) => {
+                            const getValue = event.target.value;
+                            dispatch(getCryptoCoinName(getValue));
+                            dispatch(setImageURL(getValue));
+                        }} >
+                            {/* <img src={image} className="w-8 h-8 absolute"></img> */}
+                            <option selected>{coinName}</option>
+                            {
+                                list.map((curValue, index) => {
 
-                                return <>
-                                    <option key={curValue.market_cap} value={curValue.id} className="bg-white py-3 text-black">{curValue.name}</option>
+                                    return <>
+                                        <option key={curValue.market_cap} value={curValue.id} className="bg-white py-3 text-black">{curValue.name}</option>
 
-                                </>
+                                    </>
 
-                            })
-                        }
+                                })
+                            }
 
 
 
-                    </select>
+                        </select>
 
 
                     <div className="flex relative">
@@ -128,7 +138,7 @@ const MainChartSection = (props) => {
                     !statusMessage && <div className="flex flex-col gap-y-4 items-center">
                         <img src="/images/sorry.png" className="h-28 w-28"></img>
                         <h1 className="text-lg font-semibold text-center">Could Not Find Your Coin..<br></br>Please Try Again..</h1>
-                        </div>
+                    </div>
                 }
 
 
@@ -143,7 +153,7 @@ const MainChartSection = (props) => {
                 }
 
                 {
-                    (!chartLoadingStatus) && (chartType === "bar_horizontal") && statusMessage &&<DisplayBarHorizontalChart chartData={props.chartData} />
+                    (!chartLoadingStatus) && (chartType === "bar_horizontal") && statusMessage && <DisplayBarHorizontalChart chartData={props.chartData} />
                 }
             </div>
 
