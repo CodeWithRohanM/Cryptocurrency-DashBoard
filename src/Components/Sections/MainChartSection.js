@@ -32,14 +32,21 @@ const MainChartSection = (props) => {
         padding = "1";
     }
 
-    const customStyles = {
-        control: base => ({
-          ...base,
-          height: 35,
-          minHeight: 35
-        })
-      };
 
+
+    const customStyles = (width = 100, height = 40) => {
+        return {
+            container: (base) => ({
+                ...base,
+                display:'inline-block',
+                width: width,
+            }),
+            valueContainer: (base) => ({
+                ...base,
+                minHeight: height,
+            })
+        }
+    }
 
     return <>
 
@@ -64,9 +71,8 @@ const MainChartSection = (props) => {
                         }
 
                     </div>
-                        <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider basic-single" 
-                        classNamePrefix="select"
-                        styles = {customStyles}
+                        <select className="py-2 shadow-xl rounded-md bg-white md:px-4 text-center font-bold tracking-wider" 
+                        style={{customStyles}}
                         onChange={(event) => {
                             const getValue = event.target.value;
                             dispatch(getCryptoCoinName(getValue));
