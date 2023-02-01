@@ -118,7 +118,7 @@ const FooterSection = () => {
 
                 <div className="flex flex-row gap-x-3 lg:gap-x-5 justify-between">
 
-                    <div className="flex flex-col gap-y-6 w-1/2 text-center lg:text-left">
+                    <div className="flex flex-col w-1/2 text-center lg:text-left justify-between">
 
 
                         <h1 className="font-bold text-md lg:text-lg text-center">Exchange Coins</h1>
@@ -164,16 +164,16 @@ const FooterSection = () => {
 
                     <div className="flex flex-col gap-y-4 w-1/2">
 
-                        <div className="flex flex-col gap-y-4 w-full">
+                        <div className="flex flex-col gap-y-10 sm:gap-y-4 w-4/5 lg:w-full">
                             <h1 className="text-gray-500 text-center">Your Avl. Balances</h1>
-                            <input type="text" value={exchangeNumber} placeholder="Enter Amount.." className="border-gray-400 p-1 lg:p-2 rounded-md border-2 font-bold text-md w-full" onChange={(event) => setExchangeNumber(event.target.value)}></input>
+                            <input type="text" value={exchangeNumber} placeholder="Enter Amount.." className="border-gray-400 p-1 lg:p-2 rounded-md border-2 font-bold text-md w-full text-xs sm:text-sm lg:text-md" onChange={(event) => setExchangeNumber(event.target.value)}></input>
                         </div>
 
                         {
-                            loading && <input type="text" value={`Doing Exchanges..`} className="border-gray-400 p-1 lg:p-2 rounded-md border-2 text-gray-700 font-bold text-sm"></input>
+                            loading && <input type="text" value={`Doing Exchanges..`} className="border-gray-400 p-1 lg:p-2 rounded-md border-2 text-gray-700 font-bold text-xs sm:text-sm"></input>
                         }
                         {
-                            !loading && <input type="text" value={`Avl. ${exchangeRate}`} className="border-gray-400 p-1 lg:p-2 rounded-md border-2 font-bold text-sm"></input>
+                            !loading && <input type="text" value={`Avl. ${exchangeRate}`} className="border-gray-400 p-1 lg:p-2 w-4/5 lg:w-full text-xs rounded-md border-2 font-bold lg:text-sm"></input>
 
                         }
 

@@ -52,7 +52,7 @@ const MainChartSection = (props) => {
 
         <div className="h-1/2 lg:h-3/6 flex flex-col gap-y-8 lg:gap-y-6 antialiased">
 
-            <div className="flex flex-row justify-between gap-x-3 lg:gap-x-5 w-full">
+            <div className="flex flex-row justify-between gap-x-3 lg:gap-x-5 lg:w-full  ">
 
                 <div className="flex flex-row gap-x-2 lg:gap-x-4 hover:cursor-pointer font-bold">
                     <button className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 px-2  lg:px-4 

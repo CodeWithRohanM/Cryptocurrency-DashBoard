@@ -59,7 +59,7 @@ const DashBoardUI = (props) => {
                     </div>
 
 
-                    <div className="md:w-3/12  bg-purple-400">
+                    <div className="md:w-3/12 ">
                         <MarketCapListSection />
                     </div>
                 </div>
