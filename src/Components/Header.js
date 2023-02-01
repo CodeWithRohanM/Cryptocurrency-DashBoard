@@ -5,10 +5,10 @@ const Header = () => {
 
     return <>
 
-        <div className="p-4 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 flex-1 flex items-center shadow-md ">
+        <div className="p-4 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 flex-1 flex items-center shadow-md">
 
-            <div className="flex flex-col gap-y-12 w-full justify-between items-center container mx-auto md:flex-row text-center antialiased">
-                <div className="hover:scale-90 transition ease-in-out duration-300">
+            <div className="flex flex-col gap-y-6 w-full justify-between items-center container mx-auto md:flex-row text-center antialiased">
+                <div className="hover:scale-95 transition ease-in-out duration-300 active:scale-90">
                     <a href="/">
                         <img src="/images/alma.png" alt="Logo_Img" className="h-12"></img>
                     </a>

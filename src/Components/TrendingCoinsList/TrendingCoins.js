@@ -39,15 +39,14 @@ const TrendingCoins = () => {
 
     return <>
 
-        <Header />
+        <div className="flex h-screen flex-col gap-y-12 lg:gap-y-20 p-10 lg:p-12  bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600 overflow-scroll">
 
-        <div className="flex h-screen flex-col gap-y-20  p-12  bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600 overflow-scroll">
-
-            <div className="flex flex-row container mx-auto">
+            <div className="flex flex-row container mx-auto justify-between gap-x-3 ">
 
 
-                <button type="button" className="bg-gradient-to-r from-red-200 to-red-600 rounded-md text-white uppercase tracking-wider font-bold text-2xl container mx-auto max-w-lg flex flex-row gap-x-4 items-center justify-center
-             py-4 hover:cursor-pointer hover:-translate-y-1 transition ease-in-out duration-300 shadow-2xl active:scale-90 focus:animate-none animate-pulse" onClick={fetchTrendingCoinsList}>
+                <button type="button" className="bg-gradient-to-r from-red-200 to-red-600 rounded-md text-white uppercase tracking-wider font-bold text-sm md:text-md lg:text-2xl container mx-auto max-w-lg flex flex-row gap-x-4 items-center justify-center
+                py-1 lg:py-4 hover:cursor-pointer hover:-translate-y-1 transition ease-in-out duration-300 shadow-2xl active:scale-90 focus:animate-none animate-pulse" onClick={fetchTrendingCoinsList}>
+
                     <h1>Get Today's Trending Coins</h1>
                     <img src="/images/coinGiff.gif" className="w-8 h-8"></img>
                 </button>
@@ -75,7 +74,8 @@ const TrendingCoins = () => {
                 }
 
                 {
-                    !loader && <div className="grid grid-cols-3 gap-x-16 gap-y-20">
+                    !loader && <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 
+                    gap-y-8 lg:gap-y-20">
                         {
                             trendingList.filter((curValue, index) => index < 6).map((curValue, index) => {
 

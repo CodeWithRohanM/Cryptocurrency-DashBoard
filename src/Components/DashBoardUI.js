@@ -40,14 +40,13 @@ const DashBoardUI = (props) => {
     return <>
 
 
-        <div className="bg-cyan-300">
-        <Header />
+        <div className="bg-cyan-200 w-screen overflow-y-auto h-screen">
 
-            <div className="bg-cyan-100 h-screen pt-6 container mx-auto rounded-xl antialiased">
+            <div className="bg-cyan-100 md:h-full w-full pt-6 container mx-auto rounded-xl antialiased flex-1">
 
-                <div className="flex flex-col gap-y-8 container mx-auto md:flex-row h-full md:gap-x-4">
+                <div className="flex flex-col gap-y-8  md:flex-row h-full md:gap-x-4">
 
-                    <div className="flex flex-col gap-y-8 md:gap-y-5 md:w-9/12 flex-1 items-center">
+                    <div className="flex flex-col gap-y-8 md:gap-y-5 md:w-9/12 items-center lg:h-full ">
 
                         <SearchBarSection />
 
@@ -60,9 +59,9 @@ const DashBoardUI = (props) => {
                     </div>
 
 
-                <div className="flex">
-                    <MarketCapListSection />
-                </div>
+                    <div className="md:w-3/12  bg-purple-400">
+                        <MarketCapListSection />
+                    </div>
                 </div>
 
             </div>

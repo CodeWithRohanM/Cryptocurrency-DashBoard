@@ -27,16 +27,18 @@ const MarketCapListSection = () => {
     const dispatch = useDispatch();
 
     return <>
-        <div className="h-96 md:h-full container mx-auto md:w-96 flex flex-col gap-y-8  overflow-y-scroll scroll-smooth">
+        <div className="h-96 md:h-full container mx-auto flex flex-col gap-y-8 overflow-y-scroll scroll-smooth">
 
 
-            <div className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 flex flex-col gap-y-4 py-4 container mx-auto items-center max-w-xs rounded-md shadow-xl ">
-                <h1 className="text-center font-bold text-xl tracking-widest">Cryptocurrency By Market Cap</h1>
-                <h1 className="font-normal"><span className="text-gray-500 font-bold tracking-wider">Currency =</span> <span className="uppercase font-bold text-xl">{currencyIcon} {currency}</span></h1>
+            <div className="bg-gradient-to-t from-blue-400 via-cyan-300 to-purple-400 flex flex-col 
+            gap-y-2 lg:gap-y-4 py-4 container mx-auto items-center sm:max-w-xs rounded-md shadow-xl ">
+
+                <h1 className="text-center font-bold sm:text-sm lg:text-xl tracking-widest">Cryptocurrency By Market Cap</h1>
+                <h1 className="font-normal"><span className="text-gray-500 font-bold sm:text-sm lg:text-xl tracking-wider">Currency =</span> <span className="uppercase font-bold sm:text-md lg:text-xl">{currencyIcon} {currency}</span></h1>
             </div>
 
 
-            <div className="flex flex-col px-4">
+            <div className="flex flex-col lg:px-0">
                 {
                     (loadingStatus) && <div className="flex flex-col items-center">
                         <img src="/images/LoadingGif.gif" className="h-12 w-20 rounded-full"></img>

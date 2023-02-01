@@ -7,12 +7,14 @@ import App from "./App";
 
 import { Provider } from "react-redux";
 import Store from "./Store";
+import Header from "./Components/Header";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Router>
     <Provider store={Store}>
+      <Header />
       <App />
     </Provider>
   </Router>
