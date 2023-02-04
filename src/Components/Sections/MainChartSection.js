@@ -75,7 +75,7 @@ const MainChartSection = (props) => {
                 <div className="flex flex-row gap-x-2 lg:gap-x-4">
 
 
-                    <div className="py-2 shadow-xl rounded-md bg-white lg:w-52 font-bold tracking-wider relative items-center flex-1">
+                    <div className="py-2 shadow-xl rounded-md bg-white lg:w-52 font-bold tracking-wider relative items-center flex flex-1">
                         
                         <div className="absolute z-10 hidden sm:block sm:px-3 sm:py-1 lg:py-0 lg:px-3">
                             {
