@@ -21,15 +21,12 @@ const MainChartSection = (props) => {
     // USING USE STATE HOOK
     const [chartType, setChartType] = useState("line");
     let chartImage = "";
-    let padding = ""
 
     if (chartType === "line") {
         chartImage = "📈";
-        padding = "4";
     }
-    if (chartType === "bar") {
-        chartImage = "📊";
-        padding = "-1";
+    else if (chartType === "bar") {
+        chartImage = "";
     }
 
 
@@ -116,11 +113,11 @@ const MainChartSection = (props) => {
 
                     <div className="flex py-2 shadow-xl rounded-md bg-white lg:w-52 font-bold tracking-wider relative flex-1 antialiased">
 
-                        <div className={`absolute z-10 hidden sm:block sm:px-1 lg:px-2 px-${padding}`}>
+                        <div className={`absolute z-10 hidden sm:block  px-4 sm:px-1 lg:px-4`}>
                             <h1 className="w-7 h-7">{chartImage}</h1>
                         </div>
                         
-                        <select className=" text-sm lg:text-lg  text-center w-full bg-transparent border-none focus:outline-none relative " onChange={(event) => {
+                        <select className="text-sm lg:text-lg  text-center w-full bg-transparent border-none focus:outline-none relative flex items-center" onChange={(event) => {
                             dispatch(setChartLoaderState(true));
                             const getValue = event.target.value;
                             setChartType(getValue);
