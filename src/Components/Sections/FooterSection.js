@@ -6,11 +6,10 @@ const FooterSection = () => {
     const [buyName, setBuyName] = useState("eth");
     const [exchangeRate, setExchangeRate] = useState(13.61);
     const [exchangeNumber, setExchangeNumber] = useState();
-
     const [exchangeList, setExchangeList] = useState([]);
-
     const [loading, setLoading] = useState(false);
 
+    const [staticText, setStaticText] = useState("eth");
 
 
 
@@ -36,6 +35,7 @@ const FooterSection = () => {
         try {
             setLoading(true);
             console.log("Buy = " + buyName);
+            setStaticText("");
 
             const getData = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${buyName}`);
 
@@ -116,12 +116,12 @@ const FooterSection = () => {
 
             <div className="flex w-1/2 rounded-md px-3 pt-2 flex-col gap-y-5 lg:gap-y-5 lg:px-5 lg:py-4 tracking-wider bg-white">
 
-                <div className="flex flex-row gap-x-3 lg:gap-x-5 justify-between">
+                <div className="flex flex-row gap-x-3 lg:gap-x-5 justify-between h-4/5">
 
-                    <div className="flex flex-col w-1/2 text-center lg:text-left justify-between">
+                    <div className="flex flex-col w-1/2 text-center lg:text-left justify-between lg:gap-y-5 gap-y-2 ">
 
 
-                        <h1 className="font-bold text-md lg:text-lg text-center">Exchange Coins</h1>
+                        <h1 className="font-bold text-xs lg:text-lg text-center">Exchange Coins</h1>
 
 
 
@@ -162,20 +162,22 @@ const FooterSection = () => {
                     </div>
 
 
-                    <div className="flex flex-col gap-y-4 w-1/2">
+                    <div className="flex flex-col  w-1/2 justify-between">
 
-                        <div className="flex flex-col gap-y-10 sm:gap-y-4 w-4/5 lg:w-full">
+                        <div className=" w-full text-xs lg:text-lg">
                             <h1 className="text-gray-500 text-center">Your Avl. Balances</h1>
-                            <input type="text" value={exchangeNumber} placeholder="Enter Amount.." className="border-gray-400 p-1 lg:p-2 rounded-md border-2 font-bold text-md w-full text-xs sm:text-sm lg:text-md" onChange={(event) => setExchangeNumber(event.target.value)}></input>
+
                         </div>
 
-                        {
-                            loading && <input type="text" value={`Doing Exchanges..`} className="border-gray-400 p-1 lg:p-2 rounded-md border-2 text-gray-700 font-bold text-xs sm:text-sm"></input>
-                        }
-                        {
-                            !loading && <input type="text" value={`Avl. ${exchangeRate}`} className="border-gray-400 p-1 lg:p-2 w-4/5 lg:w-full text-xs rounded-md border-2 font-bold lg:text-sm"></input>
-
-                        }
+                            <div className="flex flex-col gap-y-3.5">
+                                <input type="text" value={exchangeNumber} placeholder="Enter Amount.." className="border-gray-400 p-1 lg:p-2 rounded-md border-2 font-bold w-full text-xs sm:text-sm lg:text-md" onChange={(event) => setExchangeNumber(event.target.value)}></input>
+                                {
+                                    loading && <input type="text" value={`Exchanging..`} className="border-gray-400 p-1 lg:p-2 w-full rounded-md border-2 text-gray-700 font-bold text-xs lg:text-sm"></input>
+                                }
+                                {
+                                    !loading && <input type="text" value={`Avl. ${exchangeRate} ${staticText}`} className="border-gray-400 p-1 lg:p-2 w-full text-xs sm:text-sm rounded-md border-2 font-bold lg:text-sm"></input>
+                                }
+                            </div>
 
                     </div>
 

@@ -87,7 +87,7 @@ const MainChartSection = (props) => {
 
 
                         <select
-                        className=" text-sm lg:text-lg  text-center w-full  border-none focus:outline-none relative antialiased"
+                        className=" text-sm lg:text-lg  text-center w-full bg-transparent border-none focus:outline-none relative antialiased"
                             // style={{ customStyles }}
                             onChange={(event) => {
                                 const getValue = event.target.value;

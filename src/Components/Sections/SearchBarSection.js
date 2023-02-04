@@ -37,7 +37,13 @@ const SearchBarSection = () => {
             </select>
 
             <div className="flex flex-row gap-x-3 w-full rounded-md px-4 bg-white items-center">
-                <div className="text-gray-400 text-xl text-center">
+                <div className="text-gray-400 text-xl text-center" onClick={() => {
+                    dispatch(setStatusMessage(true));
+
+                    dispatch(getCryptoCoinName(storeCoinName.toLowerCase()));
+                    dispatch(setImageURL(storeCoinName.toLowerCase()));
+                    setStoreCoinName("");
+                }}>
                     <i className="fa fa-search"></i>
                 </div>
                 <input id="myInput" type="text" className="w-full h-full px-3 text-gray-400 font-bold focus:outline-none tracking-wider" placeholder="Search By Coin Name.." value={storeCoinName} onChange={(event) => {
