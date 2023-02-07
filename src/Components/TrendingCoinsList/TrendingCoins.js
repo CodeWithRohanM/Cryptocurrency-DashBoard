@@ -74,7 +74,7 @@ const TrendingCoins = () => {
                 }
 
                 {
-                    !loader && <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 
+                    !loader && <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 
                     gap-y-8 lg:gap-y-20">
                         {
                             trendingList.filter((curValue, index) => index < 6).map((curValue, index) => {

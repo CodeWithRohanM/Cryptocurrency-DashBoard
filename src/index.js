@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Router>
     <Provider store={Store}>
-      <Header />
+      {/* <Header /> */}
       <App />
     </Provider>
   </Router>

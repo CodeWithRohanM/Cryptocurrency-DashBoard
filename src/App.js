@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import TrendingCoins from "./Components/TrendingCoinsList/TrendingCoins";
 import ErrorPage from "./Components/ErrorPage";
 import CoinInfo from "./Components/CoinInfo";
+import Header from "./Components/Header";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -9,7 +10,7 @@ import DashBoardUI from "./Components/DashBoardUI";
 import { Data } from "./Utils/Data";
 
 import { useSelector, useDispatch } from "react-redux";
-import {setChartLoaderState, setStatusMessage, setLoaderState, fetchList } from "./Actions/actions";
+import { setChartLoaderState, setStatusMessage, setLoaderState, fetchList } from "./Actions/actions";
 
 const App = () => {
 
@@ -93,7 +94,7 @@ const App = () => {
             label: "Each Hour",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) => curValue[1]),
             backgroundColor: [
-              "#0000FF"
+              "#1E90FF"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -109,7 +110,7 @@ const App = () => {
             label: "Each Day",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "#0000FF"
+              "#1E90FF"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -126,7 +127,7 @@ const App = () => {
             label: "Each Week",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 168 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "#0000FF"
+              "#1E90FF"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -145,7 +146,7 @@ const App = () => {
             label: "Each Month",
             data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
-              "#0000FF"
+              "#1E90FF"
             ],
             borderWidth: 2,
             borderColor: "black",
@@ -165,11 +166,11 @@ const App = () => {
 
 
     } catch (err) {
-      setTimeout(()=>{
+      setTimeout(() => {
         dispatch(setStatusMessage(false));
-        
+
       }, 1500);
-      console.log("ERR ="+err);
+      console.log("ERR =" + err);
     }
 
   }
@@ -253,6 +254,8 @@ const App = () => {
 
 
   return <>
+
+    <Header />
 
     <Routes>
       <Route exact path="/" element={<DashBoardUI chartData={chartData} />}></Route>

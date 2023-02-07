@@ -84,9 +84,9 @@ const FooterSection = () => {
 
 
 
-                <div className="flex flex-col gap-y-2 lg:gap-y-4 items-center w-1/2 lg:h-full lg:py-3">
+                <div className="flex flex-col gap-y-2 lg:gap-y-4 items-center w-1/2 h-full">
 
-                    <h1 className="font-bold tracking-wider w-full text-center text-md lg:text-xl lg:text-left "><span className="text-gray-400 font-bold tracking-wider">Total Value:</span> $1000</h1>
+                    <h1 className="font-bold tracking-wider w-full text-center text-md lg:text-xl lg:text-left "><span className="text-gray-400 font-bold tracking-wider ">Total Value:</span> $1000</h1>
 
                     <div className="flex flex-col gap-y-2 lg:gap-y-4 w-full ">
                         <div className="flex flex-row gap-x-2 items-center">
@@ -130,7 +130,7 @@ const FooterSection = () => {
                             <div className="flex flex-row justify-center sm:justify-between items-center w-full flex-wrap sm:flex-nowrap">
                                 <h1 className="text-red-500 font-bold text-sm lg:text-lg">Sell</h1>
                                 <select className="text-sm lg:text-lg text-center p-1 lg:p-2 bg-gradient-to-t from-blue-300 via-cyan-300 to-purple-300 rounded-md font-semibold text-black">
-                                    <option selected>BitCoin</option>
+                                    <option selected>BTC</option>
 
                                 </select>
                             </div>
@@ -169,15 +169,15 @@ const FooterSection = () => {
 
                         </div>
 
-                            <div className="flex flex-col gap-y-3.5">
-                                <input type="text" value={exchangeNumber} placeholder="Enter Amount.." className="border-gray-400 p-1 lg:p-2 rounded-md border-2 font-bold w-full text-xs sm:text-sm lg:text-md" onChange={(event) => setExchangeNumber(event.target.value)}></input>
-                                {
-                                    loading && <input type="text" value={`Exchanging..`} className="border-gray-400 p-1 lg:p-2 w-full rounded-md border-2 text-gray-700 font-bold text-xs lg:text-sm"></input>
-                                }
-                                {
-                                    !loading && <input type="text" value={`Avl. ${exchangeRate} ${staticText}`} className="border-gray-400 p-1 lg:p-2 w-full text-xs sm:text-sm rounded-md border-2 font-bold lg:text-sm"></input>
-                                }
-                            </div>
+                        <div className="flex flex-col gap-y-3.5">
+                            <input type="text" value={exchangeNumber} placeholder="Enter Amount.." className="border-gray-400 p-1 lg:p-2 rounded-md border-2 font-bold w-full text-xs sm:text-sm lg:text-md" onChange={(event) => setExchangeNumber(event.target.value)}></input>
+                            {
+                                loading && <input type="text" value={`Exchanging..`} className="border-gray-400 p-1 lg:p-2 w-full rounded-md border-2 text-gray-700 font-bold text-xs lg:text-sm"></input>
+                            }
+                            {
+                                !loading && <input type="text" value={`Avl. ${exchangeRate} ${staticText}`} className="border-gray-400 p-1 lg:p-2 w-full text-xs sm:text-sm rounded-md border-2 font-bold lg:text-sm"></input>
+                            }
+                        </div>
 
                     </div>
 
