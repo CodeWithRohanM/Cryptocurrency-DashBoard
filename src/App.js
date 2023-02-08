@@ -123,7 +123,7 @@ const App = () => {
       }
       else if (days === 90) {
         setChartData({
-          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + new Date(curValue[0]).getMonth() + 1 + "/" + new Date(curValue[0]).getFullYear()),
+          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() + 1)+ "/" + new Date(curValue[0]).getFullYear()),
 
           datasets: [{
             label: "Each Month",
@@ -138,13 +138,14 @@ const App = () => {
         });
 
       }
+
       else if (days === 180) {
         setChartData({
-          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + new Date(curValue[0]).getMonth() + 1 + "/" + new Date(curValue[0]).getFullYear()),
+          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 30 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + (new Date(curValue[0]).getMonth() + 1)+ "/" + new Date(curValue[0]).getFullYear()),
 
           datasets: [{
-            label: "Every Month",
-            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
+            label: "Each Month",
+            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 30 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
               "#1E90FF"
             ],
@@ -155,7 +156,6 @@ const App = () => {
         });
 
       }
-
 
       // Delaying The Loader State To Display Loading Icon
       // Also, Setting The Status State To Be True To Verify The Result Received

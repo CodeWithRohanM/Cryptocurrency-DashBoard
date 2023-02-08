@@ -28,12 +28,10 @@ const DisplayBarHorizontalChart = ({ chartData }) => {
   else if (days === 30) {
     duration = "WEEKLY";
   }
-  else if (days === 90) {
+  else if (days === 90 || days === 180) {
     duration = "MONTHLY";
   }
-  else if (days === 180) {
-    duration = "EVERY 3 MONTHS";
-  }
+
 
 
   // Displaying Vertical Bar Chart

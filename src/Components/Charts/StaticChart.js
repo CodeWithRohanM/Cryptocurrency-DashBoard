@@ -26,6 +26,8 @@ const StaticChart = () => {
         ]
     });
 
+
+    {/* Display Pie Chart*/}
     return <>
 
             <Pie
@@ -44,9 +46,6 @@ const StaticChart = () => {
                           datalabels: { // This code is used to display data values
                             display:true,
                             color: "black",
-                            // anchor: 'end',
-                            // align: 'top',
-                            // formatter: Math.round,
                             font: {
                                 weight: 'bold',
                                 size: 16

@@ -4,7 +4,7 @@ import { getDaysCount, getCryptoCoinName, setChartLoaderState, setImageURL } fro
 
 import DisplayBarChart from "../Charts/DisplayBarChart";
 import DisplayLineChart from "../Charts/DisplayLineChart";
-import DisplayBarHorizontalChart from "../Charts/DisplayBarHorizontalChart";
+import DisplayBarHorizontalChart from "../Charts/DisplayBarVerticalChart";
 
 
 const MainChartSection = (props) => {
