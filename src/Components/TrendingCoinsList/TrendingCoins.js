@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
 import ListCard from "./ListCard";
-import Header from "../Header";
 import { NavLink } from "react-router-dom";
 
 const TrendingCoins = () => {
 
-
+    // Initializing The States
     const [trendingList, setTrendingList] = useState([]);
     const [loader, setLoader] = useState(true);
     const [statusMessage, setStatusMessage] = useState(true);
 
 
-
-
-
-
-
+    // Function To Fetch API To Display The Trending Coins List
     const fetchTrendingCoinsList = async () => {
         try {
             setLoader(true);
@@ -36,17 +31,17 @@ const TrendingCoins = () => {
                 setStatusMessage(false);
             }, 2000);
         }
-
     }
 
 
     return <>
 
+        {/* Main Container */}
         <div className="flex h-screen flex-col gap-y-12 lg:gap-y-20 p-10 lg:p-12  bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600 overflow-scroll">
 
             <div className="flex flex-row container mx-auto justify-between gap-x-3 ">
 
-
+                {/* Button To Display The Current Trending List Of Coins */}
                 <button type="button" className="bg-gradient-to-r from-red-200 to-red-600 rounded-md text-white uppercase tracking-wider font-bold text-sm md:text-md lg:text-2xl container mx-auto max-w-lg flex flex-row gap-x-4 items-center justify-center
                 py-1 lg:py-4 hover:cursor-pointer hover:-translate-y-1 transition ease-in-out duration-300 shadow-2xl active:scale-90 focus:animate-none animate-pulse" onClick={fetchTrendingCoinsList}>
 
@@ -54,6 +49,7 @@ const TrendingCoins = () => {
                     <img src="/images/coinGiff.gif" className="w-8 h-8"></img>
                 </button>
 
+                {/* Button To Navigate To Home Page */}
                 <NavLink to="/" className="bg-gradient-to-r from-red-200 to-red-600 rounded-md text-white uppercase tracking-wider font-bold text-2xl px-4 flex flex-row gap-x-4 items-center justify-center
              py-4 hover:cursor-pointer hover:-translate-y-1 transition ease-in-out duration-300 shadow-2xl active:scale-90" >
                     <h1>🏠</h1>
@@ -63,12 +59,14 @@ const TrendingCoins = () => {
 
             <div id="trendingList" className="hidden max-h-2xl container mx-auto">
 
+                {/* When StatusMessage State Is True, Execute This Component*/}
                 {
                     statusMessage && loader && <div className="flex flex-col items-center ">
                         <img src="/images/LoadingGif.gif" className="h-20 w-32 rounded-xl"></img>
                     </div>
                 }
 
+                {/* When StatusMessage State is False, Execute This Component*/}
                 {
                     !statusMessage && <div className="flex flex-col gap-y-4 items-center">
                         <img src="/images/sorry.png" className="h-28 w-28"></img>
@@ -76,6 +74,7 @@ const TrendingCoins = () => {
                     </div>
                 }
 
+                {/* When Loader State Is False, Execute This Component*/}
                 {
                     !loader && <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 lg:gap-x-16 
                     gap-y-8 lg:gap-y-20">
@@ -95,7 +94,6 @@ const TrendingCoins = () => {
                         }
                     </div>
                 }
-
 
             </div>
 

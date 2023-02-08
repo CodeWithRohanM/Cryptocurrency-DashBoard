@@ -9,19 +9,16 @@ const FooterSection = () => {
     const [exchangeList, setExchangeList] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    // Initializing The State
     const [staticText, setStaticText] = useState("eth");
 
-
-
+    // Function To Fetch Exchange Currency List API
     const fetchExchangeCurrencyList = async () => {
         try {
 
             const getData = await fetch("https://api.coingecko.com/api/v3/simple/supported_vs_currencies");
             const getResponse = await getData.json();
-
             setExchangeList(getResponse);
-
-
         }
         catch (err) {
             console.log(err);
@@ -30,18 +27,16 @@ const FooterSection = () => {
 
 
 
-
+    // Function To Fetch Exchange Currency API As Per The User Coin Selection
     const fetchExchangeAPI = async () => {
         try {
             setLoading(true);
             console.log("Buy = " + buyName);
             setStaticText("");
-
             const getData = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${buyName}`);
-
             const getResponse = await getData.json();
 
-
+            // Delaying The Updation Of State To Display Loading Text For User Experience
             setTimeout(() => {
                 setExchangeRate(`${getResponse.bitcoin[buyName].toFixed(2) * exchangeNumber} ${buyName}`);
                 setLoading(false);
@@ -54,24 +49,13 @@ const FooterSection = () => {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     return <>
+        {/* Main Container */}
         <div className="lg:h-56 flex flex-row gap-x-2 lg:gap-x-4 w-full ">
 
-
+            {/* Component Showing Portfolio */}
             <div className="flex rounded-md px-3 items-center lg:px-6 gap-x-3 lg:gap-x-6 lg:py-3 
             w-1/2 flex-row justify-between bg-white">
-
-
 
                 <div className="flex flex-col items-center gap-y-2 lg:gap-y-4 w-1/2 lg:h-full">
                     <h1 className="font-bold text-lg tracking-wider">Portfolio</h1>
@@ -81,7 +65,6 @@ const FooterSection = () => {
                         <StaticChart />
                     </div>
                 </div>
-
 
 
                 <div className="flex flex-col gap-y-2 lg:gap-y-4 items-center w-1/2 h-full">
@@ -105,25 +88,18 @@ const FooterSection = () => {
 
                 </div>
 
-
             </div>
 
 
 
-
-
-
-
+            {/* Component Showing Exchange Coins Section */}
             <div className="flex w-1/2 rounded-md px-3 pt-2 flex-col gap-y-5 lg:gap-y-5 lg:px-5 lg:py-4 tracking-wider bg-white">
 
                 <div className="flex flex-row gap-x-3 lg:gap-x-5 justify-between h-4/5">
 
                     <div className="flex flex-col w-1/2 text-center lg:text-left justify-between lg:gap-y-5 gap-y-2 ">
 
-
                         <h1 className="font-bold text-xs lg:text-lg text-center">Exchange Coins</h1>
-
-
 
                         <div className="flex flex-col gap-y-4 w-full">
 
@@ -153,12 +129,8 @@ const FooterSection = () => {
                                     }
 
                                 </select>
-
                             </div>
-
-
                         </div>
-
                     </div>
 
 
@@ -182,7 +154,6 @@ const FooterSection = () => {
                     </div>
 
                 </div>
-
 
 
                 <div className="flex justify-center">

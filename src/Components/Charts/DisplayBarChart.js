@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Pie, Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 import { Chart, ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend } from "chart.js";
 
@@ -8,61 +8,55 @@ const DisplayBarChart = ({ chartData }) => {
 
   Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend);
 
-  const days = useSelector((state)=> state.callListAPIReducer.days);
+  // Fethcing Store Data
+  const days = useSelector((state) => state.callListAPIReducer.days);
   const currency = useSelector((state) => state.callListAPIReducer.currency);
-  const dispatch = useDispatch();
 
-
+  // Default Duration Text
   let duration = "";
 
-  if(days === 1)
-  {
+
+  // Conditions As Per The User Selection Of Days Duration Buttons (1Day, 7Days, 30Days, etc.)
+  if (days === 1) {
     duration = "HOURLY";
   }
 
-  if(days === 7)
-  {
+  if (days === 7) {
     duration = "DAILY";
   }
-  else if(days === 30)
-  {
+  else if (days === 30) {
     duration = "WEEKLY";
   }
-  else if(days === 90)
-  {
+  else if (days === 90) {
     duration = "MONTHLY";
   }
-  else if(days === 180)
-  {
+  else if (days === 180) {
     duration = "EVERY 3 MONTHS";
   }
 
 
-
-
-
-
+  // Disaplying Horizontal Bar Chart
   return <>
     <Bar
       data={chartData}
       options={{
-        scales:{
-          x:{
-            title:{
+        scales: {
+          x: {
+            title: {
               display: true,
-              text:duration,
-              font:{
+              text: duration,
+              font: {
                 size: 12,
-                weight:"bold",
+                weight: "bold",
                 color: "black",
               }
             }
           },
-          y:{
-            title:{
+          y: {
+            title: {
               display: true,
-              text:currency.toUpperCase(),
-              font:{
+              text: currency.toUpperCase(),
+              font: {
                 size: 12,
                 color: "black",
                 weight: "bold"

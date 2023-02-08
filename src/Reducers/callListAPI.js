@@ -1,3 +1,4 @@
+// Initial State For The Store
 const initialStates = {
     coinsList: [],
     currency: "usd",
@@ -12,7 +13,7 @@ const initialStates = {
     statusMessage: true,
 };
 
-
+// Reducer Function To Update The Respective Store State
 const callListAPIReducer = (state = initialStates, action) => {
     switch (action.type) {
         case "GET_CURRENCY": {
@@ -21,6 +22,7 @@ const callListAPIReducer = (state = initialStates, action) => {
                 currency: action.payLoad,
             }
         };
+
         case "COIN_NAME": {
             return {
                 ...state,
@@ -34,6 +36,7 @@ const callListAPIReducer = (state = initialStates, action) => {
                 days: action.payLoad,
             }
         };
+        
         case "COINS_LIST": {
             return {
                 ...state,

@@ -1,3 +1,4 @@
+// Using Function To Dispatch The Necessary Action For Asynchronocity
 const fetchList = (currency) => {
 
     return async (dispatch) => {
@@ -13,7 +14,6 @@ const fetchList = (currency) => {
 
 };
 
-
 const fetchGraph = (coinName, currency, days) => {
 
     return async (dispatch) => {
@@ -23,10 +23,8 @@ const fetchGraph = (coinName, currency, days) => {
     
             dispatch(getCoinData(getResponse.prices));
 
-
     }
 };
-
 
 
 const setImageURL = (coinName) => {
@@ -115,7 +113,6 @@ const getCoinsList = (list) => {
         type: "COINS_LIST",
         payLoad: list,
     }
-
 };
 
 const getCurrency = (currency) => {

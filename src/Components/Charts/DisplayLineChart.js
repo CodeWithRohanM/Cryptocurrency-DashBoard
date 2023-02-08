@@ -1,64 +1,61 @@
-import {React, useState} from "react";
-import { Pie, Bar, Line} from "react-chartjs-2";
-import { useSelector, useDispatch } from "react-redux";
+import { React, useState } from "react";
+import { Line } from "react-chartjs-2";
+import { useSelector } from "react-redux";
 import { Chart, ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend } from "chart.js";
 
-const DisplayLineChart = ({chartData}) =>{
+const DisplayLineChart = ({ chartData }) => {
 
   Chart.register(ArcElement, BarElement, LineElement, PointElement, CategoryScale, Tooltip, LinearScale, Legend);
 
+  // Fetching Store States
+  const currency = useSelector((state) => state.callListAPIReducer.currency);
+  const days = useSelector((state) => state.callListAPIReducer.days);
 
-  const coinData = useSelector((state)=> state.callListAPIReducer.coinData);
-  const divisionNumber = useSelector((state)=> state.callListAPIReducer.divisionNumber);
-  const currency = useSelector((state)=> state.callListAPIReducer.currency);
-  const days = useSelector((state)=> state.callListAPIReducer.days);
-  const dispatch = useDispatch();
-
+  // Default Duration Text
   let duration = "";
 
-  if(days === 1)
-  {
+
+  // Conditions As Per The User Selection Of Days Duration Buttons (1Day, 7Days, 30Days, etc.)
+  if (days === 1) {
     duration = "HOURLY";
   }
 
-  if(days === 7)
-  {
+  if (days === 7) {
     duration = "DAILY";
   }
-  else if(days === 30)
-  {
+  else if (days === 30) {
     duration = "WEEKLY";
   }
-  else if(days === 90)
-  {
+  else if (days === 90) {
     duration = "MONTHLY";
   }
-  else if(days === 180)
-  {
+  else if (days === 180) {
     duration = "EVERY 3 MONTHS";
   }
 
+
+  // Displaying Line Chart
   return <>
     <Line
       data={chartData}
       options={{
-        scales:{
-          x:{
-            title:{
+        scales: {
+          x: {
+            title: {
               display: true,
               text: duration,
-              font:{
+              font: {
                 color: "black",
-                weight:"bold",
+                weight: "bold",
                 size: 12
               }
             }
           },
-          y:{
-            title:{
+          y: {
+            title: {
               display: true,
-              text:currency.toUpperCase(),
-              font:{
+              text: currency.toUpperCase(),
+              font: {
                 size: 12,
                 color: "black",
                 weight: "bold"
@@ -74,7 +71,7 @@ const DisplayLineChart = ({chartData}) =>{
         }
       }}
     />
-  
+
   </>
 
 

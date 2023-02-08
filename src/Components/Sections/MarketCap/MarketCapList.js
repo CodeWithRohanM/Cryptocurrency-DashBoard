@@ -1,9 +1,12 @@
 import React from "react";
 
+
+// Function To Display Individual Component Containig Coin Market Cap And Other Details
 const MarketCapList = (props) => {
 
     return <>
 
+        {/* Main Container */}
         <div className={`flex flex-row  ${props.getColor} rounded-md p-2 lg:p-3 items-center text-sm border-b border-black container mx-auto max-w-md`}>
 
             <div className="flex flex-row gap-x-4 items-center w-4/5">

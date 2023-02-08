@@ -24,27 +24,27 @@ const App = () => {
 
 
   // Initial Chart State
-  const [chartData, setChartData] = useState({
-    labels: [],
-    datasets: [],
-
-  });
-
-
   // const [chartData, setChartData] = useState({
-  //   labels: Data.map((curValue, index)=> curValue.userGain),
+  //   labels: [],
+  //   datasets: [],
 
-  //   datasets: [{
-  //     label: "Chart Data",
-  //     data: Data.map((curValue, index)=> curValue.userLost),
-  //     backgroundColor: [
-  //       "#0000FF",
-  //             ],
-  //     borderWidth: 2,
-  //     borderColor: "black",
-  //   }
-  //   ]
   // });
+
+
+  const [chartData, setChartData] = useState({
+    labels: Data.map((curValue, index)=> curValue.userGain),
+
+    datasets: [{
+      label: "Chart Data",
+      data: Data.map((curValue, index)=> curValue.userLost),
+      backgroundColor: [
+        "#0000FF",
+              ],
+      borderWidth: 2,
+      borderColor: "black",
+    }
+    ]
+  });
 
 
 
@@ -181,27 +181,27 @@ const App = () => {
 
 
 
-  useEffect((curValue) => {
-    //Setting Loading States
-    dispatch(setLoaderState(true));
-    dispatch(setChartLoaderState(true));
+  // useEffect((curValue) => {
+  //   //Setting Loading States
+  //   dispatch(setLoaderState(true));
+  //   dispatch(setChartLoaderState(true));
 
 
-    //Calling API's
-    dispatch(fetchList(currency));
-    fetchCoinNameGraph();
+  //   //Calling API's
+  //   dispatch(fetchList(currency));
+  //   fetchCoinNameGraph();
 
-  }, [currency]);
+  // }, [currency]);
 
 
-  useEffect((curValue) => {
-    //Setting Loading States
-    dispatch(setChartLoaderState(true));
+  // useEffect((curValue) => {
+  //   //Setting Loading States
+  //   dispatch(setChartLoaderState(true));
 
-    //Calling API's
-    fetchCoinNameGraph();
+  //   //Calling API's
+  //   fetchCoinNameGraph();
 
-  }, [days, coinName]);
+  // }, [days, coinName]);
 
 
 
