@@ -8,6 +8,7 @@ import App from "./App";
 import { Provider } from "react-redux";
 import Store from "./Store";
 import Header from "./Components/Header";
+import Hooks from "./Components/Hooks";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -15,6 +16,7 @@ root.render(
   <Router>
     <Provider store={Store}>
       {/* <Header /> */}
+      {/* <Hooks /> */}
       <App />
     </Provider>
   </Router>

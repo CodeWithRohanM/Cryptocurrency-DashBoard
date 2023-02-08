@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Importing Different Components
 import TrendingCoins from "./Components/TrendingCoinsList/TrendingCoins";
 import ErrorPage from "./Components/ErrorPage";
 import CoinInfo from "./Components/CoinInfo";
 import Header from "./Components/Header";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import DashBoardUI from "./Components/DashBoardUI";
 import { Data } from "./Utils/Data";
 
+//Importing Action Methods
 import { useSelector, useDispatch } from "react-redux";
 import { setChartLoaderState, setStatusMessage, setLoaderState, fetchList } from "./Actions/actions";
 
 const App = () => {
 
-  const currency = useSelector((state) => state.callListAPIReducer.currency);
-  const coinName = useSelector((state) => state.callListAPIReducer.coinName);
-  const coinData = useSelector((state) => state.callListAPIReducer.coinData);
-  const days = useSelector((state) => state.callListAPIReducer.days);
-
   const dispatch = useDispatch();
 
+  // Using The Store To Get Respective Values
+  const currency = useSelector((state) => state.callListAPIReducer.currency);
+  const coinName = useSelector((state) => state.callListAPIReducer.coinName);
+  const days = useSelector((state) => state.callListAPIReducer.days);
 
 
-  console.log(coinData);
-  console.log("Days = " + days);
-
-
-
-
-
+  // Initial Chart State
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
@@ -60,29 +54,20 @@ const App = () => {
 
 
 
-
+  // Function To Fetch Diifferent API's As Per The User Selection Of Duration (1Day, 7Days, 30Days, etc)
   const fetchCoinNameGraph = async () => {
 
     try {
 
-
-
+      // Fetching API with changing coinName, Currency & Days 
       const getData = await fetch(`https://api.coingecko.com/api/v3/coins/${coinName}/market_chart?vs_currency=${currency}&days=${days}`);
 
+      // Getting Back Response in Json Format
       const getResponse = await getData.json();
 
-      console.log("First Response ->");
-      console.log(coinData[0]);
-
-      console.log("Second Response ->");
-      console.log(coinData[1]);
-
-      // dispatch(getCoinData(getResponse.prices));
-
-
-
-
+      // Applying Conditions With Respect To User Days Selection
       if (days === 1) {
+        // Setting The Chart Labels And Data To Be Displayed
         setChartData({
           labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 12 === 0)).map((curValue, index) =>
             (new Date(curValue[0]).getHours() > 12) ? (new Date(curValue[0]).getHours() - 12 + "PM") : (
@@ -137,14 +122,29 @@ const App = () => {
 
       }
       else if (days === 90) {
-
-
         setChartData({
           labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + new Date(curValue[0]).getMonth() + 1 + "/" + new Date(curValue[0]).getFullYear()),
 
           datasets: [{
             label: "Each Month",
-            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 24 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
+            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
+            backgroundColor: [
+              "#1E90FF"
+            ],
+            borderWidth: 2,
+            borderColor: "black",
+          }
+          ]
+        });
+
+      }
+      else if (days === 180) {
+        setChartData({
+          labels: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => new Date(curValue[0]).getDate() + "/" + new Date(curValue[0]).getMonth() + 1 + "/" + new Date(curValue[0]).getFullYear()),
+
+          datasets: [{
+            label: "Every Month",
+            data: getResponse.prices.filter((curValue, index) => (index > 0 && index % 672 === 0)).map((curValue, index) => curValue[1].toFixed(2)),
             backgroundColor: [
               "#1E90FF"
             ],
@@ -157,6 +157,8 @@ const App = () => {
       }
 
 
+      // Delaying The Loader State To Display Loading Icon
+      // Also, Setting The Status State To Be True To Verify The Result Received
       setTimeout(() => {
         dispatch(setChartLoaderState(false));
         dispatch(setStatusMessage(true));
@@ -164,7 +166,9 @@ const App = () => {
 
 
 
-
+      // Catching Any Errors If Any
+      // Also Delaying The Error Catching To Dispaly A Loader And 
+      // Finally Display The Error Text Message To The User
     } catch (err) {
       setTimeout(() => {
         dispatch(setStatusMessage(false));
@@ -177,79 +181,27 @@ const App = () => {
 
 
 
-
-
-
-
-  // const fetchCoinsListAPI = async () => {
-  //   try {
-
-  //     const getData = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
-
-
-  //     const getResponse = await getData.json();
-  //     console.log("NAMEEEEEEE = " + getResponse[0].id);
-
-  //     // dispatch(getClearArray());
-
-  //     dispatch(getCoinsList(getResponse));
-  //     // dispatch(getLoadingStatus(false));
-
-
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-
-  // };
-
-
-  // const fetchCoinGraph = async () => {
-  //   try {
-  //     dispatch(getCoinData(await fetchCoinNameGraph()));
-
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
-
-
-
-
   useEffect((curValue) => {
-    //setting Loading States
+    //Setting Loading States
     dispatch(setLoaderState(true));
     dispatch(setChartLoaderState(true));
 
 
     //Calling API's
     dispatch(fetchList(currency));
-    // dispatch(fetchGraph(coinName, currency, days));
-
     fetchCoinNameGraph();
 
   }, [currency]);
 
 
   useEffect((curValue) => {
-    //setting Loading States
+    //Setting Loading States
     dispatch(setChartLoaderState(true));
 
     //Calling API's
-    // dispatch(fetchGraph(coinName, currency, days));
-
     fetchCoinNameGraph();
 
   }, [days, coinName]);
-
-
-
-
-  // if(!status)
-  // {
-  //   window.alert("Something Wrong..");
-  // }
-
 
 
 
@@ -257,6 +209,7 @@ const App = () => {
 
     <Header />
 
+    {/* Using Routes To Route The User On Diiferent Pages*/}
     <Routes>
       <Route exact path="/" element={<DashBoardUI chartData={chartData} />}></Route>
       <Route exact path="/trending" element={<TrendingCoins />}></Route>

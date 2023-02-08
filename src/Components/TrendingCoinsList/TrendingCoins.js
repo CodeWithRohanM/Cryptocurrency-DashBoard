@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListCard from "./ListCard";
 import Header from "../Header";
 import { NavLink } from "react-router-dom";
@@ -9,6 +9,9 @@ const TrendingCoins = () => {
     const [trendingList, setTrendingList] = useState([]);
     const [loader, setLoader] = useState(true);
     const [statusMessage, setStatusMessage] = useState(true);
+
+
+
 
 
 
@@ -78,6 +81,7 @@ const TrendingCoins = () => {
                     gap-y-8 lg:gap-y-20">
                         {
                             trendingList.filter((curValue, index) => index < 6).map((curValue, index) => {
+                                console.log(curValue);
 
                                 return <>
 
