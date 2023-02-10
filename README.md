@@ -30,9 +30,9 @@ A real-time cryptocurrency dashboard that displays the current pricing and marke
 
 - Portfolio display: Users can view their portfolio of cryptocurrencies.
 
-- Trending coins: A Seperate page that displays the top 6 trending cryptocurrencies.
+- Trending coins: A Separate page that displays the top 6 trending cryptocurrencies.
 
-- Coin information: A Seperate page that provides detailed information about a searched cryptocurrency.
+- Coin information: A Separate page that provides detailed information about a searched cryptocurrency.
 
 
 
@@ -69,8 +69,7 @@ Using the Crypto Dashboard is simple and straightforward. Follow these steps to 
 The Crypto Dashboard project offers a user-friendly interface and real-time data to help users stay up-to-date on the latest cryptocurrency information. The multiple currency support, data duration options, coin search, conversion tool, and portfolio display make this a comprehensive cryptocurrency dashboard for users of all levels.
 ## Demo
 
-https://www.youtube.com/watch?v=MZyBTs9pZMg&ab_channel=RohanMote
-
+https://www.youtube.com/watch?v=uR_yUSwWX78&ab_channel=RohanMote
 ## Authors
 
 - [@rohan_mote ](https://github.com/CodeWithRohanM)
