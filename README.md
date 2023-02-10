@@ -1,70 +1,100 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Crypto Dashboard
 
-## Available Scripts
+## Introduction
+A real-time cryptocurrency dashboard that displays the current pricing and market cap information for different cryptocurrencies. The default cryptocurrency set is Bitcoin and the currency is USD, but users can also view data for multiple cryptocurrencies & currencies like INR, JPY, and EUR.
 
-In the project directory, you can run:
 
-### `npm start`
+## Overview
+- The Crypto Dashboard provides a comprehensive overview of the cryptocurrency market in real-time. The default cryptocurrency set is Bitcoin and the currency is USD, but users can also view data for multiple cryptocurrencies & currencies like INR, JPY, and EUR. With the help of graphical representations, you can quickly analyze the market trends and stay updated with the latest information.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- You can toggle between different types of graphs such as line graph, bar chart, and horizontal bar chart to get a better understanding of the pricing information. You can also choose the duration of data to be displayed, ranging from 1 day to 6 months.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- The Crypto Dashboard also has a conversion feature where you can convert Bitcoin to other cryptocurrencies at real-time exchange rates. You can enter the amount you want to exchange and select the desired cryptocurrency to get the exchange rate.
 
-### `npm test`
+- The Trending Cryptocurrency and Detailed Information Pages provide additional insights into the cryptocurrency market. The Trending Cryptocurrency page displays the top 6 trending cryptocurrencies, and the Detailed Information page gives you in-depth information about a specific cryptocurrency.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Overall, the Crypto Dashboard is designed to be user-friendly, with a smooth and intuitive UI that makes tracking the cryptocurrency market a breeze.
+## Features
 
-### `npm run build`
+- Multi-currency support: Users can select their preferred currency and view the chart and market cap sections updated in the selected currency.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Real-time market cap valuation: Users can see the real-time total market cap valuation of different cryptocurrencies in the selected currency.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Graph types: Users can toggle between different types of graphs, including line graph, bar chart, and horizontal bar chart.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Coin search: Users can manually search for a specific coin and view real-time data for the entered cryptocurrency.
+- Data duration: Users can select the duration of data to be displayed, including 1 day, 7 days, 30 days, 3 months, and 6 months.
 
-### `npm run eject`
+- Conversion tool: Users can convert Bitcoin into different cryptocurrencies, selecting the desired cryptocurrency and entering the amount to be exchanged. The system provides real-time exchange rates for the cryptocurrency.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Portfolio display: Users can view their portfolio of cryptocurrencies.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Trending coins: A Seperate page that displays the top 6 trending cryptocurrencies.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Coin information: A Seperate page that provides detailed information about a searched cryptocurrency.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Built With
+- React.js
+- Chart.js
+- API Integration
+## How To Use
+Using the Crypto Dashboard is simple and straightforward. Follow these steps to get started:
 
-### Code Splitting
+- Select your preferred currency: The default currency is USD, but you can easily switch between multiple currencies (INR, USD, JPY, EUR) by clicking on the currency tab.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Graphical Representation: You can toggle between different types of graphs (Line graph, bar chart, horizontal bar chart) to get a better understanding of the pricing information.
 
-### Analyzing the Bundle Size
+- Duration of Data Displayed: Choose the duration of data to be displayed (1 day, 7 days, 30 days, 3 months, 6 months) by clicking on the appropriate button.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Manually Search for a Specific Cryptocurrency: If you are interested in a specific cryptocurrency, you can manually search for it using the search bar.
 
-### Making a Progressive Web App
+- Portfolio: Keep track of your investments by accessing the portfolio section.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Convert Bitcoin to other Cryptocurrencies: The Crypto Dashboard has a conversion feature that allows you to convert Bitcoin to other cryptocurrencies at real-time exchange rates. Enter the amount you want to exchange and select the desired cryptocurrency to get the exchange rate.
 
-### Advanced Configuration
+- Trending Cryptocurrency: Stay updated with the latest market trends by checking the Trending Cryptocurrency Page, which displays the top 6 trending cryptocurrencies.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Detailed Information: Get in-depth information about a specific cryptocurrency by accessing the Detailed Information Page and searching for it.
 
-### Deployment
+## Requirements
+- A modern web browser
+- An active internet connection
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+## Conclusion
+The Crypto Dashboard project offers a user-friendly interface and real-time data to help users stay up-to-date on the latest cryptocurrency information. The multiple currency support, data duration options, coin search, conversion tool, and portfolio display make this a comprehensive cryptocurrency dashboard for users of all levels.
+## Demo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://www.youtube.com/watch?v=MZyBTs9pZMg&ab_channel=RohanMote
+
+## Authors
+
+- [@rohan_mote ](https://github.com/CodeWithRohanM)
+- [@shashwat_rajput ](https://github.com/ShaswatRajput)
+
+## FAQ
+
+### What cryptocurrencies can I view data for?
+- You can view data for Bitcoin and multiple other cryptocurrencies like INR, USD, JPY, and EUR.
+### Can I view data for different time durations?
+- Yes, you can select the data duration to be displayed, including 1 day, 7 days, 30 days, 3 months, and 6 months.
+### Can I convert Bitcoin into other cryptocurrencies?
+- Yes, you can convert Bitcoin into different cryptocurrencies using the conversion tool in the app.
+### Can I see detailed information about a specific cryptocurrency?
+- Yes, there is a page in the app that provides detailed information about a selected cryptocurrency.
+### Can I see get the current trending list of cryptocurrencies?
+- Yes, there is a page in the app that gives you a list of top 6 Trending Coins.
+
+
+## Lessons Learned
+
+- The importance of real-time data: Understood the importance of providing real-time data to users in the cryptocurrency market.
+
+- User experience: The user-friendly interface and smooth user experience are key to providing a good overall experience for the users.
+
+- The need for customization: Providing different options for customization like currency selection, graph types, and data duration, etc. is important for a better user experience.
+

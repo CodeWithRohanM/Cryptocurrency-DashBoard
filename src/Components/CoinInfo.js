@@ -101,13 +101,13 @@ const CoinInfo = () => {
 
         {/* Main Container */}
         <div className="min-w-screen min-h-screen bg-gradient-to-b from-gray-900 via-purple-900 to-violet-600 flex items-center p-5 lg:px-20 overflow-hidden relative">
-            <div className="flex-1 min-h-full min-w-full rounded-3xl bg-cyan-50 shadow-xl p-10 lg:p-20 text-gray-800 relative md:flex-col md:space-y-12  text-center md:text-left">
+            <div className="flex flex-1 min-h-full min-w-full rounded-3xl bg-cyan-50 shadow-xl p-10 lg:p-20 text-gray-800 relative flex-col space-y-12  text-center md:text-left">
 
                 {/* Search Bar To Take User Input */}
-                <div className="flex flex-1 flex-row gap-x-6 w-full container mx-auto md:max-w-xl border-b border-black py-2">
-                    <input type="text" id="coinInput" placeholder="Enter Coin Name.." className="focus:outline-none text-gray-400 font-bold px-3 appearance-none border-none bg-transparent flex-1 uppercase" onKeyDown={showCoinName} value={inputCoinName} onChange={(event) => {
-                        setInputCoinName(event.target.value);
-                    }}></input>
+                <div className="flex flex-col gap-y-6 md:flex-row gap-x-6 items-center container mx-auto md:max-w-xl md:border-b border-black py-2">
+                        <input type="text" id="coinInput" placeholder="Enter Coin Name.." className="focus:outline-none text-gray-400 font-bold px-3 appearance-none border-black border-b md:border-none bg-transparent flex-1 uppercase" onKeyDown={showCoinName} value={inputCoinName} onChange={(event) => {
+                            setInputCoinName(event.target.value);
+                        }}></input>
                     <button type="button" className="bg-blue-500 text-white font-bold text-center px-4 py-2 rounded-md hover:-translate-y-1 transition ease-in-out duration-300 active:scale-90" onClick={fetchSearchAPI}>Search</button>
                 </div>
 

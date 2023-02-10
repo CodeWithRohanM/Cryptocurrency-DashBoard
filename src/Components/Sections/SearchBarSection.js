@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getCryptoCoinName, getCurrency, setLoaderState, fetchList, setStatusMessage, setImageURL } from "../../Actions/actions";
+import { getCryptoCoinName, getCurrency, setStatusMessage, setImageURL } from "../../Actions/actions";
 
 const SearchBarSection = () => {
     const dispatch = useDispatch();
