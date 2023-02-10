@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Crypto_DashBoard/static/css/main.040f7a60.css",
+    "main.js": "/Crypto_DashBoard/static/js/main.79d74638.js",
+    "index.html": "/Crypto_DashBoard/index.html",
+    "main.040f7a60.css.map": "/Crypto_DashBoard/static/css/main.040f7a60.css.map",
+    "main.79d74638.js.map": "/Crypto_DashBoard/static/js/main.79d74638.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.040f7a60.css",
+    "static/js/main.79d74638.js"
+  ]
+}
